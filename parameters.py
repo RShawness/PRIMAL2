@@ -43,7 +43,7 @@ IL_GIF_PROB             = 0.
 
 # Imitation options
 PRIMING_LENGTH          = 0   # number of episodes at the beginning to train only on demonstrations
-MSTAR_CALL_FREQUENCY    = 1
+EXPERT_CALL_FREQUENCY    = 1
 
 # observation variables
 NUM_CHANNEL             = 8 + NUM_FUTURE_STEPS

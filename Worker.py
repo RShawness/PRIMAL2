@@ -368,7 +368,7 @@ class Worker():
 
         single_done = False
         new_call = False
-        new_MSTAR_call = False
+        new_EXPERT_call = False
 
         all_obs = self.env._observe()
         for agentID in range(1, self.num_workers + 1):
@@ -376,6 +376,7 @@ class Worker():
             train_imitation[agentID] = 1
         step_count = 0
         while step_count <= IL_MAX_EP_LENGTH:
+            #* CALL THE EXPERT POLICY
             path = self.env.expert_until_first_goal()
             if path is None:  # solution not exists
                 if step_count != 0:
@@ -390,25 +391,28 @@ class Worker():
                 goals = []
                 for i in range(self.num_workers):
                     agent_id = i + 1
+                    # TODO: Fix this section
                     next_pos = path[path_step][i]
                     diff = tuple_minus(next_pos, self.env.world.getPos(agent_id))
                     actions[agent_id] = dir2action(diff)
+                    # /END TODO
 
                 all_obs, _ = self.env.step_all(actions)
                 for i in range(self.num_workers):
                     agent_id = i + 1
+                    # TODO: check this line...
                     result[i].append([o[agent_id][0], o[agent_id][1], actions[agent_id], train_imitation[agent_id]])
                     if self.env.world.agents[agent_id].status == 1:
                         completed_agents.append(i)
                         targets_done += 1
                         single_done = True
-                        if targets_done % MSTAR_CALL_FREQUENCY == 0:
-                            new_MSTAR_call = True
+                        if targets_done % EXPERT_CALL_FREQUENCY == 0:
+                            new_EXPERT_call = True
                         else:
                             new_call = True
                 if saveGIF and OUTPUT_IL_GIFS:
                     GIF_frames.append(self.env._render())
-                if single_done and new_MSTAR_call:
+                if single_done and new_EXPERT_call:
                     path = self.env.expert_until_first_goal()
                     if path is None:
                         return result, targets_done
@@ -417,6 +421,7 @@ class Worker():
                     path = path[path_step:]
                     path = [list(state) for state in path]
                     for finished_agent in completed_agents:
+                        # WHAT IS THIS FUNCTION?????
                         path = merge_plans(path, [None] * len(path), finished_agent)
                     try:
                         while path[-1] == path[-2]:
@@ -431,6 +436,7 @@ class Worker():
                     world = self.env.getObstacleMap()
                     # print('OLD PATH', path) # print('CURRENT POSITIONS', start_positions) # print('CURRENT GOALS',goals) # print('WORLD',world)
                     try:
+                        # Literally where the fuck does this function come from????
                         path = priority_planner(world, tuple(start_positions), tuple(goals), path)
                     except:
                         path = self.env.expert_until_first_goal()
@@ -441,7 +447,7 @@ class Worker():
                 step_count += 1
                 path_step += 1
                 new_call = False
-                new_MSTAR_call = False
+                new_EXPERT_call = False
         if saveGIF and OUTPUT_IL_GIFS:
             make_gif(np.array(GIF_frames),
                      '{}/episodeIL_{}.gif'.format(gifs_path, episode_count))

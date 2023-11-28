@@ -16,25 +16,30 @@ class Primal2Observer(ObservationBuilder):
         super(Primal2Observer, self).__init__()
         self.observation_size = observation_size
         self.num_future_steps = num_future_steps
+
+        # NUM_CHANNELS is the number of observation matrices
         self.NUM_CHANNELS = 8 + self.num_future_steps
         self.printTime = printTime
 
     def set_world(self, world):
         super().set_env(world)
 
+    # TODO: check if this needs to include orientation. It seems like using orientated neighbors is more accurate...?
     def get_next_positions(self, agent_id):
         agent_pos = self.world.getPos(agent_id)
         positions = []
         current_pos = [agent_pos[0], agent_pos[1]] #might need changing? -A
-        next_positions = self.world.blank_env_valid_neighbor(current_pos[0], current_pos[1])
+        #! should this be calling blank_env_valid_neighbor() or valid_neighbors_oriented()? -JB
+        next_positions = self.world.valid_neighbors_oriented(agent_pos)
         for position in next_positions:
             if position is not None and position != agent_pos:
                 positions.append([position[0], position[1]])
-                next_next_positions = self.world.blank_env_valid_neighbor(position[0], position[1])
+                next_next_positions = self.world.valid_neighbors_oriented(position)
                 for pos in next_next_positions:
                     if pos is not None and pos not in positions and pos != agent_pos:
                         positions.append([pos[0], pos[1]])
 
+        # returns only cartesian positions (no orientation)
         return positions
 
     def _get(self, agent_id, all_astar_maps):
@@ -130,16 +135,18 @@ class Primal2Observer(ObservationBuilder):
         start_time = time.time()
 
         current_corridor_id = -1
+        # access corridor map using position
         current_corridor = self.world.corridor_map[self.world.getPos(agent_id)[0], self.world.getPos(agent_id)[1]][1]
         if current_corridor == 1:
             current_corridor_id = \
                 self.world.corridor_map[self.world.getPos(agent_id)[0], self.world.getPos(agent_id)[1]][0]
 
+        # TODO: check if this needs the orientation
         positions = self.get_next_positions(agent_id)
         for position in positions:
             cell_info = self.world.corridor_map[position[0], position[1]]
-            if cell_info[1] == 1:
-                corridor_id = cell_info[0]
+            if cell_info[1] == 1: # if an agent is in the corridor
+                corridor_id = cell_info[0] 
                 if corridor_id != current_corridor_id:
                     if len(self.world.corridors[corridor_id]['EndPoints']) == 1:
                         if [position[0], position[1]] == self.world.corridors[corridor_id]['StoppingPoints'][0]:
@@ -218,7 +225,7 @@ class Primal2Observer(ObservationBuilder):
 
         :return: a dict of 3D np arrays. Each astar_maps[agentID] is a num_future_steps * obs_size * obs_size matrix.
         """
-
+        # ! This a* implementation is inconsistent with our action space -JB
         def get_single_astar_path(distance_map, start_position, path_len):
             """
             :param distance_map:
@@ -227,17 +234,27 @@ class Primal2Observer(ObservationBuilder):
             :return: [[(x,y), ...],..] a list of lists of positions from start_position, the length of the return can be
             smaller than num_future_steps. Index of the return: list[step][0-n] = tuple(x, y)
             """
-
+            
             def get_astar_one_step(position):
                 next_astar_cell = []
                 h = self.world.state.shape[0]
                 w = self.world.state.shape[1]
-                for direction in [(1, 0), (0, 1), (-1, 0), (0, -1)]:
-                    # print(position, direction)
-                    new_pos = tuple_plus(position, direction)
+                # -TODO done : Change this direction choice to match our action space -JB
+                # run through all possible actions...
+                # for direction in [(1, 0), (0, 1), (-1, 0), (0, -1)]:
+                #     # print(position, direction)
+                #     new_pos = tuple_plus(position, direction)
+                #     if 0 < new_pos[0] <= h and 0 < new_pos[1] <= w:
+                #         if distance_map[new_pos] == distance_map[position] - 1 \
+                #                 and distance_map[new_pos] >= 0:
+                #             next_astar_cell.append(new_pos)
+                # return next_astar_cell
+            
+                for action in range(1, 4):
+                    new_pos = action2position(action, position)
                     if 0 < new_pos[0] <= h and 0 < new_pos[1] <= w:
-                        if distance_map[new_pos] == distance_map[position] - 1 \
-                                and distance_map[new_pos] >= 0:
+                        if distance_map[new_pos[:2]] == distance_map[position[:2]] - 1 \
+                                and distance_map[new_pos[:2]] >= 0:
                             next_astar_cell.append(new_pos)
                 return next_astar_cell
 
@@ -257,13 +274,16 @@ class Primal2Observer(ObservationBuilder):
                 path_counter += 1
 
             astar_list.pop(0)
+            # contains position
             return astar_list
 
+        # TODO: I am not sure about this segment...
         astar_maps = {}
         for agentID in range(1, self.world.num_agents + 1):
             astar_maps.update(
                 {agentID: np.zeros([self.num_future_steps, self.world.state.shape[0], self.world.state.shape[1]])})
 
+            # start_pos0 includes orientation
             distance_map0, start_pos0 = self.world.agents[agentID].distanceMap, self.world.agents[agentID].position
 
             astar_path = get_single_astar_path(distance_map0, start_pos0, self.num_future_steps)
@@ -285,6 +305,7 @@ class Primal2Observer(ObservationBuilder):
 
         return np.asarray([astar_maps[i] for i in range(1, self.world.num_agents + 1)])
 
+    # TODO
     def get_blocking(self, corridor_id, reverse, agent_id, dead_end):
         def get_last_pos(agentID, position):
             history_list = copy.deepcopy(self.world.agents[agentID].position_history)

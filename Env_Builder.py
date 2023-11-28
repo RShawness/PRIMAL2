@@ -7,7 +7,7 @@ import warnings
 from od_mstar3.col_set_addition import OutOfTimeError, NoSolutionError
 from od_mstar3 import od_mstar
 from od_mstar3 import cpp_mstar
-from LNS_CBS import cbs_py
+from CBS_for_PRIMAL import cbs_py
 from GroupLock import Lock
 from matplotlib.colors import *
 from gym.envs.classic_control import rendering
