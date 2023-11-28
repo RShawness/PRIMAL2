@@ -62,8 +62,7 @@ void CBS::findConflicts(CBSNode& curr, int a1, int a2)
 		int loc2 = paths[a2]->at(timestep).location;
 		if (loc1 == loc2)
 		{
-			cout << "conflict" << endl;
-			cout << "(" << loc1 << "," << loc2 <<  "," << timestep <<")" << endl;
+
 			shared_ptr<Conflict> conflict(new Conflict());
 			if (target_reasoning && paths[a1]->size() == timestep + 1)
 			{
@@ -381,7 +380,9 @@ bool CBS::findPathForSingleAgent(CBSNode* node, int ag, int lowerbound, int dire
 	// CAT cat(node->makespan + 1);  // initialized to false
 	// updateReservationTable(cat, ag, *node);
 	// find a path
+
 	Path new_path = search_engines[ag]->findPath(*node, initial_constraints[ag], paths, ag, lowerbound, direction);
+
 	num_LL_expanded += search_engines[ag]->num_expanded;
 	num_LL_generated += search_engines[ag]->num_generated;
 	runtime_build_CT += search_engines[ag]->runtime_build_CT;
@@ -547,7 +548,6 @@ inline void CBS::pushNode(CBSNode* node)
 
 void CBS::printPaths() const
 {
-	cout << "printing paths" << endl;
 	for (int i = 0; i < num_of_agents; i++)
 	{
 		cout << "Agent " << i << " (" << paths_found_initially[i].size() - 1 << " -->" <<
@@ -593,7 +593,7 @@ void CBS::printResults() const
 	else if (solution_cost == -1) // time_out
 		cout << "Timeout,";
 	else if (solution_cost == -2) // no solution
-		cout << "No solutions,";
+		cout << "No solutions!,";
 	else if (solution_cost == -3) // nodes out
 		cout << "Nodesout,";
 
@@ -834,7 +834,7 @@ string CBS::getSolverName() const
 
 bool CBS::solve(double _time_limit, int _cost_lowerbound, int _cost_upperbound)
 {
-	cout << "call solve" << endl;
+	// cout << "calling solve" << endl;
 	this->min_f_val = _cost_lowerbound;
 	this->cost_upperbound = _cost_upperbound;
 	this->time_limit = _time_limit;
@@ -848,14 +848,13 @@ bool CBS::solve(double _time_limit, int _cost_lowerbound, int _cost_upperbound)
 	// set timer
 	start = clock();
 
-	generateRoot();
+	bool root_succ = generateRoot();
+	if (!root_succ) {
+		return false;
+	}
 
 	while (!open_list.empty() && !solution_found)
 	{
-		// CBSNode* curr1 = open_list.top();
-		// auto iterator = curr1->paths.begin();
-		// advance(iterator, 2);
-		// cout << (*iterator).second << endl;
 
 		updateFocalList();
 		if (min_f_val >= cost_upperbound)
@@ -929,7 +928,6 @@ bool CBS::solve(double _time_limit, int _cost_lowerbound, int _cost_upperbound)
 
 		if (!curr->h_computed) // heuristics has not been computed yet
 		{
-
 			if (PC) // prioritize conflicts
 				classifyConflicts(*curr);
 			runtime = (double) (clock() - start) / CLOCKS_PER_SEC;
@@ -947,7 +945,6 @@ bool CBS::solve(double _time_limit, int _cost_lowerbound, int _cost_upperbound)
 			}
 			if (!succ) // no solution, so prune this node
 			{
-				cout << "no solution" << endl;
 				curr->clear();
 				continue;
 			}
@@ -962,7 +959,6 @@ bool CBS::solve(double _time_limit, int _cost_lowerbound, int _cost_upperbound)
 			}
 			continue;
 		}
-
 
 
 		//Expand the node
@@ -1159,10 +1155,19 @@ bool CBS::solve(double _time_limit, int _cost_lowerbound, int _cost_upperbound)
 		printPaths();
 		exit(-1);
 	}
+	
 	if (screen == 2)
         printPaths();
 	if (screen > 0) // 1 or 2
 		printResults();
+
+	if (solution_cost < 0) {
+		return false;
+	}
+	else {
+		return true;
+	}
+	
 	return solution_found;
 }
 
@@ -1204,7 +1209,6 @@ CBS::CBS(const Instance& instance, bool sipp, int screen) :
 			search_engines[i] = new SIPP(instance, i);
 		else
 			search_engines[i] = new SpaceTimeAStar(instance, i);
-			cout << search_engines[i]->start_direction << endl;
 
 		initial_constraints[i].goal_location = search_engines[i]->goal_location;
 	}
@@ -1220,7 +1224,6 @@ CBS::CBS(const Instance& instance, bool sipp, int screen) :
 
 bool CBS::generateRoot()
 {	
-	cout << "generating root" << endl;
 	dummy_start = new CBSNode();
 	dummy_start->g_val = 0;
 	paths.resize(num_of_agents, nullptr);
@@ -1296,7 +1299,6 @@ bool CBS::generateRoot()
 	{
 		printPaths();
 	}
-
 	return true;
 }
 

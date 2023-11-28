@@ -92,14 +92,32 @@ public:
 	{
 		assert(loc >= 0 && loc < map_size && !my_map[loc]);
 		int degree = 0;
-		if (0 < loc - num_of_cols && !my_map[loc - num_of_cols])
-			degree++;
-		if (loc + num_of_cols < map_size && !my_map[loc + num_of_cols])
-			degree++;
-		if (loc % num_of_cols > 0 && !my_map[loc - 1])
-			degree++;
-		if (loc % num_of_cols < num_of_cols - 1 && !my_map[loc + 1])
-			degree++;
+		if (loc - num_of_cols >= 0 && loc - num_of_cols < map_size) {
+			if (0 < loc - num_of_cols && !my_map[loc - num_of_cols]) {
+				degree++;
+			}
+		}
+
+		
+		
+		if (loc + num_of_cols >= 0 && loc + num_of_cols < map_size) {
+			if (loc + num_of_cols < map_size && !my_map[loc + num_of_cols]) {
+				degree++;
+			}
+			
+		}
+
+		if (loc - 1 >= 0 && loc - 1 < map_size) {
+			if (loc % num_of_cols > 0 && !my_map[loc - 1]) {
+				degree++;
+			}
+		}
+
+		if (loc + 1 >= 0 && loc + 1 < map_size) {
+			if (loc % num_of_cols < num_of_cols - 1 && !my_map[loc + 1]) {
+				degree++;
+			}
+		}
 		return degree;
 	}
 

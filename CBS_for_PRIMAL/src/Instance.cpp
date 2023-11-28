@@ -97,7 +97,6 @@ int Instance::randomWalk(int curr, int steps) const
 
 void Instance::generateRandomAgents(int warehouse_width)
 {
-	cout << "Generate " << num_of_agents << " random start and goal locations " << endl;
 	vector<bool> starts(map_size, false);
 	vector<bool> goals(map_size, false);
 	start_locations.resize(num_of_agents);
@@ -423,16 +422,14 @@ bool Instance::loadAgents()
 				int col = atoi((*beg).c_str());
 				beg++;
 				int row = atoi((*beg).c_str());
-				cout << "start: " << col << " " << row << endl;
-				cout << linearizeCoordinate(row, col) << endl;
+
 				start_locations[i] = linearizeCoordinate(row, col);
 				// read goal [row,col] for agent i
 				beg++;
 				col = atoi((*beg).c_str());
 				beg++;
 				row = atoi((*beg).c_str());
-				cout << "goal: " << col << " " << row << endl;
-				cout << linearizeCoordinate(row, col) << endl;
+
 				goal_locations[i] = linearizeCoordinate(row, col);
 				i++;
 			}

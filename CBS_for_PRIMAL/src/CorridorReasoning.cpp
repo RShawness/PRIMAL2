@@ -50,10 +50,12 @@ shared_ptr<Conflict> CorridorReasoning::findCorridorConflict(const shared_ptr<Co
         if (loc2 >= 0)
             timestep--;
     }
-    else if (loc2 >= 0 && search_engines[0]->instance.getDegree(loc2) == 2)
-        curr = loc2;
-    if (curr <= 0)
-        return nullptr;
+    else if (loc2 >= 0 && search_engines[0]->instance.getDegree(loc2) == 2) {
+		curr = loc2;
+	}
+    if (curr <= 0) {
+		return nullptr;
+	}
 
     int enter_time[2];
     for (int i = 0; i < 2; i++)
@@ -125,7 +127,8 @@ shared_ptr<Conflict> CorridorReasoning::findPseudoCorridorConflict(const shared_
 	int endpoint1, endpoint2, lowerbound1, lowerbound2; // the timestep of the range constraint at the endpoint should be >= the lowerbound
 	if (loc2 < 0) // vertex conflict
 	{
-		if (paths[conflict->a1]->size() <= timestep + 1 || paths[conflict->a2]->size() <= timestep + 1)
+		try {
+			if (paths[conflict->a1]->size() <= timestep + 1 || paths[conflict->a2]->size() <= timestep + 1)
 			return nullptr;
 		if (paths[conflict->a1]->at(timestep - 1).location != paths[conflict->a2]->at(timestep + 1).location ||
 			paths[conflict->a2]->at(timestep - 1).location != paths[conflict->a1]->at(timestep + 1).location)
@@ -137,6 +140,12 @@ shared_ptr<Conflict> CorridorReasoning::findPseudoCorridorConflict(const shared_
 			!paths[conflict->a2]->at(timestep).is_single() ||
 			!paths[conflict->a2]->at(timestep + 1).is_single())
 			return nullptr;
+		}
+		catch(...) {
+			return nullptr;
+		}
+		
+		
 		endpoint1 = paths[conflict->a1]->at(timestep + 1).location;
 		endpoint2 = loc1;
 		lowerbound1 = timestep + 1;
@@ -154,7 +163,6 @@ shared_ptr<Conflict> CorridorReasoning::findPseudoCorridorConflict(const shared_
 		lowerbound1 = timestep;
 		lowerbound2 = timestep;
 	}
-
 	auto t = getTimeRanges(conflict->a1, conflict->a2, endpoint1, endpoint2, endpoint2, endpoint1,
 		lowerbound1, lowerbound2, 1, node); // return (-1, -1) if doesn't exist
 

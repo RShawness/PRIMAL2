@@ -406,7 +406,7 @@ Path SpaceTimeAStar::findShortestPath(ConstraintTable& constraint_table, const p
 			}
 			delete next;  // not needed anymore -- we already generated it before
 		}  // end for loop that generates successors
-		if (open_list.empty()) {cout << "empty list" << endl;}
+		// if (open_list.empty()) {cout << "empty list" << endl;}
 	}  // end while loop
 
 	releaseNodes();
@@ -589,7 +589,6 @@ Path SpaceTimeAStar::findPath(ConstraintTable& constraint_table, const pair<int,
 		focal_list.pop();
 		curr->in_openlist = false;
 
-		cout << curr -> location << endl;
 
 		// check if the popped node is a goal
 		if (curr->location == goal_state.first && // arrive at the goal location
