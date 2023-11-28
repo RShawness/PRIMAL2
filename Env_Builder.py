@@ -36,12 +36,12 @@ def forwardMove(position):
     new_position = ()
     if position[2] == 0: # east
         new_position = tuple_plus(position, (1,0,0))
-    elif position[2] == 1:
-        new_position = tuple_plus(position, (0,-1,0))
-    elif position[2] == 2:
-        new_position = tuple_plus(position, (-1,0,0))
-    elif position[2] == 3:
+    elif position[2] == 1: # south
         new_position = tuple_plus(position, (0,1,0))
+    elif position[2] == 2: # west
+        new_position = tuple_plus(position, (-1,0,0))
+    elif position[2] == 3: # north
+        new_position = tuple_plus(position, (0,-1,0))
     
     return new_position
 
@@ -111,7 +111,8 @@ def getAstarDistanceMap(map: np.array, start: tuple, goal: tuple, isDiagonal: bo
         assert (len(openSet) > 0)
         minF = 2 ** 31 - 1
         minNode = None
-        for (i, j, o) in openSet:
+        # ! this line will throw an error if a goal (no orientation) is passed in openSet
+        for (i, j, o) in openSet: # will error if openSet is only a cartesian pair
             if (i, j, o) not in fScore: continue
             if fScore[(i, j, o)] < minF:
                 minF = fScore[(i, j, o)]
@@ -123,7 +124,13 @@ def getAstarDistanceMap(map: np.array, start: tuple, goal: tuple, isDiagonal: bo
         neighbors = set()
         possible_moves = [(0, 1), (1, 0), (0, -1), (-1, 0)]
 
-        ax, ay, current_orientation = node
+        if len(node) == 3:
+            ax, ay, current_orientation = node
+            # # reverse orientation??
+            # current_orientation = (current_orientation + 3) % 4
+        else:
+            ax, ay = node
+            current_orientation = -1
 
         for move in possible_moves:
             dx, dy = move
@@ -145,26 +152,31 @@ def getAstarDistanceMap(map: np.array, start: tuple, goal: tuple, isDiagonal: bo
                 continue
 
             # Calculate the cost based on the movement and current orientation + update orientation
-            if move == (0, 1):  # Move east
+            # TODO: add cases for orientation == -1 (coming from a goal state)
+            if move == (1, 0):  # Move east
                 cost = 1 if current_orientation == 0 else (3 if current_orientation == 2 else 2)  # Forward move or turn
                 new_orientation = 0  # Update orientation after the move
-            elif move == (1, 0):  # Move south
+            elif move == (0, 1):  # Move south
                 cost = 1 if current_orientation == 1 else (3 if current_orientation == 3 else 2)  # Forward move or turn
                 new_orientation = 1  # Update orientation after the move
-            elif move == (0, -1):  # Move west
+            elif move == (-1, 0):  # Move west
                 cost = 1 if current_orientation == 2 else (3 if current_orientation == 0 else 2)  # Forward move or turn
                 new_orientation = 2  # Update orientation after the move
-            elif move == (-1, 0):  # Move north
+            elif move == (0, -1):  # Move north
                 cost = 1 if current_orientation == 3 else (3 if current_orientation == 1 else 2)  # Forward move or turn
                 new_orientation = 3  # Update orientation after the move
             else:
                 print("That's not right")
+            
+            if current_orientation == -1:
+                cost = 1
 
             neighbors.add((new_pos[0], new_pos[1], new_orientation, cost))
 
         return neighbors
 
     # NOTE THAT WE REVERSE THE DIRECTION OF SEARCH SO THAT THE GSCORE WILL BE DISTANCE TO GOAL
+    # swaps the values of start and goal and then convert them to tuples
     start, goal = goal, start
     start, goal = tuple(start), tuple(goal)
     # The set of nodes already evaluated
@@ -174,7 +186,7 @@ def getAstarDistanceMap(map: np.array, start: tuple, goal: tuple, isDiagonal: bo
     # Initially, only the start node is known.
     # each entry is (x, y, o)
     openSet = set()
-    openSet.add(start)
+    openSet.add(start) #! after swapping start and goal, this first element doesnt have an orientation
 
     # For each node, which node it can most efficiently be reached from.
     # If a node can be reached from many nodes, cameFrom will eventually contain the
@@ -193,60 +205,65 @@ def getAstarDistanceMap(map: np.array, start: tuple, goal: tuple, isDiagonal: bo
     # each entry is (x, y, o)
     fScore = dict()  # default infinity
 
-    # our heuristic is euclidean distance to goal
-    #DONE different heuristic now that we have turns? Maybe manhattan?
     
-    def manhattan_heuristic_cost_estimate(current, goal):
-        dx = abs(current[0] - goal[0])
-        dy = abs(current[1] - goal[1])
-        penalty = 0
+    
+    # def manhattan_heuristic_cost_estimate(current, goal):
+    #     dx = abs(current[0] - goal[0])
+    #     dy = abs(current[1] - goal[1])
+    #     penalty = 0
         
-        # for each orientation, if goal is opposite +2 penalty
-        if current[2] == 0 and goal[0] < current[0]: # orient east, goal west
-            penalty += 2
-        elif current[2] == 1 and goal[1] > current[1]: # orient south, goal north
-            penalty += 2
-        elif current[2] == 2 and goal[0] > current[0]: # orient west, goal east
-            penalty += 2
-        elif current[2] == 3 and goal[1] < current[1]: # orient north, goal south
-            penalty += 2
+    #     # ! These orientation comparisons are not correct for the coordinate plane
+    #     # for each orientation, if goal is opposite +2 penalty
+    #     if current[2] == 0 and goal[0] < current[0]: # orient east, goal west
+    #         penalty += 2
+    #     elif current[2] == 1 and goal[1] > current[1]: # orient south, goal north
+    #         penalty += 2
+    #     elif current[2] == 2 and goal[0] > current[0]: # orient west, goal east
+    #         penalty += 2
+    #     elif current[2] == 3 and goal[1] < current[1]: # orient north, goal south
+    #         penalty += 2
             
-            
-        return dx + dy + penalty
 
-    # heuristic_cost_estimate = lambda x, y: math.hypot(x[0] - y[0], x[1] - y[1])
+    #     return dx + dy + penalty
+
+    # our heuristic is euclidean distance to goal
+    heuristic_cost_estimate = lambda x, y: math.hypot(x[0] - y[0], x[1] - y[1])
 
     # For the first node, that value is completely heuristic.
-    fScore[start] = manhattan_heuristic_cost_estimate(start, goal)
+    fScore[start] = heuristic_cost_estimate(start, goal)
 
     while len(openSet) != 0:
         # current = the node in openSet having the lowest fScore value
         current = lowestF(fScore, openSet)
 
         openSet.remove(current)
-        closedSet.add(current)
+        closedSet.add(current[:2])
         for neighbor in getNeighbors(current): #neighbors have (x, y, o, cost from current to neighbor)
-            if neighbor in closedSet:
+            if neighbor[:2] in closedSet:
                 continue  # Ignore the neighbor which is already evaluated.
-
+                
+            # ! This may be inefficient since it will add all orientations for a given position. Check later.
             if neighbor not in openSet:  # Discover a new node
                 openSet.add((neighbor[0], neighbor[1], neighbor[2])) # only give openSet (x, y, o)
 
             # The distance from start to a neighbor
             # DONE distance to each neighbor depends on the orientation calculated from getNeighbor
             tentative_gScore = neighbor[3]
-            if tentative_gScore >= gScore.get((neighbor[0], neighbor[1], neighbor[2]), 2 ** 31 - 1): 
+            if tentative_gScore >= gScore.get((neighbor[0], neighbor[1]), 2 ** 31 - 1): 
                 continue  # This is not a better path., the stored gScore of neighbor is already better
 
             # This path is the best until now. Record it!
             cameFrom[neighbor] = current
-            gScore[(neighbor[0], neighbor[1], neighbor[2])] = tentative_gScore # maintain gScore with just (x,y, orientation) #TODO decide if we need o
-            fScore[(neighbor[0], neighbor[1], neighbor[2])] = tentative_gScore + manhattan_heuristic_cost_estimate(neighbor, goal) # maintain fScore with just (x,y, orientation)
+            if (neighbor[0], neighbor[1]) in gScore:
+                gScore[(neighbor[0], neighbor[1])] = min(tentative_gScore, gScore[(neighbor[0], neighbor[1])]) #TODO decide if we need orientation --  We decided not needed in gScore
+            else:
+                gScore[(neighbor[0], neighbor[1])] = tentative_gScore
+            fScore[(neighbor[0], neighbor[1], neighbor[2])] = tentative_gScore + heuristic_cost_estimate(neighbor, goal) # maintain fScore with just (x,y, orientation)
 
             # parse through the gScores
     Astar_map = map.copy()
-    for (i, j, o) in gScore:
-        Astar_map[i, j] = gScore[i, j, o]
+    for (i, j) in gScore:  # Removed orientation in gScore
+        Astar_map[i, j] = gScore[i, j]
     return Astar_map #TODO what is Astar used for?
 
 

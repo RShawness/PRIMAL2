@@ -225,7 +225,7 @@ if __name__ == '__main__':
     a = c
     b = c
     for j in range(0, 50):
-          movement = {1: a, 2: b, 3: c, 4: c, 5: c, 6: c, 7: c, 8: c} 
+          movement = {1: a, 2: b, 3: c, 4: c, 5: c, 6: c, 7: c, 8: c}  # TODO change this for our action space? c a b are weird
           env.step_all(movement)
           obs = env._observe()
 

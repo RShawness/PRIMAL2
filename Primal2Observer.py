@@ -305,7 +305,7 @@ class Primal2Observer(ObservationBuilder):
 
         return np.asarray([astar_maps[i] for i in range(1, self.world.num_agents + 1)])
 
-    # TODO
+    # TODO 
     def get_blocking(self, corridor_id, reverse, agent_id, dead_end):
         def get_last_pos(agentID, position):
             history_list = copy.deepcopy(self.world.agents[agentID].position_history)

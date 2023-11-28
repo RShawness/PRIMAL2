@@ -356,6 +356,7 @@ class Worker():
 
         result = [[] for i in range(self.num_workers)]
         actions = {}
+        
         o = {}
         train_imitation = {}
         targets_done = 0
@@ -370,9 +371,11 @@ class Worker():
         new_call = False
         new_EXPERT_call = False
 
+        # get observations
         all_obs = self.env._observe()
+        # assign observations to agents
         for agentID in range(1, self.num_workers + 1):
-            o[agentID] = all_obs[agentID]
+            o[agentID] = all_obs[agentID] # holds a dictionary of observations for each agent
             train_imitation[agentID] = 1
         step_count = 0
         while step_count <= IL_MAX_EP_LENGTH:
@@ -422,6 +425,7 @@ class Worker():
                     path = [list(state) for state in path]
                     for finished_agent in completed_agents:
                         # WHAT IS THIS FUNCTION?????
+                        print("----------------------------------LINE 426 WORKER.PY MERGE_PLANS IS CALLED----------------------------------------------")
                         path = merge_plans(path, [None] * len(path), finished_agent)
                     try:
                         while path[-1] == path[-2]:
@@ -437,6 +441,7 @@ class Worker():
                     # print('OLD PATH', path) # print('CURRENT POSITIONS', start_positions) # print('CURRENT GOALS',goals) # print('WORLD',world)
                     try:
                         # Literally where the fuck does this function come from????
+                        print("----------------------------------LINE 441 WORKER.PY PRIORITY_PLANNER IS CALLED----------------------------------------------")
                         path = priority_planner(world, tuple(start_positions), tuple(goals), path)
                     except:
                         path = self.env.expert_until_first_goal()
