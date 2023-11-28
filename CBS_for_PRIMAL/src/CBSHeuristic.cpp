@@ -29,7 +29,6 @@ void CBSHeuristic::computeQuickHeuristics(CBSNode& node) const // for non-root n
 bool CBSHeuristic::computeInformedHeuristics(CBSNode& curr, double _time_limit)
 {
 
-
 	curr.h_computed = true;
 	// create conflict graph
 	start_time = clock();
@@ -296,23 +295,12 @@ bool CBSHeuristic::buildWeightedDependencyGraph(CBSNode& node, vector<int>& CG, 
 
 int CBSHeuristic::solve2Agents(int a1, int a2, const CBSNode& node, bool cardinal)
 {
-    cout << a1 << " and " << a2 << endl; 
 	vector<SingleAgentSolver*> engines(2);
 	engines[0] = search_engines[a1];
-
-    cout << "path 1 start" << endl;
-    cout << engines[0]->start_direction << endl;
 	engines[1] = search_engines[a2];
-    cout << "path 2 start" << endl;
-    cout << engines[1]->start_direction << endl;
-
 	vector<vector<PathEntry>> initial_paths(2);
 	initial_paths[0] = *paths[a1];
-    cout << "path 1" << endl;
-    cout << initial_paths[0] << endl;
 	initial_paths[1] = *paths[a2];
-    cout << "path 2" << endl;
-    cout << initial_paths[1] << endl;
 	vector<ConstraintTable> constraints{
 		ConstraintTable(initial_constraints[a1]),
 		ConstraintTable(initial_constraints[a2]) };
@@ -337,11 +325,7 @@ int CBSHeuristic::solve2Agents(int a1, int a2, const CBSNode& node, bool cardina
 		lowerbound += 1;
 	cbs.solve(time_limit - runtime, lowerbound, upperbound);
     initial_paths[0] = *paths[a1];
-    cout << "new path 1" << endl;
-    cout << initial_paths[0] << endl;
 	initial_paths[1] = *paths[a2];
-    cout << "new path 2" << endl;
-    cout << initial_paths[1] << endl;
 	num_solve_2agent_problems++;
 	int rst;
 	if (cbs.runtime > time_limit - runtime || cbs.num_HL_expanded > node_limit) // time out or node out

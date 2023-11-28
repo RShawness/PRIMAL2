@@ -69,7 +69,6 @@ Path SIPP::findPath(const CBSNode& node, const ConstraintTable& initial_constrai
 		open_list.erase(curr->open_handle);
 		curr->in_openlist = false;
 		num_expanded++;
-		cout << curr->location << endl;
 
 		// check if the popped node is a goal node
 		if (curr->location == goal_location && // arrive at the goal location
