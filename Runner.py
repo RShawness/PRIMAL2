@@ -43,32 +43,40 @@ class Runner(object):
         self.localNetwork = ACNet(GLOBAL_NET_SCOPE,a_size,trainer,True,NUM_CHANNEL,OBS_SIZE,GLOBAL_NET_SCOPE=GLOBAL_NET_SCOPE, GLOBAL_NETWORK=False)
         self.currEpisode = int(metaAgentID)
 
-        self.global_step = tf.placeholder(tf.float32)
+        # self.global_step = tf.placeholder(tf.float32)
+        self.global_step = tf.compat.v1.placeholder(tf.float32)           # new edit
         
         
         # first `NUM_IL_META_AGENTS` only use IL and don't need gpu/tensorflow
         if self.metaAgentID < NUM_IL_META_AGENTS:
-            config = tf.ConfigProto(allow_soft_placement=True, device_count={"GPU": 0})
+            # config = tf.ConfigProto(allow_soft_placement=True, device_count={"GPU": 0})
+            config = tf.compat.v1.ConfigProto(allow_soft_placement=True, device_count={"GPU": 0})       # new edit
             self.coord = None
             self.saver = None
 
         else:
             # set up tf session
-            config = tf.ConfigProto(allow_soft_placement = True)
+            # config = tf.ConfigProto(allow_soft_placement = True)
+            config = tf.compat.v1.ConfigProto(allow_soft_placement = True)      # new edit
             config.gpu_options.per_process_gpu_memory_fraction = 1.0 / (NUM_META_AGENTS - NUM_IL_META_AGENTS + 1)
             config.gpu_options.allow_growth=True
 
-            self.saver = tf.train.Saver(max_to_keep=1)
+            # self.saver = tf.train.Saver(max_to_keep=1)
+            self.saver = tf.compat.v1.train.Saver(max_to_keep=1)                     # new edit
             self.coord = tf.train.Coordinator()
 
             
-        self.sess = tf.Session(config=config)
-        self.sess.run(tf.global_variables_initializer())
+        # self.sess = tf.Session(config=config)
+        # self.sess.run(tf.global_variables_initializer())
+        self.sess = tf.compat.v1.Session(config=config)                              # new edit
+        self.sess.run(tf.compat.v1.global_variables_initializer())
         
 
-        self.weightVars = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES)
+        # self.weightVars = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES)
+        self.weightVars = tf.compat.v1.get_collection(tf.compat.v1.GraphKeys.TRAINABLE_VARIABLES)           # new edit
         weights = self.sess.run(self.weightVars)
-        self.weightSetters = [tf.placeholder(shape=w.shape, dtype=tf.float32) for w in weights]
+        # self.weightSetters = [tf.placeholder(shape=w.shape, dtype=tf.float32) for w in weights]
+        self.weightSetters = [tf.compat.v1.placeholder(shape=w.shape, dtype=tf.float32) for w in weights]       # new edit
         self.set_weights_ops = [var.assign(w) for var, w in zip(self.weightVars, self.weightSetters)]
 
     def set_weights(self, weights):

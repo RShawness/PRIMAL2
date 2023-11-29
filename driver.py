@@ -13,10 +13,12 @@ import random
 ray.init(num_gpus=1)
 
 
-tf.reset_default_graph()
+# tf.reset_default_graph()
+tf.compat.v1.reset_default_graph()  # new edit
 print("Hello World")
 
-config = tf.ConfigProto(allow_soft_placement = True)
+# config = tf.ConfigProto(allow_soft_placement = True)
+config = tf.compat.v1.ConfigProto(allow_soft_placement = True)  # new edit
 config.gpu_options.per_process_gpu_memory_fraction = 1.0 / (NUM_META_AGENTS - NUM_IL_META_AGENTS + 1)
 config.gpu_options.allow_growth=True
 
@@ -30,7 +32,10 @@ if not os.path.exists(gifs_path):
     os.makedirs(gifs_path)
 
 
-global_step = tf.placeholder(tf.float32)
+# global_step = tf.placeholder(tf.float32)
+tf.compat.v1.disable_eager_execution()              # new edit
+global_step = tf.compat.v1.placeholder(tf.float32)  # new edit
+
         
 if ADAPT_LR:
     # computes LR_Q/sqrt(ADAPT_COEFF*steps+1)
@@ -49,14 +54,16 @@ def apply_gradients(global_network, gradients, sess, curr_episode):
     sess.run([global_network.apply_grads], feed_dict=feed_dict)
 
 def writeImitationDataToTensorboard(global_summary, metrics, curr_episode):    
-    summary = tf.Summary()
+    # summary = tf.Summary()
+    summary = tf.compat.v1.Summary()         # new edit
     summary.value.add(tag='Losses/Imitation loss', simple_value=metrics[0])
     global_summary.add_summary(summary, curr_episode)
     global_summary.flush()
 
 
 def writeEpisodeRatio(global_summary, numIL, numRL, sess, curr_episode):
-    summary = tf.Summary()
+    # summary = tf.Summary()
+    summary = tf.compat.v1.Summary()         # new edit
 
     current_learning_rate = sess.run(lr, feed_dict={global_step: curr_episode})
 
@@ -89,7 +96,8 @@ def writeToTensorBoard(global_summary, tensorboardData, curr_episode, plotMeans=
             mean_stop, mean_reward, mean_finishes = firstEpisode
 
         
-    summary = tf.Summary()
+    # summary = tf.Summary()
+    summary = tf.compat.v1.Summary()         # new edit
     
     summary.value.add(tag='Perf/Reward', simple_value=mean_reward)
     summary.value.add(tag='Perf/Targets Done', simple_value=mean_finishes)
@@ -112,14 +120,21 @@ def writeToTensorBoard(global_summary, tensorboardData, curr_episode, plotMeans=
     
 def main():    
     with tf.device("/gpu:0"):
-        trainer = tf.contrib.opt.NadamOptimizer(learning_rate=lr, use_locking=True)
+        # trainer = tf.compat.v1.estimator.opt.NadamOptimizer(learning_rate=lr, use_locking=True) 
+        # trainer = tf.keras.optimizers.experimental.Nadam(learning_rate=lr)
+        trainer = tf.keras.optimizers.legacy.Nadam(learning_rate=lr)        # new edit
         global_network = ACNet(GLOBAL_NET_SCOPE,a_size,trainer,False,NUM_CHANNEL, OBS_SIZE,GLOBAL_NET_SCOPE, GLOBAL_NETWORK=True)
 
-        global_summary = tf.summary.FileWriter(train_path)
-        saver = tf.train.Saver(max_to_keep=1)
+        # global_summary = tf.summary.FileWriter(train_path)
+        global_summary = tf.compat.v1.summary.FileWriter(train_path)          # new edit
+        # saver = tf.train.Saver(max_to_keep=1)
+        saver = tf.compat.v1.train.Saver(max_to_keep=1)                     # new edit
 
-    with tf.Session(config=config) as sess:
-        sess.run(tf.global_variables_initializer())
+    # with tf.Session(config=config) as sess:
+    with tf.compat.v1.Session(config=config) as sess:
+        tf.compat.v1.disable_eager_execution()                              # new edit
+        # sess.run(tf.global_variables_initializer())
+        sess.run(tf.compat.v1.global_variables_initializer())               # new edit
         if load_model == True:
             print ('Loading Model...')
             ckpt = tf.train.get_checkpoint_state(model_path)
@@ -144,11 +159,13 @@ def main():
         
 
         # get the initial weights from the global network
-        weight_names = tf.trainable_variables()
+        # weight_names = tf.trainable_variables()
+        weight_names = tf.compat.v1.trainable_variables()               # new edit
         weights = sess.run(weight_names) # Gets weights in numpy arrays CHECK
 
 
-        weightVars = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES)
+        # weightVars = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES)
+        weightVars = tf.compat.v1.get_collection(tf.compat.v1.GraphKeys.TRAINABLE_VARIABLES)  # new edit
 
         
         # launch the first job (e.g. getGradient) on each runner
@@ -207,7 +224,8 @@ def main():
                     tensorboardData = []
                     
                 # get the updated weights from the global network
-                weight_names = tf.trainable_variables()
+                # weight_names = tf.trainable_variables()
+                weight_names = tf.compat.v1.trainable_variables()               # new edit
                 weights = sess.run(weight_names)
                 curr_episode += 1
 
