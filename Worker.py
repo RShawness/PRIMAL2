@@ -380,7 +380,7 @@ class Worker():
         step_count = 0
         while step_count <= IL_MAX_EP_LENGTH:
             #* CALL THE EXPERT POLICY
-            path = self.env.expert_until_first_goal() # returned from expert policy 
+            path = self.env.expert_until_first_goal() # returned from expert policy: List of List of tuple(x,y,orientation) 
             if path is None:  # solution not exists
                 if step_count != 0:
                     return result, targets_done
@@ -394,16 +394,25 @@ class Worker():
                 goals = []
                 for i in range(self.num_workers):
                     agent_id = i + 1
-                    # TODO: Fix this section - x, y, o for next_pos
-                    next_pos = path[path_step][i]
-                    diff = tuple_minus(next_pos, self.env.world.getPos(agent_id))
-                    actions[agent_id] = dir2action(diff)
-                    # /END TODO
+                    # DONE Fixed this section - x, y, o for next_pos
+                    next_pos = path[path_step][i] 
+                    # <--old code-->
+                    #  diff = tuple_minus(next_pos, self.env.world.getPos(agent_id))
+                    #  actions[agent_id] = dir2action(diff) 
 
-                all_obs, _ = self.env.step_all(actions)
+                    actions[agent_id] = positions2action(next_pos, self.env.world.getPos(agent_id)) 
+                    
+
+
+
+                    
+                # uses the returned path to create a series of actions to be checked for collisions
+                # step_all() returns Dict of all observation maps {agentid:[], ...}
+                all_obs, _ = self.env.step_all(actions) 
                 for i in range(self.num_workers):
                     agent_id = i + 1
-                    # TODO: check this line...
+                    # result is empty, then appends the 0 and 1 indexed map of the observation maps dictionary
+                    # 0: poss_map, 1: goal_map
                     result[i].append([o[agent_id][0], o[agent_id][1], actions[agent_id], train_imitation[agent_id]])
                     if self.env.world.agents[agent_id].status == 1:
                         completed_agents.append(i)

@@ -11,6 +11,7 @@ class Primal2Observer(ObservationBuilder):
     obs shape: (8 + num_future_steps * obs_size * obs_size )
     map order: poss_map, goal_map, goals_map, obs_map, pathlength_map, blocking_map, deltax_map, deltay_map, astar maps
     """
+    
 
     def __init__(self, observation_size=11, num_future_steps=3, printTime=False):
         super(Primal2Observer, self).__init__()
@@ -25,6 +26,7 @@ class Primal2Observer(ObservationBuilder):
         super().set_env(world)
 
     # TODO: check if this needs to include orientation. It seems like using orientated neighbors is more accurate...?
+    #* todo finished
     def get_next_positions(self, agent_id):
         agent_pos = self.world.getPos(agent_id)
         positions = []
@@ -48,17 +50,17 @@ class Primal2Observer(ObservationBuilder):
         start_time = time.time()
 
         assert (agent_id > 0)
-        agent_pos = self.world.getPos(agent_id)
+        agent_pos = self.world.getPos(agent_id) 
         top_left = (agent_pos[0] - self.observation_size // 2,
                     agent_pos[1] - self.observation_size // 2)
         bottom_right = (top_left[0] + self.observation_size, top_left[1] + self.observation_size)
         centre = (self.observation_size - 1) / 2
         obs_shape = (self.observation_size, self.observation_size)
 
-        goal_map = np.zeros(obs_shape)
-        poss_map = np.zeros(obs_shape)
-        goals_map = np.zeros(obs_shape)
-        obs_map = np.zeros(obs_shape)
+        goal_map = np.zeros(obs_shape)          # goal of the agent
+        poss_map = np.zeros(obs_shape)          # position of the agent and other agents
+        goals_map = np.zeros(obs_shape)         # goals of the other agents within your view. minimized location to fit FOV
+        obs_map = np.zeros(obs_shape)           # obstacle map
         astar_map = np.zeros([self.num_future_steps, self.observation_size, self.observation_size])
         astar_map_unpadded = np.zeros([self.num_future_steps, self.world.state.shape[0], self.world.state.shape[1]])
         pathlength_map = np.zeros(obs_shape)
@@ -69,7 +71,7 @@ class Primal2Observer(ObservationBuilder):
         time1 = time.time() - start_time
         start_time = time.time()
 
-        # concatenate all_astar maps
+        # concatenate all_astar maps, except for agent itself
         other_agents = list(range(self.world.num_agents))  # needs to be 0-indexed for numpy magic below
         other_agents.remove(agent_id - 1)  # 0-indexing again
         astar_map_unpadded = np.zeros([self.num_future_steps, self.world.state.shape[0], self.world.state.shape[1]])
@@ -77,8 +79,8 @@ class Primal2Observer(ObservationBuilder):
         max(0, top_left[1]):min(bottom_right[1], self.world.state.shape[1])] = \
             np.sum(all_astar_maps[other_agents, :self.num_future_steps,
                    max(0, top_left[0]):min(bottom_right[0], self.world.state.shape[0]),
-                   max(0, top_left[1]):min(bottom_right[1], self.world.state.shape[1])], axis=0)
-
+                   max(0, top_left[1]):min(bottom_right[1], self.world.state.shape[1])], axis=0)    
+                                                                                            
         time2 = time.time() - start_time
         start_time = time.time()
 
@@ -105,7 +107,8 @@ class Primal2Observer(ObservationBuilder):
                     # agent's goal
                     goal_map[i - top_left[0], j - top_left[1]] = 1
                 if self.world.state[i, j] > 0 and self.world.state[i, j] != agent_id:
-                    # other agents' positions
+                    # other agents' positions 
+                    #* possible to add orientation here -A
                     visible_agents.append(self.world.state[i, j])
                     poss_map[i - top_left[0], j - top_left[1]] = 1
                     # updated_poss_map[i - top_left[0], j - top_left[1]] = self.world.state[i, j]
@@ -138,7 +141,7 @@ class Primal2Observer(ObservationBuilder):
         current_corridor_id = -1
         # access corridor map using position
         current_corridor = self.world.corridor_map[self.world.getPos(agent_id)[0], self.world.getPos(agent_id)[1]][1]
-        if current_corridor == 1:
+        if current_corridor == 1:       # inside a corridor
             current_corridor_id = \
                 self.world.corridor_map[self.world.getPos(agent_id)[0], self.world.getPos(agent_id)[1]][0]
 
@@ -252,7 +255,7 @@ class Primal2Observer(ObservationBuilder):
                 # return next_astar_cell
             
                 for action in range(1, 4):
-                    new_pos = action2position(action, position)
+                    new_pos = action2position(action, position)     # does not include standing still
                     if 0 < new_pos[0] <= h and 0 < new_pos[1] <= w:
                         if distance_map[new_pos[:2]] == distance_map[position[:2]] - 1 \
                                 and distance_map[new_pos[:2]] >= 0:
@@ -278,7 +281,8 @@ class Primal2Observer(ObservationBuilder):
             # contains position
             return astar_list
 
-        # TODO: I am not sure about this segment...
+        # TODO: I am not sure about this segment... 
+        # * it looks fine -A, MRRW
         astar_maps = {}
         for agentID in range(1, self.world.num_agents + 1):
             astar_maps.update(

@@ -65,7 +65,7 @@ def action2dir(action):
     checking_table = {0: (0, 0), 1: (0, 1), 2: (0, 0), 3: (0, 0)}
     return checking_table[action]
 
-
+#legacy code
 def dir2action(direction):
     checking_table = {(0, 0): 0, (0, 1): 1, (1, 0): 2, (0, -1): 3, (-1, 0): 4}
     return checking_table[direction]
@@ -80,6 +80,18 @@ def tuple_minus(a, b):
     """ a - b """
     return tuple(map(sub, a, b))
 
+# takes in consecutive states (x,y,orientation) and return the action that brings state1 to state2
+def positions2action(next_pos, current_pos):
+    
+    if next_pos[0] - current_pos[0] == 0 and next_pos[1] - current_pos[1] == 0:
+        if current_pos[2] == next_pos[2]:
+            return 0
+        elif (current_pos[2] + 1) % 4 == next_pos[2]:
+            return 2
+        elif (current_pos[2] + 3) % 4 == next_pos[2]:
+            return 3
+    else:
+        return 1
 
 def _heap(ls, max_length):
     while True:
@@ -93,7 +105,6 @@ def get_key(dict, value):
     return [k for k, v in dict.items() if v == value]
 
 
-#TODO make sure start has an orientation...? goal does not need one
 def getAstarDistanceMap(map: np.array, start: tuple, goal: tuple, isDiagonal: bool = False):
     """
     returns a numpy array of same dims as map with the distance to the goal from each coord
@@ -103,7 +114,7 @@ def getAstarDistanceMap(map: np.array, start: tuple, goal: tuple, isDiagonal: bo
     :return: optimal distance map
     """
 
-    #TODO estimate include orientation
+    #DONE estimate include orientation
     def lowestF(fScore, openSet):
         # find entry in openSet with lowest fScore
         assert (len(openSet) > 0)
@@ -149,7 +160,7 @@ def getAstarDistanceMap(map: np.array, start: tuple, goal: tuple, isDiagonal: bo
                 continue
 
             # Calculate the cost based on the movement and current orientation + update orientation
-            # TODO: add cases for orientation == -1 (coming from a goal state)
+            # DONE add cases for orientation == -1 (coming from a goal state)
             if move == (1, 0):  # Move east
                 cost = 1 if current_orientation == 0 else (3 if current_orientation == 2 else 2)  # Forward move or turn
                 new_orientation = 0  # Update orientation after the move
@@ -257,7 +268,7 @@ def getAstarDistanceMap(map: np.array, start: tuple, goal: tuple, isDiagonal: bo
             # This path is the best until now. Record it!
             cameFrom[neighbor] = current
             if (neighbor[0], neighbor[1]) in gScore:
-                gScore[(neighbor[0], neighbor[1])] = min(tentative_gScore, gScore[(neighbor[0], neighbor[1])]) #TODO decide if we need orientation --  We decided not needed in gScore
+                gScore[(neighbor[0], neighbor[1])] = min(tentative_gScore, gScore[(neighbor[0], neighbor[1])]) # We decided orientation not needed in gScore
             else:
                 gScore[(neighbor[0], neighbor[1])] = tentative_gScore
             
@@ -267,7 +278,7 @@ def getAstarDistanceMap(map: np.array, start: tuple, goal: tuple, isDiagonal: bo
     Astar_map = map.copy()
     for key in gScore:  # Removed orientation in gScore
         Astar_map[key[0], key[1]] = gScore[key]
-    return Astar_map #TODO what is Astar used for?
+    return Astar_map 
 
 
 class Agent:
@@ -317,22 +328,29 @@ class Agent:
         except:
             AssertionError("position is not a 3 tuple: ", position)
         self.status = status
-        self._path_count += 1 #TODO +1 path_count for each forward move and/or turn?
+        self._path_count += 1 # +1 path_count for each forward move and/or turn?
         self.position = tuple(position)
         if self._path_count != 0:
-            #TODO retrieve previous position with new orientation
-            direction = tuple_minus(position, self.position_history[-1])
+            # retrieve previous position with new orientation
+            # <--old code-->
+                # direction = tuple_minus(position, self.position_history[-1])
+                # action = dir2action(direction)
+                # self.direction_history.append(direction)
+            # <--end old--->
 
-            #TODO Change logic of actionDir to find direction
-            action = dir2action(direction)
-            assert action in list(range(4 + 1)), \
+            # <---new code--->
+            # Do not need direction history, just action
+            action = positions2action(position, self.position_history[-1])
+            # <---end new--->
+            assert action in list(range(4)), \
                 "direction not in actionDir, something going wrong"
-            self.direction_history.append(direction)
+            
             self.action_history.append(action)
         self.position_history.append(tuple(position))
 
         self.position_history = _heap(self.position_history, 30)
-        self.direction_history = _heap(self.direction_history, 30) # TODO Only used in get_history() which is not used ever
+        # direction_history only used in get_history() which is not used ever
+        # self.direction_history = _heap(self.direction_history, 30) 
         self.action_history = _heap(self.action_history, 30)
 
 
@@ -521,6 +539,7 @@ class World:
                 new_positions = self.blank_env_valid_neighbor(positions[num][0], positions[num][1])
                 if new_positions.count(None) in [2, 3]:
                     counter += 1
+                    break # added since we're just checking for counter > 0...??? -A
         return counter > 0
 
     def visit(self, i, j, corridor_id):
@@ -571,7 +590,7 @@ class World:
                         continue
         return possible_positions
 
-    #TODO might need to add orientation to the position
+    #TODO might need to add orientation to the position. position and orientation are both initialized
     def getPos(self, agent_id):
         return tuple(self.agents[agent_id].position)
 
@@ -579,6 +598,7 @@ class World:
         # get the number of goals that an agent has finished
         return self.agents[agentID].dones
 
+    # Legacy code: get_history() is never used!
     def get_history(self, agent_id, path_id=None):
         """
         :param: path_id: if None, get the last step
@@ -988,6 +1008,8 @@ class MAPFEnv(gym.Env):
         """
         Returns Dict of observation {agentid:[], ...}
         """
+        # handles is a list of agentIDs
+        # get_many() calls get() and builds all the observation maps
         if handles is None:
             self.obs_dict = self.observer.get_many(list(range(1, self.num_agents + 1)))
         elif handles in list(range(1, self.num_agents + 1)):
