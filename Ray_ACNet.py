@@ -1,5 +1,6 @@
 import tensorflow as tf
-import tensorflow.contrib.layers as layers
+# import tensorflow.contrib.layers as layers
+import tensorflow.keras.layers as layers
 import numpy as np
 
 # parameters for training

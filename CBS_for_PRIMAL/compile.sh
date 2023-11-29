@@ -1,6 +1,12 @@
 #!/bin/bash
 
-mkdir build
+# Check if pybind11 directory exists
+if [ ! -d "pybind11" ]; then
+  # If not, download it from GitHub
+  git clone https://github.com/pybind/pybind11.git
+fi
+
+mkdir -p build
 
 # build exec for cpp
 

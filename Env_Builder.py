@@ -4,13 +4,11 @@ import gym
 import numpy as np
 import math, time
 import warnings
-from od_mstar3.col_set_addition import OutOfTimeError, NoSolutionError
-from od_mstar3 import od_mstar
-from od_mstar3 import cpp_mstar
 from CBS_for_PRIMAL import cbs_py
 from GroupLock import Lock
 from matplotlib.colors import *
 from gym.envs.classic_control import rendering
+# from gym.utils import pyglet_rendering as rendering
 import imageio
 from gym import spaces
 
@@ -111,12 +109,17 @@ def getAstarDistanceMap(map: np.array, start: tuple, goal: tuple, isDiagonal: bo
         assert (len(openSet) > 0)
         minF = 2 ** 31 - 1
         minNode = None
-        # ! this line will throw an error if a goal (no orientation) is passed in openSet
-        for (i, j, o) in openSet: # will error if openSet is only a cartesian pair
-            if (i, j, o) not in fScore: continue
+        
+        for element in openSet:
+            i, j, *rest = element
+            o = rest[0] if rest else -1
+            if (i, j, o) not in fScore: continue # ! this line is getting called
             if fScore[(i, j, o)] < minF:
-                minF = fScore[(i, j, o)]
-                minNode = (i, j, o)
+                minF = fScore[(i, j, o)] 
+                minNode = (i, j, o) 
+        if minNode is None:
+            # print("MIN NODE IS NONE")
+            minNode = next(iter(openSet)) # will return the first key in openSet
         return minNode
 
     #DONE modify for orientation, with cost calculation
@@ -124,14 +127,8 @@ def getAstarDistanceMap(map: np.array, start: tuple, goal: tuple, isDiagonal: bo
         neighbors = set()
         possible_moves = [(0, 1), (1, 0), (0, -1), (-1, 0)]
 
-        if len(node) == 3:
-            ax, ay, current_orientation = node
-            # # reverse orientation??
-            # current_orientation = (current_orientation + 3) % 4
-        else:
-            ax, ay = node
-            current_orientation = -1
-
+        ax, ay, current_orientation = node
+       
         for move in possible_moves:
             dx, dy = move
 
@@ -168,6 +165,7 @@ def getAstarDistanceMap(map: np.array, start: tuple, goal: tuple, isDiagonal: bo
             else:
                 print("That's not right")
             
+            # first case with manual goal orientation -1
             if current_orientation == -1:
                 cost = 1
 
@@ -177,6 +175,8 @@ def getAstarDistanceMap(map: np.array, start: tuple, goal: tuple, isDiagonal: bo
 
     # NOTE THAT WE REVERSE THE DIRECTION OF SEARCH SO THAT THE GSCORE WILL BE DISTANCE TO GOAL
     # swaps the values of start and goal and then convert them to tuples
+    goal = (goal[0], goal[1], -1) # give the goal an arbitrary orientation
+    
     start, goal = goal, start
     start, goal = tuple(start), tuple(goal)
     # The set of nodes already evaluated
@@ -235,8 +235,10 @@ def getAstarDistanceMap(map: np.array, start: tuple, goal: tuple, isDiagonal: bo
     while len(openSet) != 0:
         # current = the node in openSet having the lowest fScore value
         current = lowestF(fScore, openSet)
-
-        openSet.remove(current)
+        
+        if current is None:
+            print("CURRENT NODE IS NONE")
+        openSet.remove(current) #! Error when trying to remove 'current' that isnt a key in the set
         closedSet.add(current[:2])
         for neighbor in getNeighbors(current): #neighbors have (x, y, o, cost from current to neighbor)
             if neighbor[:2] in closedSet:
@@ -258,12 +260,13 @@ def getAstarDistanceMap(map: np.array, start: tuple, goal: tuple, isDiagonal: bo
                 gScore[(neighbor[0], neighbor[1])] = min(tentative_gScore, gScore[(neighbor[0], neighbor[1])]) #TODO decide if we need orientation --  We decided not needed in gScore
             else:
                 gScore[(neighbor[0], neighbor[1])] = tentative_gScore
+            
             fScore[(neighbor[0], neighbor[1], neighbor[2])] = tentative_gScore + heuristic_cost_estimate(neighbor, goal) # maintain fScore with just (x,y, orientation)
 
             # parse through the gScores
     Astar_map = map.copy()
-    for (i, j) in gScore:  # Removed orientation in gScore
-        Astar_map[i, j] = gScore[i, j]
+    for key in gScore:  # Removed orientation in gScore
+        Astar_map[key[0], key[1]] = gScore[key]
     return Astar_map #TODO what is Astar used for?
 
 
@@ -309,7 +312,10 @@ class Agent:
         self.add_history(pos, status)
 
     def add_history(self, position, status):
-        assert len(position) == 3 # Change to 3: (x,y,o)
+        try:
+            assert len(position) == 3 # Change to 3: (x,y,o)
+        except:
+            AssertionError("position is not a 3 tuple: ", position)
         self.status = status
         self._path_count += 1 #TODO +1 path_count for each forward move and/or turn?
         self.position = tuple(position)
@@ -1083,20 +1089,51 @@ class MAPFEnv(gym.Env):
         start_time = time.time()
         try:
             # C++ call of expert policy
-            expert_path = cbs_py.findPath_new(world, start_positions, start_directions, goals, width, height, self.world.num_agents)
+            linear_old_expert_path = cbs_py.findPath_new(world, start_positions, start_directions, goals, width, height, self.world.num_agents)
+                
             # expert_path = cpp_mstar.find_path(world, start_positions, goals, inflation, time_limit / 5.0)
+            if len(linear_old_expert_path) == 0:
+                return None
+            
+            ##
+            min_length = 2**31 -1
+            for agent in linear_old_expert_path:
+                if len(agent) < min_length:
+                    min_length = len(agent)
+            
+            expert_path = np.empty([min_length, self.world.num_agents], dtype=tuple)
 
-        except OutOfTimeError:
-            # M* timed out
-            print("timeout")
-            print('World', world)
-            print('Start Pos', start_positions)
-            print('Goals', goals)
-        except NoSolutionError:
-            print("nosol????")
-            print('World', world)
-            print('Start Pos', start_positions)
-            print('Goals', goals)
+            for time_step in range(len(expert_path)):
+                for agent in range(self.world.num_agents):
+                    linear_loc = linear_old_expert_path[agent][time_step][0]
+                    linear_orientation = linear_old_expert_path[agent][time_step][1]
+                    x = linear_loc % width
+                    y = (linear_loc - x) / width
+                    expert_path[time_step][agent] = (x, y, linear_orientation)
+            # linear_expert_path = np.array(linear_old_expert_path[:min_length])
+            # linear_expert_path = np.transpose(linear_expert_path)
+            
+            # expert_path = np.empty(linear_expert_path.shape)
+            
+            # for time_step in linear_expert_path:
+            #     for agent in time_step:
+            #         linear_loc = linear_expert_path[time_step][agent][0]
+            #         linear_orientation = linear_expert_path[time_step][agent][1]
+            #         y = linear_loc % width
+            #         x = (linear_loc - y) / width
+            #         expert_path[time_step][agent] = (x, y, linear_orientation)
+
+        # except OutOfTimeError:
+        #     # M* timed out
+        #     print("timeout")
+        #     print('World', world)
+        #     print('Start Pos', start_positions)
+        #     print('Goals', goals)
+        # except NoSolutionError:
+        #     print("nosol????")
+        #     print('World', world)
+        #     print('Start Pos', start_positions)
+        #     print('Goals', goals)
 
         except:
             c_time = time.time() - start_time

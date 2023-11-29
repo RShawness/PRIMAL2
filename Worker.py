@@ -176,7 +176,7 @@ class Worker():
                 episode_invalid_ops[self.metaAgentID] = []
                 episode_stop_ops[self.metaAgentID] = []
 
-                # ===============================start training =======================================================================
+                # =============================== start training =======================================================================
                 # RL
                 if True:
                     # prepare to save GIF
@@ -344,7 +344,7 @@ class Worker():
             # gradients are accessed by the runner in self.allGradients
         return
 
-    #! This function needs to be looked at
+    # ! This function needs to be looked at
     # Used for imitation learning
     def parse_path(self, episode_count):
         """needed function to take the path generated from M* and create the
@@ -380,7 +380,7 @@ class Worker():
         step_count = 0
         while step_count <= IL_MAX_EP_LENGTH:
             #* CALL THE EXPERT POLICY
-            path = self.env.expert_until_first_goal()
+            path = self.env.expert_until_first_goal() # returned from expert policy 
             if path is None:  # solution not exists
                 if step_count != 0:
                     return result, targets_done
@@ -394,7 +394,7 @@ class Worker():
                 goals = []
                 for i in range(self.num_workers):
                     agent_id = i + 1
-                    # TODO: Fix this section
+                    # TODO: Fix this section - x, y, o for next_pos
                     next_pos = path[path_step][i]
                     diff = tuple_minus(next_pos, self.env.world.getPos(agent_id))
                     actions[agent_id] = dir2action(diff)
@@ -416,7 +416,7 @@ class Worker():
                 if saveGIF and OUTPUT_IL_GIFS:
                     GIF_frames.append(self.env._render())
                 if single_done and new_EXPERT_call:
-                    path = self.env.expert_until_first_goal()
+                    path = self.env.expert_until_first_goal() 
                     if path is None:
                         return result, targets_done
                     path_step = 0
