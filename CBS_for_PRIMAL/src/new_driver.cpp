@@ -18,7 +18,7 @@ list<list<pair<int, int>>> findPath_new(list<bool> map, list<int> startL, list<i
 
     // initialie the solver
 	CBS cbs(instance, false, 1);
-	cbs.setPrioritizeConflicts(true);
+	cbs.setPrioritizeConflicts(false);
 	cbs.setDisjointSplitting(false);
 	cbs.setBypass(true);
 	cbs.setRectangleReasoning(rectangle_strategy::GR);
