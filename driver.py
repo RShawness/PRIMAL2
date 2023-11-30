@@ -67,7 +67,8 @@ def writeEpisodeRatio(global_summary, numIL, numRL, sess, curr_episode):
 
     current_learning_rate = sess.run(lr, feed_dict={global_step: curr_episode})
 
-    RL_IL_Ratio = numRL / (numRL + numIL)
+    RL_IL_Ratio = numRL / (numRL + numIL + 1)
+    print("RL:", numRL, "IL:", numIL)
     summary.value.add(tag='Perf/Num IL Ep.', simple_value=numIL)
     summary.value.add(tag='Perf/Num RL Ep.', simple_value=numRL)
     summary.value.add(tag='Perf/ RL IL ratio Ep.', simple_value=RL_IL_Ratio)
@@ -118,8 +119,13 @@ def writeToTensorBoard(global_summary, tensorboardData, curr_episode, plotMeans=
 
 
     
-def main():    
-    with tf.device("/gpu:0"):
+def main():
+    if tf.config.list_physical_devices('GPU'):
+        device_name = "/gpu:0"
+    else:
+        device_name = "/cpu:0"
+
+    with tf.device(device_name):    
         # trainer = tf.compat.v1.estimator.opt.NadamOptimizer(learning_rate=lr, use_locking=True) 
         # trainer = tf.keras.optimizers.experimental.Nadam(learning_rate=lr)
         trainer = tf.keras.optimizers.legacy.Nadam(learning_rate=lr)        # new edit
@@ -185,9 +191,12 @@ def main():
             while True:
                 # wait for any job to be completed - unblock as soon as the earliest arrives
                 done_id, jobList = ray.wait(jobList)
+                # print("Done ID: ", done_id)
+                # print("Job List: ", jobList)
                 
                 # get the results of the task from the object store
                 jobResults, metrics, info = ray.get(done_id)[0]
+                # print("Job Results: ", jobResults, "\nmetrics: ", metrics, "\ninfo: ", info)
 
                 # imitation episodes write different data to tensorboard
                 if info['is_imitation']:

@@ -4,7 +4,7 @@
 # compile CXX with /Library/Developer/CommandLineTools/usr/bin/c++
 CXX_DEFINES = -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB -Dcbs_py_EXPORTS
 
-CXX_INCLUDES = -I/Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc -I/Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/src -isystem /opt/homebrew/include -isystem /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/pybind11/include -isystem /Users/jbush/miniforge3/envs/CSCI567/include/python3.8
+CXX_INCLUDES = -I/Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc -I/Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/src -isystem /opt/homebrew/include -isystem /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/pybind11/include -isystem /Users/jbush/miniforge3/envs/CSCI567/include/python3.8
 
 CXX_FLAGSx86_64 = -std=gnu++14 -arch x86_64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -fPIC -fvisibility=hidden -flto
 

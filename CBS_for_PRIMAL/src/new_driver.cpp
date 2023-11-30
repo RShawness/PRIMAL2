@@ -4,16 +4,17 @@
 
 
 list<list<pair<int, int>>> findPath_new(list<bool> map, list<int> startL, list<int> startD, list<int> goalL, int cols, int rows, int agents, int time_limit) {
-    // (list<bool> map, list<int> startL, list<int> startD, list<int> goalL, int cols, int rows, int agents);
-    Instance instance(map, startL, startD, goalL, cols, rows, agents);
+    cout << "finding path in cbs" << endl;
+	// (list<bool> map, list<int> startL, list<int> startD, list<int> goalL, int cols, int rows, int agents);
+	Instance instance(map, startL, startD, goalL, cols, rows, agents);
 
     int runs = 1;
-	cout << "printing instance" << endl;
+	// cout << "printing instance" << endl;
 
-	cout << "number of columns: " << instance.num_of_cols << endl;
-	cout << "number of rows: " << instance.num_of_rows << endl;
-	cout << "map size: " << instance.map_size << endl;
-	instance.printMap();
+	// cout << "number of columns: " << instance.num_of_cols << endl;
+	// cout << "number of rows: " << instance.num_of_rows << endl;
+	// cout << "map size: " << instance.map_size << endl;
+	// instance.printMap();
 
     // initialie the solver
 	CBS cbs(instance, false, 1);

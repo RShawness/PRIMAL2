@@ -71,6 +71,7 @@ class ACNet:
             self.value_loss  = 0.1 * tf.reduce_mean(
                 self.train_value * tf.square(self.target_v - tf.reshape(self.value, shape=[-1])))
             
+            
             # self.entropy     = - tf.reduce_mean(self.policy * tf.log(tf.clip_by_value(self.policy, 1e-10, 1.0)))
             self.entropy     = - tf.reduce_mean(self.policy * tf.math.log(tf.clip_by_value(self.policy, 1e-10, 1.0)))       # new edit
 
@@ -128,10 +129,8 @@ class ACNet:
             print("\n\n\n\n is a global network\n\n\n\n")
             # weightVars = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES)
             weightVars = tf.compat.v1.get_collection(tf.compat.v1.GraphKeys.TRAINABLE_VARIABLES)                                # new edit
-            print(weightVars)
             # self.tempGradients = [tf.placeholder(shape=w.get_shape(), dtype=tf.float32) for w in weightVars]
             self.tempGradients = [tf.compat.v1.placeholder(shape=w.get_shape(), dtype=tf.float32) for w in weightVars]        # new edit
-            print(self.tempGradients)
             self.apply_grads = self.trainer.apply_gradients(zip(self.tempGradients, weightVars))
             #self.clippedGrads, norms = tf.clip_by_global_norm(self.tempGradients, GRAD_CLIP)
             #self.apply_grads = self.trainer.apply_gradients(zip(self.clippedGrads, weightVars))
@@ -209,6 +208,8 @@ class ACNet:
                                               biases_initializer=None, activation_fn=None)
         policy = tf.nn.softmax(policy_layer)
         policy_sig = tf.sigmoid(policy_layer)
+
+        # May not be working correctly...?
         value = layers.fully_connected(inputs=self.rnn_out, num_outputs=1,
                                        weights_initializer=normalized_columns_initializer(1.0), biases_initializer=None,
                                        activation_fn=None)

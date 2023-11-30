@@ -54,6 +54,15 @@ class Worker():
 
                      }
 
+        
+
+        # names = ("global_step", "inputs", "goal_pos", "optimal_actions", "state_in[0]", "state_in[1]", "train_imitation", "target_v", "train_value")
+        # i = 0
+        # for key, value in feed_dict.items():
+        #     print(f"{names[i]}, {key}: Type={type(value)}, Value={value}")
+        #     i += 1
+        
+
         v_l, i_l, i_grads = self.sess.run([self.local_AC.value_loss,
                                            self.local_AC.imitation_loss,
                                            self.local_AC.i_grads],
@@ -115,8 +124,10 @@ class Worker():
     def imitation_learning_only(self, episode_count):
         self.env._reset()
         rollouts, targets_done = self.parse_path(episode_count)
+        # print("rollouts: ", rollouts)
 
         if rollouts is None:
+            print("rollout is none -.-")
             return None, 0
 
         gradients = []
@@ -223,6 +234,7 @@ class Worker():
                         self.synchronize()
 
                         if self.agentID == 1:
+                            # ! joint actions needs to change eventually for our RL implementation. 
                             all_obs, all_rewards = self.env.step_all(joint_actions[self.metaAgentID])
                             for i in range(1, self.num_workers + 1):
                                 joint_observations[self.metaAgentID][i] = all_obs[i]
@@ -380,12 +392,23 @@ class Worker():
         step_count = 0
         while step_count <= IL_MAX_EP_LENGTH:
             #* CALL THE EXPERT POLICY
-            path = self.env.expert_until_first_goal() # returned from expert policy: List of List of tuple(x,y,orientation) 
+            path = self.env.expert_until_first_goal() # returned from expert policy: List of List of tuple(row,col,orientation) 
             if path is None:  # solution not exists
+                print(f"Path is None, step_count: {step_count}")
                 if step_count != 0:
                     return result, targets_done
-                # print('Failed intially')
                 return None, 0
+            
+            for i in range(self.num_workers):
+                invalidMove = False
+                for idx in range(1, len(path)):
+                    if positions2action[path[idx][i], path[idx-1][i]] == -1:
+                        invalidMove = True
+                        break
+                if invalidMove:
+                    print("this is da invalid wae: \n", path)
+                    break
+                    
             none_on_goal = True
             path_step = 1
             while none_on_goal and step_count <= IL_MAX_EP_LENGTH:
@@ -395,24 +418,27 @@ class Worker():
                 for i in range(self.num_workers):
                     agent_id = i + 1
                     # DONE Fixed this section - x, y, o for next_pos
-                    next_pos = path[path_step][i] 
+                    if (path_step >= len(path)):
+                        continue
+                    next_pos = path[path_step][i]
                     # <--old code-->
                     #  diff = tuple_minus(next_pos, self.env.world.getPos(agent_id))
                     #  actions[agent_id] = dir2action(diff) 
 
-                    actions[agent_id] = positions2action(next_pos, self.env.world.getPos(agent_id)) 
-                    
-
-
-
-                    
+                    # print("parse_path call worker.py")
+                    actions[agent_id] = positions2action(next_pos, self.env.world.getPos(agent_id))     
                 # uses the returned path to create a series of actions to be checked for collisions
                 # step_all() returns Dict of all observation maps {agentid:[], ...}
+                # print("current time_step agent locations")
+                print("Current Agent Positions:", self.env.getPositions())
+                print("Parsed Actions: ", actions)
                 all_obs, _ = self.env.step_all(actions) 
                 for i in range(self.num_workers):
                     agent_id = i + 1
                     # result is empty, then appends the 0 and 1 indexed map of the observation maps dictionary
                     # 0: poss_map, 1: goal_map
+                    # TODO: Check this section
+                    # print(f"agent {agent_id} action: {actions[agent_id]}")
                     result[i].append([o[agent_id][0], o[agent_id][1], actions[agent_id], train_imitation[agent_id]])
                     if self.env.world.agents[agent_id].status == 1:
                         completed_agents.append(i)
@@ -425,38 +451,48 @@ class Worker():
                 if saveGIF and OUTPUT_IL_GIFS:
                     GIF_frames.append(self.env._render())
                 if single_done and new_EXPERT_call:
-                    path = self.env.expert_until_first_goal() 
+                    path = self.env.expert_until_first_goal()
+                    for i in range(self.num_workers):
+                        invalidMove = False
+                        for idx in range(1, len(path)):
+                            if positions2action[path[idx][i], path[idx-1][i]] == -1:
+                                invalidMove = True
+                                break
+                        if invalidMove:
+                            print("this is da invalid wae (call 2): \n", path)
+                            break
                     if path is None:
                         return result, targets_done
                     path_step = 0
-                elif single_done and new_call:
-                    path = path[path_step:]
-                    path = [list(state) for state in path]
-                    for finished_agent in completed_agents:
-                        # WHAT IS THIS FUNCTION?????
-                        print("----------------------------------LINE 426 WORKER.PY MERGE_PLANS IS CALLED----------------------------------------------")
-                        path = merge_plans(path, [None] * len(path), finished_agent)
-                    try:
-                        while path[-1] == path[-2]:
-                            path = path[:-1]
-                    except:
-                        assert (len(path) <= 2)
-                    start_positions_dir = self.env.getPositions()
-                    goals_dir = self.env.getGoals()
-                    for i in range(1, self.env.world.num_agents + 1):
-                        start_positions.append(start_positions_dir[i])
-                        goals.append(goals_dir[i])
-                    world = self.env.getObstacleMap()
-                    # print('OLD PATH', path) # print('CURRENT POSITIONS', start_positions) # print('CURRENT GOALS',goals) # print('WORLD',world)
-                    try:
-                        # Literally where the fuck does this function come from????
-                        print("----------------------------------LINE 441 WORKER.PY PRIORITY_PLANNER IS CALLED----------------------------------------------")
-                        path = priority_planner(world, tuple(start_positions), tuple(goals), path)
-                    except:
-                        path = self.env.expert_until_first_goal()
-                        if path is None:
-                            return result, targets_done
-                    path_step = 0
+                # elif single_done and new_call:
+                #     path = path[path_step:]
+                #     path = [list(state) for state in path]
+                #     for finished_agent in completed_agents:
+                #         # WHAT IS THIS FUNCTION?????
+                #         print("----------------------------------LINE 426 WORKER.PY MERGE_PLANS IS CALLED----------------------------------------------")
+                #         # path = merge_plans(path, [None] * len(path), finished_agent)
+                #     try:
+                #         while path[-1] == path[-2]:
+                #             path = path[:-1]
+                #     except:
+                #         assert (len(path) <= 2)
+                #     start_positions_dir = self.env.getPositions()
+                #     goals_dir = self.env.getGoals()
+                #     for i in range(1, self.env.world.num_agents + 1):
+                #         start_positions.append(start_positions_dir[i])
+                #         goals.append(goals_dir[i])
+                #     world = self.env.getObstacleMap()
+                #     # print('OLD PATH', path) # print('CURRENT POSITIONS', start_positions) # print('CURRENT GOALS',goals) # print('WORLD',world)
+                #     try:
+                #         # Literally where the fuck does this function come from????
+                #         print("----------------------------------LINE 441 WORKER.PY PRIORITY_PLANNER IS CALLED----------------------------------------------")
+                #         # path = priority_planner(world, tuple(start_positions), tuple(goals), path)
+                #     except:
+                #         path = self.env.expert_until_first_goal()
+                #         print("this is da wae (call 3): \n", path)
+                #         if path is None:
+                #             return result, targets_done
+                #     path_step = 0
                 o = all_obs
                 step_count += 1
                 path_step += 1

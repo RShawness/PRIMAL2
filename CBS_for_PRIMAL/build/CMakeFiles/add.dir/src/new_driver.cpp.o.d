@@ -1,5 +1,5 @@
 CMakeFiles/add.dir/src/new_driver.cpp.o: \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/src/new_driver.cpp \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/src/new_driver.cpp \
   /opt/homebrew/include/boost/program_options.hpp \
   /opt/homebrew/include/boost/program_options/options_description.hpp \
   /opt/homebrew/include/boost/program_options/config.hpp \
@@ -995,12 +995,12 @@ CMakeFiles/add.dir/src/new_driver.cpp.o: \
   /opt/homebrew/include/boost/token_iterator.hpp \
   /opt/homebrew/include/boost/iterator/minimum_category.hpp \
   /opt/homebrew/include/boost/token_functions.hpp \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/CBS.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/CBSHeuristic.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/MDD.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/SingleAgentSolver.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/Instance.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/common.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/CBS.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/CBSHeuristic.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/MDD.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/SingleAgentSolver.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/Instance.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/common.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk/usr/include/c++/v1/list \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk/usr/include/c++/v1/fstream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk/usr/include/c++/v1/filesystem \
@@ -1362,13 +1362,13 @@ CMakeFiles/add.dir/src/new_driver.cpp.o: \
   /opt/homebrew/include/boost/unordered/unordered_map.hpp \
   /opt/homebrew/include/boost/unordered/detail/map.hpp \
   /opt/homebrew/include/boost/unordered/unordered_map_fwd.hpp \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/ConstraintTable.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/CBSNode.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/Conflict.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/RectangleReasoning.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/CorridorReasoning.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/ReservationTable.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/ConstraintPropagation.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/SMDDConstraintPropagation.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/MutexReasoning.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/IncrementalPairwiseMutexPropagation.hpp
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/ConstraintTable.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/CBSNode.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/Conflict.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/RectangleReasoning.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/CorridorReasoning.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/ReservationTable.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/ConstraintPropagation.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/SMDDConstraintPropagation.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/MutexReasoning.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/IncrementalPairwiseMutexPropagation.hpp

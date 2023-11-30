@@ -157,7 +157,7 @@ class Runner(object):
         
         return jobResults, all_metrics, is_imitation
     
-
+    #! this no work
     def imitationLearningJob(self, episodeNumber):
         workersPerMetaAgent = NUM_THREADS
         agentID=None
@@ -172,7 +172,8 @@ class Runner(object):
         mean_imitation_loss = [np.mean(losses)]
 
         is_imitation = True
-
+        # print("gradients: ", gradients)
+        # print("losses: ", losses)
         return gradients, mean_imitation_loss, is_imitation
         
         
@@ -204,7 +205,7 @@ class Runner(object):
             "episode_number": episodeNumber,
             "is_imitation": is_imitation
         }
-
+        # print("job results: ", jobResults)
         return jobResults, metrics, info
 
 

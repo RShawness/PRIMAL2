@@ -1,5 +1,5 @@
 CMakeFiles/cbs_py.dir/src/pybinding_CBS.cpp.o: \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/src/pybinding_CBS.cpp \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/src/pybinding_CBS.cpp \
   /opt/homebrew/include/pybind11/pybind11.h \
   /opt/homebrew/include/pybind11/detail/class.h \
   /opt/homebrew/include/pybind11/detail/../attr.h \
@@ -558,7 +558,7 @@ CMakeFiles/cbs_py.dir/src/pybinding_CBS.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk/usr/include/c++/v1/__bsd_locale_defaults.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk/usr/include/c++/v1/set \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk/usr/include/c++/v1/valarray \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/src/new_driver.cpp \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/src/new_driver.cpp \
   /opt/homebrew/include/boost/program_options.hpp \
   /opt/homebrew/include/boost/program_options/options_description.hpp \
   /opt/homebrew/include/boost/program_options/config.hpp \
@@ -1118,12 +1118,12 @@ CMakeFiles/cbs_py.dir/src/pybinding_CBS.cpp.o: \
   /opt/homebrew/include/boost/token_iterator.hpp \
   /opt/homebrew/include/boost/iterator/minimum_category.hpp \
   /opt/homebrew/include/boost/token_functions.hpp \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/CBS.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/CBSHeuristic.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/MDD.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/SingleAgentSolver.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/Instance.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/common.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/CBS.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/CBSHeuristic.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/MDD.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/SingleAgentSolver.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/Instance.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/common.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk/usr/include/c++/v1/fstream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk/usr/include/c++/v1/filesystem \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk/usr/include/c++/v1/stack \
@@ -1483,13 +1483,13 @@ CMakeFiles/cbs_py.dir/src/pybinding_CBS.cpp.o: \
   /opt/homebrew/include/boost/unordered/unordered_map.hpp \
   /opt/homebrew/include/boost/unordered/detail/map.hpp \
   /opt/homebrew/include/boost/unordered/unordered_map_fwd.hpp \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/ConstraintTable.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/CBSNode.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/Conflict.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/RectangleReasoning.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/CorridorReasoning.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/ReservationTable.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/ConstraintPropagation.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/SMDDConstraintPropagation.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/MutexReasoning.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/IncrementalPairwiseMutexPropagation.hpp
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/ConstraintTable.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/CBSNode.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/Conflict.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/RectangleReasoning.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/CorridorReasoning.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/ReservationTable.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/ConstraintPropagation.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/SMDDConstraintPropagation.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/MutexReasoning.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/IncrementalPairwiseMutexPropagation.hpp

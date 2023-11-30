@@ -324,7 +324,7 @@ bool Instance::loadMap()
 
 
 void Instance::printMap() const
-{
+{	
 	for (int i = 0; i < num_of_rows; i++)
 	{
 		for (int j = 0; j < num_of_cols; j++)

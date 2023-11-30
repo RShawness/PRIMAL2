@@ -154,8 +154,22 @@ def maze_generator(env_size=(10, 70), wall_components=(1, 8), obstacle_density=N
         world = -maze(int(world_size), int(world_size),
                       total_density=np.random.uniform(obstacle_density[0], obstacle_density[1]),
                       ).astype(int)
+        # print world to terminal. print -1 as '@' and 0 as '.'
+        # printMap(world)
+
         world = np.array(world)
         return world, None
+    
+    def printMap(world):
+        for i in range(world.shape[0]):
+            for j in range(world.shape[1]):
+                if world[i, j] == -1:
+                    print('@', end='')
+                elif world[i, j] == 0:
+                    print('.', end='')
+                else:
+                    print(' ', end='')
+            print()
 
     return generator
 
@@ -181,7 +195,7 @@ if __name__ == "__main__":
 
     print("testing randomized map generation")
     plt.ion()
-    for _ in range(1000):
+    for _ in range(2):
         generator = maze_generator()
         world = generator()
         plt.imshow(world[0])  # obstacle map

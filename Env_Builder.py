@@ -35,13 +35,15 @@ def forwardMove(position):
     if len(position) < 3:
         raise ValueError("position is not a 3 tuple: ", position)
     if position[2] == 0: # east #! Throws an index out of range error
-        new_position = tuple_plus(position, (1,0,0))
-    elif position[2] == 1: # south
         new_position = tuple_plus(position, (0,1,0))
+    elif position[2] == 1: # south
+        new_position = tuple_plus(position, (1,0,0))
     elif position[2] == 2: # west
-        new_position = tuple_plus(position, (-1,0,0))
-    elif position[2] == 3: # north
         new_position = tuple_plus(position, (0,-1,0))
+    elif position[2] == 3: # north
+        new_position = tuple_plus(position, (-1,0,0))
+    else:
+        print("Something went wrong in forwardMove")
     
     return new_position
 
@@ -54,13 +56,18 @@ def previousPos2direction(position, previous_position):
 def action2position(action, position):
     #checked
     new_position = list(position)
-    # if action == 0, new pos = pos
-    if action == 1:
+    if action == 0:
+        new_position = position
+    elif action == 1:
         new_position = forwardMove(position)
-    elif action == 2: #rotate CW, keep x,y the same
+    elif action == 2: #rotate CW, keep coordinate position the same
         new_position[2] = (position[2] + 1) % 4
-    elif action == 3: #rotate CCW, keep x,y the same
+    elif action == 3: #rotate CCW, keep coordinate position the same
         new_position[2] = (position[2] + 3) % 4
+    elif action == None:
+        print("action2position argument is")
+    else:
+        print("Something else wrong in action2position")
     return tuple(new_position)
 
 def action2dir(action):
@@ -82,9 +89,11 @@ def tuple_minus(a, b):
     """ a - b """
     return tuple(map(sub, a, b))
 
-# takes in consecutive states (x,y,orientation) and return the action that brings state1 to state2
+# takes in consecutive states (row,col,orientation) and return the action that brings state1 to state2
 def positions2action(next_pos, current_pos):
-    
+    # check if position has changed
+    # if next_pos[:2] != current_pos[:2]:
+    # print("current_pos: ", current_pos, "next_pos: ", next_pos)
     if next_pos[0] - current_pos[0] == 0 and next_pos[1] - current_pos[1] == 0:
         if current_pos[2] == next_pos[2]:
             return 0
@@ -92,8 +101,17 @@ def positions2action(next_pos, current_pos):
             return 2
         elif (current_pos[2] + 3) % 4 == next_pos[2]:
             return 3
-    else:
+        else:
+            print("positions2action is doing a double turn, 180")
+            print("current_pos: ", current_pos)
+            print("next_pos: ", next_pos)
+            return -1
+    elif (next_pos[0] - current_pos[0] == 1 and next_pos[1] - current_pos[1] == 0) or \
+        (next_pos[0] - current_pos[0] == 0 and next_pos[1] - current_pos[1] == 1):
         return 1
+    else:
+        print("weirdo positions2action")
+        return -1
 
 def _heap(ls, max_length):
     while True:
@@ -104,7 +122,8 @@ def _heap(ls, max_length):
 
 
 def get_key(dict, value):
-    return [k for k, v in dict.items() if v == value]
+    # return [k for k, v in dict.items() if v == value]
+    return [k for k,v in dict.items() if v[:2] == value[:2]]
 
 
 def getAstarDistanceMap(map: np.array, start: tuple, goal: tuple, isDiagonal: bool = False):
@@ -140,13 +159,13 @@ def getAstarDistanceMap(map: np.array, start: tuple, goal: tuple, isDiagonal: bo
         neighbors = set()
         possible_moves = [(0, 1), (1, 0), (0, -1), (-1, 0)]
 
-        ax, ay, current_orientation = node
+        node_row, node_col, current_orientation = node
        
         for move in possible_moves:
-            dx, dy = move
+            d_row, d_col = move
 
             # Calculate each of the 4 neighbors independent of orientation
-            new_pos = (ax + dx, ay + dy)
+            new_pos = (node_row + d_row, node_col + d_col)
 
             # Check if the new position is within bounds
             if (
@@ -163,16 +182,16 @@ def getAstarDistanceMap(map: np.array, start: tuple, goal: tuple, isDiagonal: bo
 
             # Calculate the cost based on the movement and current orientation + update orientation
             # DONE add cases for orientation == -1 (coming from a goal state)
-            if move == (1, 0):  # Move east
+            if move == (0, 1):  # Move east
                 cost = 1 if current_orientation == 0 else (3 if current_orientation == 2 else 2)  # Forward move or turn
                 new_orientation = 0  # Update orientation after the move
-            elif move == (0, 1):  # Move south
+            elif move == (1, 0):  # Move south
                 cost = 1 if current_orientation == 1 else (3 if current_orientation == 3 else 2)  # Forward move or turn
                 new_orientation = 1  # Update orientation after the move
-            elif move == (-1, 0):  # Move west
+            elif move == (0, -1):  # Move west
                 cost = 1 if current_orientation == 2 else (3 if current_orientation == 0 else 2)  # Forward move or turn
                 new_orientation = 2  # Update orientation after the move
-            elif move == (0, -1):  # Move north
+            elif move == (-1, 0):  # Move north
                 cost = 1 if current_orientation == 3 else (3 if current_orientation == 1 else 2)  # Forward move or turn
                 new_orientation = 3  # Update orientation after the move
             else:
@@ -197,7 +216,7 @@ def getAstarDistanceMap(map: np.array, start: tuple, goal: tuple, isDiagonal: bo
 
     # The set of currently discovered nodes that are not evaluated yet.
     # Initially, only the start node is known.
-    # each entry is (x, y, o)
+    # each entry is (row, col, o)
     openSet = set()
     openSet.add(start) #! after swapping start and goal, this first element doesnt have an orientation
 
@@ -240,7 +259,7 @@ def getAstarDistanceMap(map: np.array, start: tuple, goal: tuple, isDiagonal: bo
     #     return dx + dy + penalty
 
     # our heuristic is euclidean distance to goal
-    heuristic_cost_estimate = lambda x, y: math.hypot(x[0] - y[0], x[1] - y[1])
+    heuristic_cost_estimate = lambda a, b: math.hypot(a[0] - b[0], a[1] - b[1])
 
     # For the first node, that value is completely heuristic.
     fScore[start] = heuristic_cost_estimate(start, goal)
@@ -253,28 +272,28 @@ def getAstarDistanceMap(map: np.array, start: tuple, goal: tuple, isDiagonal: bo
             print("CURRENT NODE IS NONE")
         openSet.remove(current) #! Error when trying to remove 'current' that isnt a key in the set
         closedSet.add(current[:2])
-        for neighbor in getNeighbors(current): #neighbors have (x, y, o, cost from current to neighbor)
+        for neighbor in getNeighbors(current): #neighbors have (row, col, o, cost from current to neighbor)
             if neighbor[:2] in closedSet:
                 continue  # Ignore the neighbor which is already evaluated.
                 
             # ! This may be inefficient since it will add all orientations for a given position. Check later.
             if neighbor not in openSet:  # Discover a new node
-                openSet.add((neighbor[0], neighbor[1], neighbor[2])) # only give openSet (x, y, o)
+                openSet.add((neighbor[0], neighbor[1], neighbor[2])) # only give openSet (row, col, o)
 
             # The distance from start to a neighbor
             # DONE distance to each neighbor depends on the orientation calculated from getNeighbor
-            tentative_gScore = neighbor[3]
-            if tentative_gScore >= gScore.get((neighbor[0], neighbor[1]), 2 ** 31 - 1): 
+            tentative_gScore = gScore[(current[0], current[1], current[2])] + neighbor[3]
+            if tentative_gScore >= gScore.get((neighbor[0], neighbor[1], neighbor[2]), 2 ** 31 - 1): 
                 continue  # This is not a better path., the stored gScore of neighbor is already better
 
             # This path is the best until now. Record it!
             cameFrom[neighbor] = current
             if (neighbor[0], neighbor[1]) in gScore:
-                gScore[(neighbor[0], neighbor[1])] = min(tentative_gScore, gScore[(neighbor[0], neighbor[1])]) # We decided orientation not needed in gScore
+                gScore[(neighbor[0], neighbor[1], neighbor[2])] = min(tentative_gScore, gScore[(neighbor[0], neighbor[1], neighbor[2])]) # We decided orientation not needed in gScore
             else:
-                gScore[(neighbor[0], neighbor[1])] = tentative_gScore
+                gScore[(neighbor[0], neighbor[1], neighbor[2])] = tentative_gScore
             
-            fScore[(neighbor[0], neighbor[1], neighbor[2])] = tentative_gScore + heuristic_cost_estimate(neighbor, goal) # maintain fScore with just (x,y, orientation)
+            fScore[(neighbor[0], neighbor[1], neighbor[2])] = tentative_gScore + heuristic_cost_estimate(neighbor, goal) # maintain fScore with just (row,col, orientation)
 
             # parse through the gScores
     Astar_map = map.copy()
@@ -294,7 +313,7 @@ class Agent:
     ###########
     """
 
-    # Change Agent position to a 3 tuple (x, y, orientation)
+    # Change Agent position to a 3 tuple (row, col, orientation)
     # Orientation: {0, 1, 2, 3}: 0: east, 1: south, 2: west, 3: north
 
 
@@ -323,13 +342,15 @@ class Agent:
         if self.position is not None:
             # Changed the tuples to include a 0 for orientation (no change when adding)
             # Changed to reflect orientation + forward move as only valid move
-            assert pos in [self.position, forwardMove(self.position), ], \
+            # make two dummy positions CW and CCW from self.position
+            
+            assert pos in [self.position, forwardMove(self.position), action2position(2, self.position), action2position(3, self.position)], \
                 "only 1 step 1 cell in orientation allowed. Previous pos:" + str(self.position)
         self.add_history(pos, status)
 
     def add_history(self, position, status):
         try:
-            assert len(position) == 3 # Change to 3: (x,y,o)
+            assert len(position) == 3 # Change to 3: (row,col,o)
         except:
             AssertionError("position is not a 3 tuple: ", position)
         self.status = status
@@ -345,6 +366,7 @@ class Agent:
 
             # <---new code--->
             # Do not need direction history, just action
+            # print("add history fx call")
             action = positions2action(position, self.position_history[-1])
             # <---end new--->
             assert action in list(range(4)), \
@@ -376,7 +398,7 @@ class World:
         self.map_generator = map_generator
         self.isDiagonal = isDiagonal
 
-        # DONE agents_init_pos now holds agentID as key: (x,y,o) as value
+        # DONE agents_init_pos now holds agentID as key: (row,col,o) as value
         self.agents_init_pos, self.goals_init_pos = None, None
         self.reset_world()
         self.init_agents_and_goals()
@@ -407,7 +429,7 @@ class World:
             self.manual_world = True
             self.agents_init_pos = scan_for_agents(self.state)
             # maybe initalize random orientation?
-            #TODO issues with inital agent_init_pos just being (x,y)
+            #TODO issues with initial agent_init_pos just being (row,col)
             if self.num_agents is not None and self.num_agents != len(self.agents_init_pos.keys()):
                 warnings.warn("num_agent does not match the actual agent number in manual map! "
                               "num_agent has been set to be consistent with manual map.")
@@ -471,7 +493,7 @@ class World:
                         if positions[num] is not None:
                             self.visit(positions[num][0], positions[num][1], corridor_count)
                     corridor_count += 1
-        # Get Delta X , Delta Y for the computed corridors ( Delta= Displacement to corridor exit)       
+        # Get Delta x , Delta y for the computed corridors ( Delta= Displacement to corridor exit)       
         for k in range(1, corridor_count):
             if k in self.corridors:
                 if len(self.corridors[k]['EndPoints']) == 2:
@@ -479,9 +501,9 @@ class World:
                     self.corridors[k]['DeltaY'] = {}
                     pos_a = self.corridors[k]['EndPoints'][0]
                     pos_b = self.corridors[k]['EndPoints'][1]
-                    self.corridors[k]['DeltaX'][pos_a] = (pos_a[0] - pos_b[0])  # / (max(1, abs(pos_a[0] - pos_b[0])))
+                    self.corridors[k]['DeltaX'][pos_a] = (pos_a[1] - pos_b[1])  # / (max(1, abs(pos_a[0] - pos_b[0])))
                     self.corridors[k]['DeltaX'][pos_b] = -1 * self.corridors[k]['DeltaX'][pos_a]
-                    self.corridors[k]['DeltaY'][pos_a] = (pos_a[1] - pos_b[1])  # / (max(1, abs(pos_a[1] - pos_b[1])))
+                    self.corridors[k]['DeltaY'][pos_a] = (pos_a[0] - pos_b[0])  # / (max(1, abs(pos_a[1] - pos_b[1])))
                     self.corridors[k]['DeltaY'][pos_b] = -1 * self.corridors[k]['DeltaY'][pos_a]
             else:
                 print('Weird2')
@@ -564,7 +586,8 @@ class World:
         else:
             print('Weird')
     
-    # Keep blank_env_valid_neighbor for corridor calculations w/in this file, create new valid_neighbors_oriented() for listValidActions() in Primal2ENv.py below
+    # Keep blank_env_valid_neighbor for corridor calculations w/in this file, create new valid_neighbors_oriented() for 
+    # Actions() in Primal2ENv.py below
     def blank_env_valid_neighbor(self, i, j):
         possible_positions = [None, None, None, None]
         move = [[0, 1], [1, 0], [-1, 0], [0, -1]]
@@ -572,11 +595,12 @@ class World:
             return possible_positions
         else:
             for num in range(4):
-                x = i + move[num][0]
-                y = j + move[num][1]
-                if 0 <= x < self.state.shape[0] and 0 <= y < self.state.shape[1]:
-                    if self.state[x, y] != -1:
-                        possible_positions[num] = (x, y)
+                row = i + move[num][0]
+                col = j + move[num][1]
+                # state[0] is Height or #ROWS, state[1] is Width or COL
+                if 0 <= row < self.state.shape[0] and 0 <= col < self.state.shape[1]:
+                    if self.state[row, col] != -1:
+                        possible_positions[num] = (row, col)
                         continue
         return possible_positions
 
@@ -588,12 +612,13 @@ class World:
         else:
             for action in range(4):
                 new_position = action2position(action, position)
-                x = new_position[0]
-                y = new_position[1]
-                if 0 <= x < self.state.shape[0] and 0 <= y < self.state.shape[1]:
-                    if self.state[x, y] != -1:
+                row = new_position[0]
+                col = new_position[1]
+                if 0 <= row < self.state.shape[0] and 0 <= col < self.state.shape[1]:
+                    if self.state[row, col] != -1:
                         possible_positions[action] = new_position
                         continue
+                    
         return possible_positions
 
     #TODO might need to add orientation to the position. position and orientation are both initialized
@@ -608,7 +633,7 @@ class World:
     def get_history(self, agent_id, path_id=None):
         """
         :param: path_id: if None, get the last step
-        :return: past_pos: (x,y), past_direction: int
+        :return: past_pos: (row, col), past_direction: int
         """
 
         if path_id is None:
@@ -682,7 +707,7 @@ class World:
         # no corridor population restriction
         if not self.restrict_init_corridor or (self.restrict_init_corridor and self.manual_world):
             self.put_goals(list(range(1, self.num_agents + 1)), self.goals_init_pos)
-            self._put_agents(list(range(1, self.num_agents + 1)), self.agents_init_pos) #TODO do agents init pos have (x,y,o)?
+            self._put_agents(list(range(1, self.num_agents + 1)), self.agents_init_pos) #TODO do agents init pos have (row,col,o)?
         # has corridor population restriction
         else:
             check = self.put_goals(list(range(1, self.num_agents + 1)), self.goals_init_pos)
@@ -705,10 +730,10 @@ class World:
             free_space = np.argwhere(np.logical_or(self.state == 0, self.goals_map == 0) == 1)
             new_idx = np.random.choice(len(free_space), size=len(id_list), replace=False)
             
-            # generating (x,y)
+            # generating (row,col)
             init_poss_without_orientation = [free_space[idx] for idx in new_idx]
             init_poss = [(pos[0], pos[1], np.random.randint(4)) for pos in init_poss_without_orientation]
-        #TODO manual_pos of (x,y) but still a random orientation
+        #TODO manual_pos of (row,col) but still a random orientation
         else:
             assert len(manual_pos.keys()) == len(id_list)
             init_poss_without_orientation = [manual_pos[agentID] for agentID in id_list]
@@ -729,7 +754,8 @@ class World:
                 print(init_poss)
                 raise ValueError('invalid manual_pos for agent' + str(agentID) + ' at: ' + str(init_poss[idx]))
             
-            self.agents[agentID].move(init_poss[idx]) # TODO .move() argument is a (x,y)
+            #*MOVE CALLED
+            self.agents[agentID].move(init_poss[idx]) # TODO .move() argument is a (row,col)
             self.agents[agentID].distanceMap = getAstarDistanceMap(self.state, self.agents[agentID].position,
                                                                    self.agents[agentID].goal_pos)
 
@@ -737,7 +763,7 @@ class World:
     def put_goals(self, id_list, manual_pos=None):
         """
         put a goal of single agent in the env, if the goal already exists, remove that goal and put a new one
-        :param manual_pos: a dict of manual_pos {agentID: (x, y)}
+        :param manual_pos: a dict of manual_pos {agentID: (row, col)}
         :param id_list: a list of agentID
         :return: an Agent object
         """
@@ -763,12 +789,12 @@ class World:
                     free_spaces_for_previous_goal = np.logical_or(free_on_agents, free_for_all)
                     # free_spaces_for_previous_goal = np.logical_and(free_spaces_for_previous_goal, self.goals_map==0)
                     if distance > 0: # distance in this case is preset to 2, specifying a region around the prev goal that is not free
-                        previous_x, previous_y = previous_goals[agentID]
-                        x_lower_bound = (previous_x - distance) if (previous_x - distance) > 0 else 0
-                        x_upper_bound = previous_x + distance + 1
-                        y_lower_bound = (previous_y - distance) if (previous_x - distance) > 0 else 0
-                        y_upper_bound = previous_y + distance + 1
-                        free_spaces_for_previous_goal[x_lower_bound:x_upper_bound, y_lower_bound:y_upper_bound] = False
+                        previous_row, previous_col = previous_goals[agentID]
+                        row_lower_bound = (previous_row - distance) if (previous_col - distance) > 0 else 0
+                        row_upper_bound = previous_row + distance + 1
+                        col_lower_bound = (previous_col - distance) if (previous_row - distance) > 0 else 0
+                        col_upper_bound = previous_col + distance + 1
+                        free_spaces_for_previous_goal[row_lower_bound:row_upper_bound, col_lower_bound:col_upper_bound] = False
                     free_spaces_for_previous_goal = list(np.argwhere(free_spaces_for_previous_goal == 1))
                     free_spaces_for_previous_goal = [pos.tolist() for pos in free_spaces_for_previous_goal]
 
@@ -837,7 +863,7 @@ class World:
                     raise ValueError('invalid manual_pos for goal' + str(agentID) + ' at: ', str(new_goals[agentID]))
                 if previous_goals[agentID] is not None:  # it has a goal!
                     # ! This probably will cause an error since its checking for equivalence between a 2-tuple and a 3-tuple
-                    if previous_goals[agentID] != self.agents[agentID].position:
+                    if previous_goals[agentID][0:2] != self.agents[agentID].position[0:2]:
                         print(self.state)
                         print(self.goals_map)
                         print(previous_goals)
@@ -883,14 +909,16 @@ class World:
             ## 
             ## --new code snippet--
             # get the updated position (including orientation) of the agent given its action and current position.
+            
             newPos = action2position(movement_dict[agentID], self.getPos(agentID))
-
+            # print("first position: ", self.getPos(agentID), "\t new position: ", newPos)
             Assumed_newPos_dict.update({agentID: newPos})
             # check for out of bounds positions
             if newPos[0] < 0 or newPos[0] > self.state.shape[0] or newPos[1] < 0 \
                     or newPos[1] > self.state.shape[1] or self.state[newPos[:2]] == -1:
                 # sets the agent status to -1 if it is out of bounds or collides with an obstacle
                 status_dict[agentID] = -1
+                print(f"Agent {agentID} collided with env at position {newPos}")
                 # sets the new position to the current position if it is out of bounds or collides with an obstacle
                 # (i.e. the agent does not move)
                 newPos_dict.update({agentID: self.getPos(agentID)})
@@ -902,10 +930,11 @@ class World:
 
         for agentID in copy.deepcopy(not_checked_list):
             # get the agentID of the agent that is standing on the assumed new position of the current agent
-            collided_ID = self.state[Assumed_newPos_dict[agentID]]
-            if collided_ID != 0:  # another agent is standing on the assumed pos
+            collided_ID = self.state[Assumed_newPos_dict[agentID][:2]]
+            if collided_ID != 0 and collided_ID != agentID:  # another agent is standing on the assumed pos
                 if Assumed_newPos_dict[collided_ID][:2] == self.getPos(agentID)[:2]:  # he wants to swap
                     if status_dict[agentID] is None:
+                        print(f"Agent {agentID} collided with another agent at position {Assumed_newPos_dict[agentID]}")
                         status_dict[agentID] = -2
                         newPos_dict.update({agentID: self.getPos(agentID)})  # stand still
                         Assumed_newPos_dict[agentID] = self.getPos(agentID)
@@ -923,13 +952,18 @@ class World:
             other_agents_dict.pop(agentID)
             #OLD_CODE if Assumed_newPos_dict[agentID] in newPos_dict.values():
             if any(Assumed_newPos_dict[agentID][:2] == newPos[:2] for newPos in newPos_dict.values()):
+                print(f"Agent {agentID} collided with another agent at position {Assumed_newPos_dict[agentID]}")
                 status_dict[agentID] = -3
                 newPos_dict.update({agentID: self.getPos(agentID)})  # stand still
                 Assumed_newPos_dict[agentID] = self.getPos(agentID)
+                print(f"Reverting agent {agentID} to position {self.getPos(agentID)}")
                 not_checked_list.remove(agentID)
             # elif Assumed_newPos_dict[agentID] in other_agents_dict.values():
             elif any(Assumed_newPos_dict[agentID][:2] == other_agent_pos[:2] for other_agent_pos in other_agents_dict.values()):
-                other_coming_agents = get_key(Assumed_newPos_dict, Assumed_newPos_dict[agentID])
+                other_coming_agents = get_key(Assumed_newPos_dict, Assumed_newPos_dict[agentID]) 
+                print("Assumed pos keys: ", Assumed_newPos_dict.keys())
+                print("assumed pos values: ", Assumed_newPos_dict.values())
+                print("Other agents length:", len(other_coming_agents))
                 other_coming_agents.remove(agentID)
                 # if the agentID is the biggest among all other coming agents,
                 # NOTE new way to prioritize based on orientation
@@ -1034,7 +1068,6 @@ class MAPFEnv(gym.Env):
             raise ValueError("Invalid agent_id given")
         return self.obs_dict
 
-    # John-- working on this
     def step_all(self, movement_dict):
         """
         Agents are forced to freeze self.frozen_steps steps if they are standing on their goals.
@@ -1054,8 +1087,10 @@ class MAPFEnv(gym.Env):
             else:
                 assert movement_dict[agentID] in list(range(5)) if self.IsDiagonal else list(range(9)), \
                     'action not in action space'
-
+        
         status_dict, newPos_dict = self.world.CheckCollideStatus(movement_dict)
+        print("New Pos Dict: ", newPos_dict)
+        print("STATUS DICT:", status_dict)
         self.world.state[self.world.state > 0] = 0  # remove agents in the map
         put_goal_list = []
         freeze_list = []
@@ -1068,7 +1103,9 @@ class MAPFEnv(gym.Env):
             new_cartesian = newPos[:2]
             # update state only on the cartesian position
             self.world.state[new_cartesian] = agentID
-            # Is move()
+            # Move is called with status_dic
+            #* MOVE CALLED
+            # newPos is coming from the newPos_dict which is the 2nd return of CheckCollideStatus
             self.world.agents[agentID].move(newPos, status_dict[agentID])
             self.give_moving_reward(agentID)
             if status_dict[agentID] == 1:
@@ -1108,93 +1145,78 @@ class MAPFEnv(gym.Env):
         width = world.shape[1]
         height = world.shape[0]
         # flatten the world (linearize) for compatibility with CBS
-        world = world.flatten()
+        world = world.flatten().tolist()
         start_positions = []
         start_directions = []
         goals = []
         start_positions_dir = self.getPositions()
         goals_dir = self.getGoals()
+        print("CBS Start Positions: ", start_positions_dir)
+        print("CBS Goals: ", goals_dir)
         # get the linearized start positions, start directions, and goals
         for i in range(1, self.world.num_agents + 1):
+            # taking the row * width + col to get the linearized position
             linearized_pos = start_positions_dir[i][0] * width + start_positions_dir[i][1]
             start_positions.append(linearized_pos)
             start_directions.append(start_positions_dir[i][2])
             
             linearized_goal = goals_dir[i][0] * width + goals_dir[i][1]
             goals.append(linearized_goal)
+
         expert_path = None
         start_time = time.time()
         try:
             # C++ call of expert policy
-            linear_old_expert_path = cbs_py.findPath_new(world, start_positions, start_directions, goals, width, height, self.world.num_agents)
-                
+            linear_old_expert_path = cbs_py.findPath_new(world, start_positions, start_directions, goals, width, height, self.world.num_agents, int(time_limit))
+            # print("cbs expert:", linear_old_expert_path)
             # expert_path = cpp_mstar.find_path(world, start_positions, goals, inflation, time_limit / 5.0)
             if len(linear_old_expert_path) == 0:
+                print("***CBS returned a len 0 path***")
                 return None
             
             ##
-            min_length = 2**31 -1
-            for agent in linear_old_expert_path:
-                if len(agent) < min_length:
-                    min_length = len(agent)
+            # min_length = 2**31 -1
+            # for agent in linear_old_expert_path:
+            #     if len(agent) < min_length:
+            #         min_length = len(agent)
             
-            expert_path = np.empty([min_length, self.world.num_agents], dtype=tuple)
+            # expert_path = np.empty([min_length, self.world.num_agents], dtype=tuple)
 
+            # for time_step in range(len(expert_path)):
+            #     for agent in range(self.world.num_agents):
+            #         linear_loc = linear_old_expert_path[agent][time_step][0]
+            #         linear_orientation = linear_old_expert_path[agent][time_step][1]
+            #         col = linear_loc % width
+            #         row = (linear_loc - x) / width
+            #         expert_path[time_step][agent] = (x, y, linear_orientation)
+
+            max_length = -1
+            for agent in linear_old_expert_path:
+                if len(agent) > max_length:
+                    max_length = len(agent)
+            
+            expert_path = np.empty([max_length, self.world.num_agents], dtype=tuple)
             for time_step in range(len(expert_path)):
                 for agent in range(self.world.num_agents):
-                    linear_loc = linear_old_expert_path[agent][time_step][0]
-                    linear_orientation = linear_old_expert_path[agent][time_step][1]
-                    x = linear_loc % width
-                    y = (linear_loc - x) / width
-                    expert_path[time_step][agent] = (x, y, linear_orientation)
+                    if time_step < len(linear_old_expert_path[agent]):
+                        linear_loc = linear_old_expert_path[agent][time_step][0]
+                        linear_orientation = linear_old_expert_path[agent][time_step][1]
+                        col = int(linear_loc % width)
+                        row = int((linear_loc - col) / width)
+                        expert_path[time_step][agent] = (row, col, linear_orientation) 
+                    else:
+                        expert_path[time_step][agent] = expert_path[time_step-1][agent]
+            # print("cbs start: ", expert_path[0])
+            # print("cbs goal: ", expert_path[-1])
             # linear_expert_path = np.array(linear_old_expert_path[:min_length])
             # linear_expert_path = np.transpose(linear_expert_path)
             
-            # expert_path = np.empty(linear_expert_path.shape)
-            
-            # for time_step in linear_expert_path:
-            #     for agent in time_step:
-            #         linear_loc = linear_expert_path[time_step][agent][0]
-            #         linear_orientation = linear_expert_path[time_step][agent][1]
-            #         y = linear_loc % width
-            #         x = (linear_loc - y) / width
-            #         expert_path[time_step][agent] = (x, y, linear_orientation)
-
-        # except OutOfTimeError:
-        #     # M* timed out
-        #     print("timeout")
-        #     print('World', world)
-        #     print('Start Pos', start_positions)
-        #     print('Goals', goals)
-        # except NoSolutionError:
-        #     print("nosol????")
-        #     print('World', world)
-        #     print('Start Pos', start_positions)
-        #     print('Goals', goals)
 
         except:
             c_time = time.time() - start_time
+            print("failing cbs")
             if c_time > time_limit:
                 return expert_path  # should be None
-
-            # # print("cpp_mstar crash most likely... trying python mstar instead")
-            # try:
-            #     
-            #     expert_path = od_mstar.find_path(world, start_positions, goals,
-            #                                     inflation=inflation, time_limit=time_limit - c_time)
-            # except OutOfTimeError:
-            #     # M* timed out
-            #     print("timeout")
-            #     print('World', world)
-            #     print('Start Pos', start_positions)
-            #     print('Goals', goals)
-            # except NoSolutionError:
-            #     print("nosol????")
-            #     print('World', world)
-            #     print('Start Pos', start_positions)
-            #     print('Goals', goals)
-            # except:
-            #     print("Unknown bug?!")
 
         return expert_path
 
@@ -1203,6 +1225,149 @@ class MAPFEnv(gym.Env):
             self.viewer.add_geom(entry)
         else:
             self.viewer.add_onetime(entry)
+
+    # def _render(self, mode='human', close=False, screen_width=800, screen_height=800):
+
+    #     def painter(state_map, agents_dict, goals_dict):
+    #         def initColors(num_agents):
+    #             c = {a + 1: hsv_to_rgb(np.array([a / float(num_agents), 1, 1])) for a in range(num_agents)}
+    #             return c
+
+    #         def create_rectangle(x, y, width, height, fill):
+    #             ps = [(x, y), ((x + width), y), ((x + width), (y + height)), (x, (y + height))]
+    #             rect = rendering.FilledPolygon(ps)
+    #             rect.set_color(fill[0], fill[1], fill[2])
+    #             rect.add_attr(rendering.Transform())
+    #             return rect
+
+    #         def create_rectangle_with_direction(x, y, dir, width, height, fill):
+    #             create_rectangle(x, y, width, height, fill)
+    #             # add superimposed direction indicator
+    #             # define four points (0:E, 1:S, 2:W, 3:N) of the rectangle
+    #             pN = (x + width / 2, y)
+    #             pS = (x + width / 2, row + height)
+    #             pE = (x + width, row + height / 2)
+    #             pW = (x, row + height / 2)
+
+    #             if dir == 0:
+    #                 poly = rendering.FilledPolygon([pE, pN, pS])
+    #             elif dir == 1:
+    #                 poly = rendering.FilledPolygon([pS, pE, pW])
+    #             elif dir == 2:
+    #                 poly = rendering.FilledPolygon([pW, pS, pN])
+    #             elif dir == 3:
+    #                 poly = rendering.FilledPolygon([pN, pW, pE])
+                
+    #             arrow_color = darken_color(fill)
+    #             poly.set_color(arrow_color[0], arrow_color[1], arrow_color[2])
+    #             poly.add_attr(rendering.Transform())
+    #             return poly
+
+    #         def darken_color(color):  
+    #             return tuple([c * 0.8 for c in color])
+
+    #         def drawStar(centerX, centerY, diameter, numPoints, color):
+    #             #! Not updated to switch col and row positions as it is not used
+    #             entry_list = []
+    #             outerRad = diameter // 2
+    #             innerRad = int(outerRad * 3 / 8)
+    #             # fill the center of the star
+    #             angleBetween = 2 * math.pi / numPoints  # angle between star points in radians
+    #             for i in range(numPoints):
+    #                 # p1 and p3 are on the inner radius, and p2 is the point
+    #                 pointAngle = math.pi / 2 + i * angleBetween
+    #                 p1X = centerX + innerRad * math.cos(pointAngle - angleBetween / 2)
+    #                 p1Y = centerY - innerRad * math.sin(pointAngle - angleBetween / 2)
+    #                 p2X = centerX + outerRad * math.cos(pointAngle)
+    #                 p2Y = centerY - outerRad * math.sin(pointAngle)
+    #                 p3X = centerX + innerRad * math.cos(pointAngle + angleBetween / 2)
+    #                 p3Y = centerY - innerRad * math.sin(pointAngle + angleBetween / 2)
+    #                 # draw the triangle for each tip.
+    #                 poly = rendering.FilledPolygon([(p1X, p1Y), (p2X, p2Y), (p3X, p3Y)])
+    #                 poly.set_color(color[0], color[1], color[2])
+    #                 poly.add_attr(rendering.Transform())
+    #                 entry_list.append(poly)
+    #             return entry_list
+
+    #         def create_circle(col, row, diameter, world_size, fill, resolution=20):
+    #             c = (row + world_size / 2, col + world_size / 2)
+    #             dr = math.pi * 2 / resolution
+    #             ps = []
+    #             for i in range(resolution):
+    #                 row = c[0] + math.cos(i * dr) * diameter / 2
+    #                 col = c[1] + math.sin(i * dr) * diameter / 2
+    #                 ps.append((col, row))
+    #             circ = rendering.FilledPolygon(ps)
+    #             circ.set_color(fill[0], fill[1], fill[2])
+    #             circ.add_attr(rendering.Transform())
+    #             return circ
+
+    #         assert len(goals_dict) == len(agents_dict)
+    #         num_agents = len(goals_dict)
+    #         world_shape = state_map.shape
+    #         world_size = screen_width / max(*world_shape)
+    #         colors = initColors(num_agents)
+    #         if self.viewer is None:
+    #             self.viewer = rendering.Viewer(screen_width, screen_height)
+    #             rect = create_rectangle(0, 0, screen_width, screen_height, (.6, .6, .6))
+    #             self._add_rendering_entry(rect, permanent=True)
+    #             for i in range(world_shape[0]):
+    #                 start = 0
+    #                 end = 1
+    #                 scanning = False
+    #                 write = False
+    #                 for j in range(world_shape[1]):
+    #                     if state_map[i, j] != -1 and not scanning:  # free
+    #                         start = j
+    #                         scanning = True
+    #                     if (j == world_shape[1] - 1 or state_map[i, j] == -1) and scanning:
+    #                         end = j + 1 if j == world_shape[1] - 1 else j
+    #                         scanning = False
+    #                         write = True
+    #                     if write:
+    #                         col = i * world_size
+    #                         row = start * world_size
+    #                         rect = create_rectangle(row, col, world_size, world_size * (end - start), (1, 1, 1))
+    #                         self._add_rendering_entry(rect, permanent=True)
+    #                         write = False
+    #         for agent in range(1, num_agents + 1):
+    #             i, j = agents_dict[agent][:2] # ! check if this line is indexed correctly
+    #             dir = agents_dict[agent][2]
+    #             col = i * world_size
+    #             row = j * world_size
+    #             color = colors[state_map[i, j]]
+    #             rect = create_rectangle_with_direction(col, row, dir, world_size, world_size, color)
+    #             self._add_rendering_entry(rect)
+
+    #             i, j = goals_dict[agent][:2]
+    #             col = i * world_size
+    #             row = j * world_size
+    #             color = colors[agent]
+    #             circ = create_circle(col, row, world_size, world_size, color)
+    #             self._add_rendering_entry(circ)
+    #             if agents_dict[agent][0] == goals_dict[agent][0] and agents_dict[agent][1] == goals_dict[agent][1]:
+    #                 color = (0, 0, 0)
+    #                 circ = create_circle(col, row, world_size, world_size, color)
+    #                 self._add_rendering_entry(circ)
+    #         # if self.action_probs is not None:
+    #         #     n_moves = 9 if self.IsDiagonal else 5
+    #         #     for agent in range(1, num_agents + 1):
+    #         #         # take the a_dist from the given data and draw it on the frame
+    #         #         a_dist = self.action_probs[agent - 1]
+    #         #         if a_dist is not None:
+    #         #             for m in range(n_moves):
+    #         #                 dx, dy = action2dir(m)
+    #         #                 col = (agents_dict(agent)[0] + dx) * world_size
+    #         #                 row = (agents_dict(agent)[1] + dy) * world_size
+    #         #                 circ = create_circle(x, y, world_size, world_size, (0, 0, 0))
+    #         #                 self._add_rendering_entry(circ)
+    #         result = self.viewer.render(return_rgb_array=1)
+    #         return result
+
+    #     frame = painter(self.world.state, self.getPositions(), self.getGoals())
+    #     return frame
+    
+
 
     def _render(self, mode='human', close=False, screen_width=800, screen_height=800):
 
@@ -1284,6 +1449,7 @@ class MAPFEnv(gym.Env):
             world_shape = state_map.shape
             world_size = screen_width / max(*world_shape)
             colors = initColors(num_agents)
+            # create map
             if self.viewer is None:
                 self.viewer = rendering.Viewer(screen_width, screen_height)
                 rect = create_rectangle(0, 0, screen_width, screen_height, (.6, .6, .6))
@@ -1307,13 +1473,15 @@ class MAPFEnv(gym.Env):
                             rect = create_rectangle(x, y, world_size, world_size * (end - start), (1, 1, 1))
                             self._add_rendering_entry(rect, permanent=True)
                             write = False
+            # draw agents
             for agent in range(1, num_agents + 1):
-                i, j = agents_dict[agent][:2] # ! check if this line is indexed correctly
+                i, j = agents_dict[agent][:2] 
                 dir = agents_dict[agent][2]
                 x = i * world_size
                 y = j * world_size
                 color = colors[state_map[i, j]]
-                rect = create_rectangle_with_direction(x, y, dir, world_size, world_size, color)
+                # rect = create_rectangle_with_direction(x, y, dir, world_size, world_size, color)
+                rect = create_rectangle(x, y, world_size, world_size, color)
                 self._add_rendering_entry(rect)
 
                 i, j = goals_dict[agent][:2]
@@ -1326,18 +1494,7 @@ class MAPFEnv(gym.Env):
                     color = (0, 0, 0)
                     circ = create_circle(x, y, world_size, world_size, color)
                     self._add_rendering_entry(circ)
-            # if self.action_probs is not None:
-            #     n_moves = 9 if self.IsDiagonal else 5
-            #     for agent in range(1, num_agents + 1):
-            #         # take the a_dist from the given data and draw it on the frame
-            #         a_dist = self.action_probs[agent - 1]
-            #         if a_dist is not None:
-            #             for m in range(n_moves):
-            #                 dx, dy = action2dir(m)
-            #                 x = (agents_dict(agent)[0] + dx) * world_size
-            #                 y = (agents_dict(agent)[1] + dy) * world_size
-            #                 circ = create_circle(x, y, world_size, world_size, (0, 0, 0))
-            #                 self._add_rendering_entry(circ)
+            
             result = self.viewer.render(return_rgb_array=1)
             return result
 

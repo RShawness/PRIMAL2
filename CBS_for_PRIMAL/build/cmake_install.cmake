@@ -1,4 +1,4 @@
-# Install script for directory: /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL
+# Install script for directory: /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/build/pybind11/cmake_install.cmake")
+  include("/Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/build/pybind11/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

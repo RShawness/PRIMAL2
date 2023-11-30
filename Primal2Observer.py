@@ -121,17 +121,17 @@ class Primal2Observer(ObservationBuilder):
         start_time = time.time()
 
         for agent in visible_agents:
-            x, y = self.world.getGoal(agent)
-            min_node = (max(top_left[0], min(top_left[0] + self.observation_size - 1, x)),
-                        max(top_left[1], min(top_left[1] + self.observation_size - 1, y)))
+            row, col = self.world.getGoal(agent)
+            min_node = (max(top_left[0], min(top_left[0] + self.observation_size - 1, row)),
+                        max(top_left[1], min(top_left[1] + self.observation_size - 1, col)))
             goals_map[min_node[0] - top_left[0], min_node[1] - top_left[1]] = 1
 
-        dx = self.world.getGoal(agent_id)[0] - agent_pos[0]
-        dy = self.world.getGoal(agent_id)[1] - agent_pos[1]
-        mag = (dx ** 2 + dy ** 2) ** .5
+        drow = self.world.getGoal(agent_id)[0] - agent_pos[0]
+        dcol = self.world.getGoal(agent_id)[1] - agent_pos[1]
+        mag = (drow ** 2 + dcol ** 2) ** .5
         if mag != 0:
-            dx = dx / mag
-            dy = dy / mag
+            drow = drow / mag
+            dcol = dcol / mag
         if mag > 60:
             mag = 60
 
@@ -158,6 +158,7 @@ class Primal2Observer(ObservationBuilder):
                                 corridor_id,
                                 0, agent_id,
                                 1)
+                    # Leave the DeltaX and DeltaY here, changed their functionality
                     elif [position[0], position[1]] == self.world.corridors[corridor_id]['StoppingPoints'][0]:
                         end_point_pos = self.world.corridors[corridor_id]['EndPoints'][0]
                         deltax_map[position[0] - top_left[0], position[1] - top_left[1]] = (self.world.corridors[
@@ -206,7 +207,7 @@ class Primal2Observer(ObservationBuilder):
         time6 = time.time() - start_time
         start_time = time.time()
 
-        return state, [dx, dy, mag], np.array([time1, time2, time3, time4, time5, time6])
+        return state, [drow, dcol, mag], np.array([time1, time2, time3, time4, time5, time6])
 
     def get_many(self, handles=None):
         observations = {}

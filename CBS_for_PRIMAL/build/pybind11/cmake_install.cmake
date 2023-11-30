@@ -1,4 +1,4 @@
-# Install script for directory: /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/pybind11
+# Install script for directory: /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/pybind11
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

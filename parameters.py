@@ -11,7 +11,7 @@ IL_MAX_EP_LENGTH        = 64
 episode_count           = 0
 
 # observer parameters
-OBS_SIZE                = 11   # the size of the FOV grid to apply to each agent
+OBS_SIZE                = 11  # the size of the FOV grid to apply to each agent
 NUM_FUTURE_STEPS        = 3
 
 # environment parameters
@@ -24,7 +24,7 @@ a_size                  = 5 + int(DIAG_MVMT) * 4
 NUM_META_AGENTS         = 9
 NUM_IL_META_AGENTS      = 4
 
-NUM_THREADS             = 8 # int(multiprocessing.cpu_count() / (2 * NUM_META_AGENTS))
+NUM_THREADS             = 4 # int(multiprocessing.cpu_count() / (2 * NUM_META_AGENTS))
 NUM_BUFFERS             = 1  # NO EXPERIENCE REPLAY int(NUM_THREADS / 2)
 
 # training parameters
@@ -37,8 +37,8 @@ gifs_path               = 'gifs_' + training_version
 train_path              = 'train_' + training_version
 OUTPUT_GIFS             = False  # Only for RL gifs
 GIFS_FREQUENCY_RL       = 512
-OUTPUT_IL_GIFS          = False
-IL_GIF_PROB             = 0.
+OUTPUT_IL_GIFS          = True
+IL_GIF_PROB             = 0.01
 
 
 # Imitation options

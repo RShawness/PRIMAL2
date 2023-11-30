@@ -1,9 +1,9 @@
 CMakeFiles/add.dir/src/MDD.cpp.o: \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/src/MDD.cpp \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/MDD.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/SingleAgentSolver.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/Instance.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/common.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/src/MDD.cpp \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/MDD.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/SingleAgentSolver.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/Instance.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/common.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk/usr/include/c++/v1/tuple \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk/usr/include/c++/v1/__config \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk/usr/include/c++/v1/__config_site \
@@ -1146,6 +1146,6 @@ CMakeFiles/add.dir/src/MDD.cpp.o: \
   /opt/homebrew/include/boost/type_traits/is_default_constructible.hpp \
   /opt/homebrew/include/boost/unordered/detail/map.hpp \
   /opt/homebrew/include/boost/unordered/unordered_map_fwd.hpp \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/ConstraintTable.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/CBSNode.h \
-  /Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc/Conflict.h
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/ConstraintTable.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/CBSNode.h \
+  /Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc/Conflict.h

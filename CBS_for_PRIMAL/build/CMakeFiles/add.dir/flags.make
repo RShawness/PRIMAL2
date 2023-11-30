@@ -4,7 +4,7 @@
 # compile CXX with /Library/Developer/CommandLineTools/usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/inc -I/Users/jbush/Documents/USC/CSCI567/Testing/Experimental/CBS_for_PRIMAL/src -I/opt/homebrew/include
+CXX_INCLUDES = -I/Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/inc -I/Users/jbush/Documents/USC/CSCI567/Testing/PRIMAL2/CBS_for_PRIMAL/src -I/opt/homebrew/include
 
 CXX_FLAGSx86_64 = -std=gnu++14 -arch x86_64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -fPIC
 

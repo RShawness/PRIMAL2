@@ -81,8 +81,8 @@ class Primal2Env(MAPFEnv):
             return None
 
 
-        # corridor_map[x,y][0] = corridor ID
-        # corridor_map[x,y][1] = is agent inside corridor
+        # corridor_map[row,col][0] = corridor ID
+        # corridor_map[row,col][1] = is agent inside corridor
 
         available_actions = []
         pos = self.world.getPos(agent_ID)
@@ -90,7 +90,7 @@ class Primal2Env(MAPFEnv):
         if self.world.corridor_map[pos[0], pos[1]][1] == 1:
             corridor_id = self.world.corridor_map[pos[0], pos[1]][0]
             if [pos[0], pos[1]] not in self.world.corridors[corridor_id]['StoppingPoints']:
-                possible_moves = self.world.valid_neighbors_oriented(pos) # DONE edit for orientation in Env_Builder
+                possible_moves = self.world.valid_neighbors_oriented(pos) # edit for orientation in Env_Builder
                 last_position = get_last_pos(agent_ID, pos)
                 for possible_position in possible_moves:
                     # Here: In corridor, not on a stopping point
@@ -100,6 +100,7 @@ class Primal2Env(MAPFEnv):
                         # DONE create 2 tuple action from 3 tuple position (repeated below)
                         # temp_action = (tuple_minus(possible_position, pos))
                         # available_actions.append(positions2action(temp_action[0], temp_action[1]))
+                        # print("first list valid actions call primal env")
                         available_actions.append(positions2action(possible_position, pos))           
 
                     # TODO What does corridors[ID][Endpoints] ==1 mean... end of a corridor? 
@@ -107,6 +108,7 @@ class Primal2Env(MAPFEnv):
                     elif len(self.world.corridors[corridor_id]['EndPoints']) == 1 and possible_position is not None \
                             and possible_moves.count(None) == 3: # where there is only 1 possible move and 3 "None" returned 
                         # temp_action = (tuple_minus(possible_position, pos))
+                        print("second list valid actions call primal env")
                         available_actions.append(positions2action(possible_position, pos))
 
                 if not available_actions:
@@ -120,12 +122,14 @@ class Primal2Env(MAPFEnv):
                         if possible_position is not None and possible_position != last_position \
                                 and self.world.state[possible_position[0], possible_position[1]] == 0:
                             # temp_action = (tuple_minus(possible_position, pos))
+                            print("third list valid actions call primal env")
                             available_actions.append(positions2action(possible_position, pos))
                 else:
                     for possible_position in possible_moves:
                         if possible_position is not None \
                                 and self.world.state[possible_position[0], possible_position[1]] == 0:
                             # temp_action = (tuple_minus(possible_position, pos))
+                            # print("fourth list valid actions call primal env")
                             available_actions.append(positions2action(possible_position, pos))
                     if not available_actions:
                         available_actions.append(0)
@@ -170,16 +174,16 @@ class Primal2Env(MAPFEnv):
                     self.world.getPos(agent_ID)[1] - self.obs_size // 2)
         blocking_map = observation[0][5]
         if blocking_map[pos[0] - top_left[0], pos[1] - top_left[1]] == -1:
-            deltay_map = observation[0][7]
-            if deltay_map[pos[0] - top_left[0], pos[1] - top_left[1]] > 0:
+            deltacol_map = observation[0][7]
+            if deltacol_map[pos[0] - top_left[0], pos[1] - top_left[1]] > 0:
                 return 1
-            elif deltay_map[pos[0] - top_left[0], pos[1] - top_left[1]] == 0:
-                deltax_map = observation[0][6]
-                if deltax_map[pos[0] - top_left[0], pos[1] - top_left[1]] > 0:
+            elif deltacol_map[pos[0] - top_left[0], pos[1] - top_left[1]] == 0:
+                deltarow_map = observation[0][6]
+                if deltarow_map[pos[0] - top_left[0], pos[1] - top_left[1]] > 0:
                     return 1
                 else:
                     return 0
-            elif deltay_map[pos[0] - top_left[0], pos[1] - top_left[1]] < 0:
+            elif deltacol_map[pos[0] - top_left[0], pos[1] - top_left[1]] < 0:
                 return 0
             else:
                 print('Weird')
@@ -197,35 +201,35 @@ class DummyEnv(Primal2Env):
         pass
 
 
-if __name__ == '__main__':
-    from matplotlib import pyplot
-    from Primal2Observer import Primal2Observer
-    from Map_Generator import maze_generator
-    from Map_Generator import manual_generator
+# if __name__ == '__main__':
+#     from matplotlib import pyplot
+#     from Primal2Observer import Primal2Observer
+#     from Map_Generator import maze_generator
+#     from Map_Generator import manual_generator
 
-    state0 = [[-1, -1, -1, -1, -1, -1, -1],
-              [-1, 1, -1, 0, 0, 0, -1],
-              [-1, 0, -1, -1, -1, 0, -1],
-              [-1, 0, 0, 0, -1, 0, -1],
-              [-1, 0, -1, 0, 0, 0, -1],
-              [-1, 2, -1, 0, 0, 0, -1],
-              [-1, -1, -1, -1, -1, -1, -1]]
-    n_agents = 3
-    env = Primal2Env(num_agents=n_agents,
-                      observer=Primal2Observer(observation_size=5),
-                      map_generator=maze_generator(env_size=(8, 10),
-                                                   wall_components=(3, 8), obstacle_density=(0.3, 0.7)),
-                      IsDiagonal=False)
-    print(env.world.state)
-    print(env.world.goals_map)
-    c = 0
-    a = c
-    b = c
-    for j in range(0, 50):
-          movement = {1: a, 2: b, 3: c, 4: c, 5: c, 6: c, 7: c, 8: c}  # TODO change this for our action space? c a b are weird
-          env.step_all(movement)
-          obs = env._observe()
+#     state0 = [[-1, -1, -1, -1, -1, -1, -1],
+#               [-1, 1, -1, 0, 0, 0, -1],
+#               [-1, 0, -1, -1, -1, 0, -1],
+#               [-1, 0, 0, 0, -1, 0, -1],
+#               [-1, 0, -1, 0, 0, 0, -1],
+#               [-1, 2, -1, 0, 0, 0, -1],
+#               [-1, -1, -1, -1, -1, -1, -1]]
+#     n_agents = 3
+#     env = Primal2Env(num_agents=n_agents,
+#                       observer=Primal2Observer(observation_size=5),
+#                       map_generator=maze_generator(env_size=(8, 10),
+#                                                    wall_components=(3, 8), obstacle_density=(0.3, 0.7)),
+#                       IsDiagonal=False)
+#     print(env.world.state)
+#     print(env.world.goals_map)
+#     c = 0
+#     a = c
+#     b = c
+#     for j in range(0, 50):
+#           movement = {1: a, 2: b, 3: c, 4: c, 5: c, 6: c, 7: c, 8: c}  # TODO change this for our action space? c a b are weird
+#           env.step_all(movement)
+#           obs = env._observe()
 
-          print(env.world.state)
-          a = int(input())
-          b = int(input())
+#           print(env.world.state)
+#           a = int(input())
+#           b = int(input())

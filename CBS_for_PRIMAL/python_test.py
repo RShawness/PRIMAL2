@@ -1,4 +1,4 @@
-import cbs_py
+from build import cbs_py
 import numpy as np
 import random
 import time 
@@ -7,7 +7,7 @@ start_time = time.time()
 cols = 10
 rows = 60
 total_map_size = cols*rows
-map = [False for i in range(total_map_size)]
+map = [0 for i in range(total_map_size)]
 num_obstacle = 0
 while num_obstacle < 50:
     randLoc = int(random.random()*total_map_size)
@@ -47,23 +47,31 @@ for i in range(agents):
 # goalL = [24,4,8]
 time_limit = 50
 
-
+print(type(map))
+print(type(startL))
+print(type(startD))
+print(type(goalL))
+print(type(cols))
+print(type(rows))
+print(type(agents))
+print(type(time_limit))
 
 result_temp = cbs_py.findPath_new(map, startL, startD, goalL, cols, rows, agents, time_limit)
-if len(result_temp) != 0:
-    result = np.array(result_temp)
-    max_time = np.amax([len(sequence) for sequence in result])
-    transposed_result = [[] for i in range(max_time)]
-    for i in range(max_time):
-        for j in range(len(result)):
-            try: 
-                transposed_result[i].append(result[j][i])
-            except Exception:
-                continue 
+
+# if len(result_temp) != 0:
+#     result = np.array(result_temp)
+#     max_time = np.amax([len(sequence) for sequence in result])
+#     transposed_result = [[] for i in range(max_time)]
+#     for i in range(max_time):
+#         for j in range(len(result)):
+#             try: 
+#                 transposed_result[i].append(result[j][i])
+#             except Exception:
+#                 continue 
         
-    print(transposed_result)
-    print(len(transposed_result[0]))
-else:
-    print("no solution found, return None")
+#     print(transposed_result)
+#     print(len(transposed_result[0]))
+# else:
+#     print("no solution found, return None")
 
 print(time.time() - start_time)
