@@ -94,6 +94,7 @@ def positions2action(next_pos, current_pos):
     # check if position has changed
     # if next_pos[:2] != current_pos[:2]:
     # print("current_pos: ", current_pos, "next_pos: ", next_pos)
+    # rotational actions
     if next_pos[0] - current_pos[0] == 0 and next_pos[1] - current_pos[1] == 0:
         if current_pos[2] == next_pos[2]:
             return 0
@@ -106,11 +107,13 @@ def positions2action(next_pos, current_pos):
             print("current_pos: ", current_pos)
             print("next_pos: ", next_pos)
             return -1
-    elif (next_pos[0] - current_pos[0] == 1 and next_pos[1] - current_pos[1] == 0) or \
-        (next_pos[0] - current_pos[0] == 0 and next_pos[1] - current_pos[1] == 1):
+    elif next_pos == forwardMove(current_pos):
         return 1
     else:
+        # any irregular positional movement
         print("weirdo positions2action")
+        print("current_pos: ", current_pos)
+        print("next_pos: ", next_pos)
         return -1
 
 def _heap(ls, max_length):
@@ -604,7 +607,7 @@ class World:
                         continue
         return possible_positions
 
-    #DONE add orientation
+    # add orientation
     def valid_neighbors_oriented(self, position):
         possible_positions = [None, None, None, None] # static, forward, CW, CCW
         if self.state[position[0], position[1]] == -1:
@@ -909,7 +912,8 @@ class World:
             ## 
             ## --new code snippet--
             # get the updated position (including orientation) of the agent given its action and current position.
-            
+
+            # HERE
             newPos = action2position(movement_dict[agentID], self.getPos(agentID))
             # print("first position: ", self.getPos(agentID), "\t new position: ", newPos)
             Assumed_newPos_dict.update({agentID: newPos})
@@ -1085,7 +1089,7 @@ class MAPFEnv(gym.Env):
             if agentID not in movement_dict.keys() or self.world.agents[agentID].freeze:
                 movement_dict.update({agentID: 0})
             else:
-                assert movement_dict[agentID] in list(range(5)) if self.IsDiagonal else list(range(9)), \
+                assert movement_dict[agentID] in list(range(9)), \
                     'action not in action space'
         
         status_dict, newPos_dict = self.world.CheckCollideStatus(movement_dict)
@@ -1153,6 +1157,7 @@ class MAPFEnv(gym.Env):
         goals_dir = self.getGoals()
         print("CBS Start Positions: ", start_positions_dir)
         print("CBS Goals: ", goals_dir)
+        print(f"CBS World Dim: {width}")
         # get the linearized start positions, start directions, and goals
         for i in range(1, self.world.num_agents + 1):
             # taking the row * width + col to get the linearized position
@@ -1384,7 +1389,8 @@ class MAPFEnv(gym.Env):
                 return rect
 
             def create_rectangle_with_direction(x, y, dir, width, height, fill):
-                create_rectangle(x, y, width, height, fill)
+                rect = create_rectangle(x, y, width, height, fill)
+                self._add_rendering_entry(rect)
                 # add superimposed direction indicator
                 # define four points (0:E, 1:S, 2:W, 3:N) of the rectangle
                 pN = (x + width / 2, y)
@@ -1394,17 +1400,19 @@ class MAPFEnv(gym.Env):
 
                 if dir == 0:
                     poly = rendering.FilledPolygon([pE, pN, pS])
-                elif dir == 1:
-                    poly = rendering.FilledPolygon([pS, pE, pW])
-                elif dir == 2:
-                    poly = rendering.FilledPolygon([pW, pS, pN])
-                elif dir == 3:
-                    poly = rendering.FilledPolygon([pN, pW, pE])
+                # elif dir == 1:
+                #     poly = rendering.FilledPolygon([pS, pE, pW])
+                # elif dir == 2:
+                #     poly = rendering.FilledPolygon([pW, pS, pN])
+                # elif dir == 3:
+                #     poly = rendering.FilledPolygon([pN, pW, pE])
                 
-                arrow_color = darken_color(fill)
-                poly.set_color(arrow_color[0], arrow_color[1], arrow_color[2])
-                poly.add_attr(rendering.Transform())
-                return poly
+                    arrow_color = darken_color(fill)
+                    poly.set_color(arrow_color[0], arrow_color[1], arrow_color[2])
+                    poly.add_attr(rendering.Transform())
+                    return poly
+                else:
+                    return rect
 
             def darken_color(color):  
                 return tuple([c * 0.8 for c in color])
@@ -1481,7 +1489,10 @@ class MAPFEnv(gym.Env):
                 y = j * world_size
                 color = colors[state_map[i, j]]
                 # rect = create_rectangle_with_direction(x, y, dir, world_size, world_size, color)
-                rect = create_rectangle(x, y, world_size, world_size, color)
+                if (dir == 0):
+                    rect = create_rectangle_with_direction(x, y, dir, world_size, world_size, color)
+                else: 
+                    rect = create_rectangle(x, y, world_size, world_size, color)
                 self._add_rendering_entry(rect)
 
                 i, j = goals_dict[agent][:2]

@@ -393,6 +393,7 @@ class Worker():
         while step_count <= IL_MAX_EP_LENGTH:
             #* CALL THE EXPERT POLICY
             path = self.env.expert_until_first_goal() # returned from expert policy: List of List of tuple(row,col,orientation) 
+            print(f"CBS Path (call 1): {path}")
             if path is None:  # solution not exists
                 print(f"Path is None, step_count: {step_count}")
                 if step_count != 0:
@@ -400,14 +401,14 @@ class Worker():
                 return None, 0
             
             for i in range(self.num_workers):
-                invalidMove = False
+                invalidMove = None
                 for idx in range(1, len(path)):
-                    if positions2action[path[idx][i], path[idx-1][i]] == -1:
-                        invalidMove = True
-                        break
-                if invalidMove:
-                    print("this is da invalid wae: \n", path)
-                    break
+                    assert positions2action(path[idx][i], path[idx-1][i]) != -1, \
+                        print(f"invalid move: {invalidMove} \n this is da invalid wae (call 1): {path}")
+                # if invalidMove:
+                #     print("invalid move: ", invalidMove)
+                #     print("this is da invalid wae: \n", path)
+                #     break
                     
             none_on_goal = True
             path_step = 1
@@ -426,7 +427,8 @@ class Worker():
                     #  actions[agent_id] = dir2action(diff) 
 
                     # print("parse_path call worker.py")
-                    actions[agent_id] = positions2action(next_pos, self.env.world.getPos(agent_id))     
+                    actions[agent_id] = positions2action(next_pos, self.env.world.getPos(agent_id))
+                    # does this actionlist ever return -1??   
                 # uses the returned path to create a series of actions to be checked for collisions
                 # step_all() returns Dict of all observation maps {agentid:[], ...}
                 # print("current time_step agent locations")
@@ -452,17 +454,18 @@ class Worker():
                     GIF_frames.append(self.env._render())
                 if single_done and new_EXPERT_call:
                     path = self.env.expert_until_first_goal()
-                    for i in range(self.num_workers):
-                        invalidMove = False
-                        for idx in range(1, len(path)):
-                            if positions2action[path[idx][i], path[idx-1][i]] == -1:
-                                invalidMove = True
-                                break
-                        if invalidMove:
-                            print("this is da invalid wae (call 2): \n", path)
-                            break
+                    print(f"CBS Path (call 2): {path}")
                     if path is None:
                         return result, targets_done
+                    for i in range(self.num_workers):
+                        invalidMove = None
+                        for idx in range(1, len(path)):
+                            assert positions2action(path[idx][i], path[idx-1][i]) != -1, \
+                                print(f"invalid move: {invalidMove} \n this is da invalid wae (call 2): {path}")
+                        # if invalidMove:
+                        #     print("invalid move: ", invalidMove)
+                        #     print("this is da invalid wae (call 2): \n", path)
+                        #     break
                     path_step = 0
                 # elif single_done and new_call:
                 #     path = path[path_step:]
