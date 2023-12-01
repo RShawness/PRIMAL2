@@ -1233,7 +1233,6 @@ class MAPFEnv(gym.Env):
 
 
     def _render(self, mode='human', close=False, screen_width=800, screen_height=800):
-
         def painter(state_map, agents_dict, goals_dict):
             def initColors(num_agents):
                 c = {a + 1: hsv_to_rgb(np.array([a / float(num_agents), 1, 1])) for a in range(num_agents)}
@@ -1317,9 +1316,11 @@ class MAPFEnv(gym.Env):
             colors = initColors(num_agents)
             # create map
             if self.viewer is None:
+                #!Throwing an error during RL create GIF
                 self.viewer = rendering.Viewer(screen_width, screen_height)
                 rect = create_rectangle(0, 0, screen_width, screen_height, (.6, .6, .6))
                 self._add_rendering_entry(rect, permanent=True)
+                
                 for i in range(world_shape[0]):
                     start = 0
                     end = 1
@@ -1339,6 +1340,7 @@ class MAPFEnv(gym.Env):
                             rect = create_rectangle(x, y, world_size, world_size * (end - start), (1, 1, 1))
                             self._add_rendering_entry(rect, permanent=True)
                             write = False
+
             # draw agents
             for agent in range(1, num_agents + 1):
                 i, j = agents_dict[agent][:2] 

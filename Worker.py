@@ -200,6 +200,8 @@ class Worker():
                         GIF_frames = [self.env._render()]
 
                     # start RL
+                    if (saveGIF is True):
+                        print("RL: Starting episode {} on metaAgent {}".format(episode_count, self.metaAgentID))
                     self.env.finished = False
                     while not self.env.finished:
                         a_dist, v, rnn_state = self.sess.run([self.local_AC.policy,
@@ -241,6 +243,7 @@ class Worker():
                                 joint_rewards[self.metaAgentID][i] = all_rewards[i]
                                 joint_done[self.metaAgentID][i] = (self.env.world.agents[i].status == 1)
                             if saveGIF and self.agentID == 1:
+                                print("Appending GIF Frame!")
                                 GIF_frames.append(self.env._render())
 
                         self.synchronize()  # synchronize threads
@@ -251,6 +254,7 @@ class Worker():
                         validActions = self.env.listValidActions(self.agentID, s1)
 
                         self.synchronize()
+
                         # Append to Appropriate buffers 
                         if not skipping_state:
                             episode_buffer.append(
