@@ -173,6 +173,23 @@ def maze_generator(env_size=(10, 70), wall_components=(1, 8), obstacle_density=N
 
     return generator
 
+def DummyGenerator():
+    state_map = np.array([[1, 0, 0, 0, 0],
+                          [0, 0, 0, 0, 0],
+                          [0, 0, 0, 0, 0],
+                          [0, 0, 0, 0, 0],
+                          [0, 0, 0, 0, 0]])
+    goals_map = np.array([[0, 0, 0, 0, 0],
+                          [0, 0, 0, 0, 0],
+                          [0, 0, 0, 0, 0],
+                          [0, 0, 0, 0, 0],
+                          [0, 0, 0, 0, 1]])
+
+    def generator():
+        return state_map, goals_map
+
+    return generator
+
 
 def manual_generator(state_map, goals_map=None):
     state_map = np.array(state_map)

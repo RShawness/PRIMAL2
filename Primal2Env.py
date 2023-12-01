@@ -32,6 +32,7 @@ class Primal2Env(MAPFEnv):
             self.num_agents = self.world.num_agents
             self.observer.set_env(self.world)
 
+        # When calling reset() in RL or MStar planner in TestingEnv
         self.fresh = True
         if self.viewer is not None:
             self.viewer = None

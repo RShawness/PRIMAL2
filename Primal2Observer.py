@@ -83,7 +83,7 @@ class Primal2Observer(ObservationBuilder):
                                                                                             
         time2 = time.time() - start_time
         start_time = time.time()
-
+        # print("hello world type shit: ", self.world.state)
         # original layers from PRIMAL1
         visible_agents = []
         for i in range(top_left[0], top_left[0] + self.observation_size):
@@ -257,7 +257,7 @@ class Primal2Observer(ObservationBuilder):
             
                 for action in range(1, 4):
                     new_pos = action2position(action, position)     # does not include standing still
-                    if 0 < new_pos[0] <= h and 0 < new_pos[1] <= w:
+                    if 0 <= new_pos[0] < h and 0 <= new_pos[1] < w:
                         if distance_map[new_pos[:2]] == distance_map[position[:2]] - 1 \
                                 and distance_map[new_pos[:2]] >= 0:
                             next_astar_cell.append(new_pos)

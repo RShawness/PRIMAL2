@@ -86,6 +86,7 @@ auto/
 *.cptk.meta
 # *.gif
 *.GIF
+*.npy
 
 # Python stuffs
 ###################

@@ -2,6 +2,7 @@ import numpy as np
 import tensorflow as tf
 import os
 import ray
+import sys
 
 from Ray_ACNet import ACNet
 from Runner import imitationRunner, RLRunner
@@ -67,9 +68,10 @@ def writeEpisodeRatio(global_summary, numIL, numRL, sess, curr_episode):
 
     current_learning_rate = sess.run(lr, feed_dict={global_step: curr_episode})
 
+    # Currently written to TB
     RL_IL_Ratio = numRL / (numRL + numIL + 1)
     print("RL:", numRL, "IL:", numIL)
-    summary.value.add(tag='Perf/Num IL Ep.', simple_value=numIL)
+    summary.value.add(tag='Perf/Num IL Ep.', simple_value=numIL) 
     summary.value.add(tag='Perf/Num RL Ep.', simple_value=numRL)
     summary.value.add(tag='Perf/ RL IL ratio Ep.', simple_value=RL_IL_Ratio)
     summary.value.add(tag='Perf/Learning Rate', simple_value=current_learning_rate)
@@ -77,7 +79,7 @@ def writeEpisodeRatio(global_summary, numIL, numRL, sess, curr_episode):
     global_summary.flush()
 
     
-
+# NOT WOKRING, not writing to TB
 def writeToTensorBoard(global_summary, tensorboardData, curr_episode, plotMeans=True):
     # each row in tensorboardData represents an episode
     # each column is a specific metric
@@ -256,4 +258,9 @@ def main():
 
 
 if __name__ == "__main__": 
+    f = open("mylogs.txt", "w")
+    original_stdout = sys.stdout
+    sys.stdout = f
     main()
+    f.close()
+    sys.stdout = original_stdout

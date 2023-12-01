@@ -918,8 +918,8 @@ class World:
             # print("first position: ", self.getPos(agentID), "\t new position: ", newPos)
             Assumed_newPos_dict.update({agentID: newPos})
             # check for out of bounds positions
-            if newPos[0] < 0 or newPos[0] > self.state.shape[0] or newPos[1] < 0 \
-                    or newPos[1] > self.state.shape[1] or self.state[newPos[:2]] == -1:
+            if newPos[0] < 0 or newPos[0] >= self.state.shape[0] or newPos[1] < 0 \
+                    or newPos[1] >= self.state.shape[1] or self.state[newPos[:2]] == -1:
                 # sets the agent status to -1 if it is out of bounds or collides with an obstacle
                 status_dict[agentID] = -1
                 print(f"Agent {agentID} collided with env at position {newPos}")
@@ -965,9 +965,9 @@ class World:
             # elif Assumed_newPos_dict[agentID] in other_agents_dict.values():
             elif any(Assumed_newPos_dict[agentID][:2] == other_agent_pos[:2] for other_agent_pos in other_agents_dict.values()):
                 other_coming_agents = get_key(Assumed_newPos_dict, Assumed_newPos_dict[agentID]) 
-                print("Assumed pos keys: ", Assumed_newPos_dict.keys())
-                print("assumed pos values: ", Assumed_newPos_dict.values())
-                print("Other agents length:", len(other_coming_agents))
+                # print("Assumed pos keys: ", Assumed_newPos_dict.keys())
+                # print("assumed pos values: ", Assumed_newPos_dict.values())
+                # print("Other agents length:", len(other_coming_agents))
                 other_coming_agents.remove(agentID)
                 # if the agentID is the biggest among all other coming agents,
                 # NOTE new way to prioritize based on orientation
@@ -1155,9 +1155,9 @@ class MAPFEnv(gym.Env):
         goals = []
         start_positions_dir = self.getPositions()
         goals_dir = self.getGoals()
-        print("CBS Start Positions: ", start_positions_dir)
-        print("CBS Goals: ", goals_dir)
-        print(f"CBS World Dim: {width}")
+        # print("CBS Start Positions: ", start_positions_dir)
+        # print("CBS Goals: ", goals_dir)
+        # print(f"CBS World Dim: {width}")
         # get the linearized start positions, start directions, and goals
         for i in range(1, self.world.num_agents + 1):
             # taking the row * width + col to get the linearized position

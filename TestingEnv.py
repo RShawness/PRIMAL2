@@ -1,6 +1,7 @@
 import json
 import os
 import argparse
+import sys
 from Primal2Observer import Primal2Observer
 from Observer_Builder import DummyObserver
 import tensorflow.compat.v1 as tf
@@ -192,6 +193,7 @@ class MstarContinuousPlanner(MAPFEnv):
     def set_world(self):
         return
 
+    # chec
     def give_moving_reward(self, agentID):
         collision_status = self.world.agents[agentID].status
         if collision_status == 0:
@@ -353,7 +355,8 @@ class ContinuousTestsRunner:
         results = dict()
 
 
-        result = self.worker.find_path(max_length=int(max_length), saveImage=np.random.rand() < self.GIF_prob)
+        # result = self.worker.find_path(max_length=int(max_length), saveImage=np.random.rand() < self.GIF_prob)
+        result = self.worker.find_path(max_length=int(max_length), saveImage=True)
 
         target_reached, computing_time_list, num_crash, episode_status, succeed_episode, step_count, frames = result
         results['target_reached'] = target_reached
@@ -383,8 +386,11 @@ class ContinuousTestsRunner:
 
 if __name__ == "__main__":
     import time
-
-    model_path = './model_astar3_continuous_0.5IL_ray2/'
+    f = open("testlogs.txt", "w")
+    original_stdout = sys.stdout
+    sys.stdout = f
+    
+    model_path = './hpc_checkpoint/'
     parser = argparse.ArgumentParser()
     parser.add_argument("--result_path", default="./testing_result/")
     parser.add_argument("--env_path", default='./saved_environments/')
@@ -425,3 +431,6 @@ if __name__ == "__main__":
         print(args.mapName, " already completed")
     else:
         sequence = tester.run_1_test(args.mapName, maps)
+        print(sequence)
+    f.close()
+    sys.stdout = original_stdout

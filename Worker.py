@@ -389,6 +389,46 @@ class Worker():
 
         # get observations
         all_obs = self.env._observe()
+
+        for i in range(self.env.world.state.shape[0]):
+            print(["@" if self.env.world.state[i][j] == -1 else "." for j in range(self.env.world.state.shape[1])])
+
+        print("printing self.world.state")
+        print(self.env.world.state)
+
+
+        print(f"agent start: {self.env.world.agents[1].position}")
+        print(f"agent goal: {self.env.world.agents[1].goal_pos}")
+        print(f"other agent 1 start: {self.env.world.agents[2].position}")
+        print(f"other agent 1 start: {self.env.world.agents[2].goal_pos}")
+        print(f"other agent 2 start: {self.env.world.agents[3].position}")
+        print(f"other agent 2 start: {self.env.world.agents[3].goal_pos}")
+
+        # print out the observation maps of agent 1
+        for i in range(11):
+            if i == 0:
+                print("printing nearby agents map")
+            elif i == 1:
+                print("printing my goal map")
+            elif i == 2:
+                print("printing other agent goal map")
+            elif i == 3:
+                print("printing local observation map")
+            elif i == 4:
+                print("printing path length map")
+            elif i == 5:
+                print("printing blocking map")
+            elif i == 6:
+                print("printing deltax map")
+            elif i == 7:
+                print("printing deltay map")
+            elif i == 8:
+                print("astar map", i - 8)
+            elif i == 9:
+                print("astar map", i - 7)
+            else:
+                print("astar map", i - 6)
+            print(all_obs[1][0][:][:][i])
         # assign observations to agents
         for agentID in range(1, self.num_workers + 1):
             o[agentID] = all_obs[agentID] # holds a dictionary of observations for each agent
