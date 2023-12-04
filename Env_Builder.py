@@ -128,17 +128,8 @@ def get_key(dict, value):
     # return [k for k, v in dict.items() if v == value]
     return [k for k,v in dict.items() if v[:2] == value[:2]]
 
-
-def getAstarDistanceMap(map: np.array, start: tuple, goal: tuple, isDiagonal: bool = False):
-    """
-    returns a numpy array of same dims as map with the distance to the goal from each coord
-    :param map: a n by m np array, where -1 denotes obstacle
-    :param start: start_position
-    :param goal: goal_position
-    :return: optimal distance map
-    """
-
-    #DONE estimate include orientation
+def getAstarDistanceMap3D(map: np.array, start: tuple, goal: tuple, isDiagonal: bool = False):
+    # print("starting getAstarDistanceMap3D")
     def lowestF(fScore, openSet):
         # find entry in openSet with lowest fScore
         assert (len(openSet) > 0)
@@ -156,20 +147,37 @@ def getAstarDistanceMap(map: np.array, start: tuple, goal: tuple, isDiagonal: bo
             # print("MIN NODE IS NONE")
             minNode = next(iter(openSet)) # will return the first key in openSet
         return minNode
-
-    #DONE modify for orientation, with cost calculation
+    
     def getNeighbors(node):
         neighbors = set()
-        possible_moves = [(0, 1), (1, 0), (0, -1), (-1, 0)]
-
         node_row, node_col, current_orientation = node
-       
+        
+        if current_orientation != -1:           # non goal node
+            possible_moves = ["F", "CW", "CCW"]
+            next_pos_dict = {}
+            if current_orientation == 0:
+                next_pos_dict["F"] = (node_row,(node_col-1),current_orientation)
+            elif current_orientation == 1:
+                next_pos_dict["F"] = ((node_row-1),node_col,current_orientation)
+            elif current_orientation == 2:
+                next_pos_dict["F"] = (node_row,(node_col+1),current_orientation)
+            else:
+                next_pos_dict["F"] = ((node_row+1),node_col,current_orientation)
+            next_pos_dict["CW"] = (node_row, node_col, (current_orientation+3)%4)
+            next_pos_dict["CCW"] = (node_row, node_col, (current_orientation+1)%4)
+        
+        else:
+            possible_moves = ["E", "S", "W", "N"]
+            next_pos_dict = {}
+            next_pos_dict["E"] = (node_row,(node_col-1),0)
+            next_pos_dict["S"] = ((node_row-1),node_col,1)
+            next_pos_dict["W"] = (node_row,(node_col+1),2)
+            next_pos_dict["N"] = ((node_row+1),node_col,3)
+  
         for move in possible_moves:
-            d_row, d_col = move
 
             # Calculate each of the 4 neighbors independent of orientation
-            new_pos = (node_row + d_row, node_col + d_col)
-
+            new_pos = next_pos_dict[move]
             # Check if the new position is within bounds
             if (
                 new_pos[0] >= map.shape[0]
@@ -183,126 +191,281 @@ def getAstarDistanceMap(map: np.array, start: tuple, goal: tuple, isDiagonal: bo
             if map[new_pos[0], new_pos[1]] == -1:
                 continue
 
-            # Calculate the cost based on the movement and current orientation + update orientation
-            # DONE add cases for orientation == -1 (coming from a goal state)
-            if move == (0, 1):  # Move east
-                cost = 1 if current_orientation == 0 else (3 if current_orientation == 2 else 2)  # Forward move or turn
-                new_orientation = 0  # Update orientation after the move
-            elif move == (1, 0):  # Move south
-                cost = 1 if current_orientation == 1 else (3 if current_orientation == 3 else 2)  # Forward move or turn
-                new_orientation = 1  # Update orientation after the move
-            elif move == (0, -1):  # Move west
-                cost = 1 if current_orientation == 2 else (3 if current_orientation == 0 else 2)  # Forward move or turn
-                new_orientation = 2  # Update orientation after the move
-            elif move == (-1, 0):  # Move north
-                cost = 1 if current_orientation == 3 else (3 if current_orientation == 1 else 2)  # Forward move or turn
-                new_orientation = 3  # Update orientation after the move
-            else:
-                print("That's not right")
-            
-            # first case with manual goal orientation -1
-            if current_orientation == -1:
-                cost = 1
-
-            neighbors.add((new_pos[0], new_pos[1], new_orientation, cost))
+            neighbors.add(new_pos)
 
         return neighbors
-
-    # NOTE THAT WE REVERSE THE DIRECTION OF SEARCH SO THAT THE GSCORE WILL BE DISTANCE TO GOAL
-    # swaps the values of start and goal and then convert them to tuples
+    
+    heuristic_cost_estimate = lambda a, b: math.hypot(a[0] - b[0], a[1] - b[1])
     goal = (goal[0], goal[1], -1) # give the goal an arbitrary orientation
     
     start, goal = goal, start
     start, goal = tuple(start), tuple(goal)
     # The set of nodes already evaluated
     closedSet = set()
-
+    gScore = dict()  # default value infinity
+    fScore = dict()
+    gScore[start] = 0
+    for depth in range(4):
+        gScore[(start[0], start[1], depth)] = 0
+        fScore[(start[0], start[1], depth)] = heuristic_cost_estimate((start[0], start[1], depth), goal)
+        closedSet.add((start[0], start[1], depth))
+        # print(f"{(start[0], start[1], depth)} added to closedSet")
     # The set of currently discovered nodes that are not evaluated yet.
     # Initially, only the start node is known.
     # each entry is (row, col, o)
     openSet = set()
-    openSet.add(start) #! after swapping start and goal, this first element doesnt have an orientation
+    cameFrom = dict()
+    # openSet.add(start) #! after swapping start and goal, this first element doesnt have an orientation
+    # print(f"start position is: {start}")
+    # print(f"start gScore is: {gScore[start]}")
+    for neighbor in getNeighbors(start):
+        cameFrom[neighbor] = start
+        openSet.add(neighbor)
+        gScore[neighbor] = 1
+        fScore[neighbor] = 1 + heuristic_cost_estimate(neighbor, goal)
+        # print(f"adding neighbor: {neighbor}")
+        # print(f"neighbor g score is: {gScore[neighbor]}")
+
+
 
     # For each node, which node it can most efficiently be reached from.
     # If a node can be reached from many nodes, cameFrom will eventually contain the
     # most efficient previous step.
-    cameFrom = dict()
+    
 
     # For each node, the cost of getting from the start node to that node.
     # UPDATE: gScore will hold (x,y,orientation): score
-    gScore = dict()  # default value infinity
 
-    # The cost of going from start to start is zero.
-    gScore[start] = 0
 
     # For each node, the total cost of getting from the start node to the goal
     # by passing by that node. That value is partly known, partly heuristic.
     # each entry is (x, y, o)
-    fScore = dict()  # default infinity
-
-    
-    
-    # def manhattan_heuristic_cost_estimate(current, goal):
-    #     dx = abs(current[0] - goal[0])
-    #     dy = abs(current[1] - goal[1])
-    #     penalty = 0
-        
-    #     # ! These orientation comparisons are not correct for the coordinate plane
-    #     # for each orientation, if goal is opposite +2 penalty
-    #     if current[2] == 0 and goal[0] < current[0]: # orient east, goal west
-    #         penalty += 2
-    #     elif current[2] == 1 and goal[1] > current[1]: # orient south, goal north
-    #         penalty += 2
-    #     elif current[2] == 2 and goal[0] > current[0]: # orient west, goal east
-    #         penalty += 2
-    #     elif current[2] == 3 and goal[1] < current[1]: # orient north, goal south
-    #         penalty += 2
-            
-
-    #     return dx + dy + penalty
+      # default infinity
 
     # our heuristic is euclidean distance to goal
-    heuristic_cost_estimate = lambda a, b: math.hypot(a[0] - b[0], a[1] - b[1])
+    
 
     # For the first node, that value is completely heuristic.
-    fScore[start] = heuristic_cost_estimate(start, goal)
+    
 
     while len(openSet) != 0:
         # current = the node in openSet having the lowest fScore value
         current = lowestF(fScore, openSet)
-        
+
         if current is None:
             print("CURRENT NODE IS NONE")
         openSet.remove(current) #! Error when trying to remove 'current' that isnt a key in the set
-        closedSet.add(current[:2])
+        closedSet.add(current)
         for neighbor in getNeighbors(current): #neighbors have (row, col, o, cost from current to neighbor)
-            if neighbor[:2] in closedSet:
+
+            if neighbor in closedSet:
                 continue  # Ignore the neighbor which is already evaluated.
+
+            if neighbor not in openSet:  # Discover a new node
+                openSet.add(neighbor) # only give openSet (row, col, o)           
                 
             # ! This may be inefficient since it will add all orientations for a given position. Check later.
-            if neighbor not in openSet:  # Discover a new node
-                openSet.add((neighbor[0], neighbor[1], neighbor[2])) # only give openSet (row, col, o)
+            
 
             # The distance from start to a neighbor
             # DONE distance to each neighbor depends on the orientation calculated from getNeighbor
-            tentative_gScore = gScore[(current[0], current[1], current[2])] + neighbor[3]
-            if tentative_gScore >= gScore.get((neighbor[0], neighbor[1], neighbor[2]), 2 ** 31 - 1): 
+            tentative_gScore = gScore[current] + 1
+            if tentative_gScore >= gScore.get(neighbor, 2 ** 31 - 1): 
                 continue  # This is not a better path., the stored gScore of neighbor is already better
 
             # This path is the best until now. Record it!
             cameFrom[neighbor] = current
-            if (neighbor[0], neighbor[1]) in gScore:
-                gScore[(neighbor[0], neighbor[1], neighbor[2])] = min(tentative_gScore, gScore[(neighbor[0], neighbor[1], neighbor[2])]) # We decided orientation not needed in gScore
-            else:
-                gScore[(neighbor[0], neighbor[1], neighbor[2])] = tentative_gScore
+            # if (neighbor) in gScore:
+            #     gScore[neighbor] = min(tentative_gScore, gScore[neighbor])
+            # else:
+            #     gScore[neighbor] = tentative_gScore
+            gScore[neighbor] = tentative_gScore
             
-            fScore[(neighbor[0], neighbor[1], neighbor[2])] = tentative_gScore + heuristic_cost_estimate(neighbor, goal) # maintain fScore with just (row,col, orientation)
+            fScore[neighbor] = tentative_gScore + heuristic_cost_estimate(neighbor, goal) # maintain fScore with just (row,col, orientation)
 
             # parse through the gScores
+
     Astar_map = map.copy()
+
+    Astar_map = np.dstack((Astar_map, Astar_map, Astar_map, Astar_map))
     for key in gScore:  # Removed orientation in gScore
-        Astar_map[key[0], key[1]] = gScore[key]
-    return Astar_map 
+        Astar_map[key] = gScore[key]
+    return Astar_map
+
+# def getAstarDistanceMap(map: np.array, start: tuple, goal: tuple, isDiagonal: bool = False):
+#     """
+#     returns a numpy array of same dims as map with the distance to the goal from each coord
+#     :param map: a n by m np array, where -1 denotes obstacle
+#     :param start: start_position
+#     :param goal: goal_position
+#     :return: optimal distance map
+#     """
+
+#     #DONE estimate include orientation
+#     def lowestF(fScore, openSet):
+#         # find entry in openSet with lowest fScore
+#         assert (len(openSet) > 0)
+#         minF = 2 ** 31 - 1
+#         minNode = None
+        
+#         for element in openSet:
+#             i, j, *rest = element
+#             o = rest[0] if rest else -1
+#             if (i, j, o) not in fScore: continue # ! this line is getting called
+#             if fScore[(i, j, o)] < minF:
+#                 minF = fScore[(i, j, o)] 
+#                 minNode = (i, j, o) 
+#         if minNode is None:
+#             # print("MIN NODE IS NONE")
+#             minNode = next(iter(openSet)) # will return the first key in openSet
+#         return minNode
+
+#     #DONE modify for orientation, with cost calculation
+#     def getNeighbors(node):
+#         neighbors = set()
+#         possible_moves = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+
+#         node_row, node_col, current_orientation = node
+       
+#         for move in possible_moves:
+#             d_row, d_col = move
+
+#             # Calculate each of the 4 neighbors independent of orientation
+#             new_pos = (node_row + d_row, node_col + d_col)
+
+#             # Check if the new position is within bounds
+#             if (
+#                 new_pos[0] >= map.shape[0]
+#                 or new_pos[0] < 0
+#                 or new_pos[1] >= map.shape[1]
+#                 or new_pos[1] < 0
+#             ):
+#                 continue
+
+#             # Check for collision with static obstacles
+#             if map[new_pos[0], new_pos[1]] == -1:
+#                 continue
+
+#             # Calculate the cost based on the movement and current orientation + update orientation
+#             # DONE add cases for orientation == -1 (coming from a goal state)
+#             if move == (0, 1):  # Move east
+#                 cost = 1 if current_orientation == 0 else (3 if current_orientation == 2 else 2)  # Forward move or turn
+#                 new_orientation = 0  # Update orientation after the move
+#             elif move == (1, 0):  # Move south
+#                 cost = 1 if current_orientation == 1 else (3 if current_orientation == 3 else 2)  # Forward move or turn
+#                 new_orientation = 1  # Update orientation after the move
+#             elif move == (0, -1):  # Move west
+#                 cost = 1 if current_orientation == 2 else (3 if current_orientation == 0 else 2)  # Forward move or turn
+#                 new_orientation = 2  # Update orientation after the move
+#             elif move == (-1, 0):  # Move north
+#                 cost = 1 if current_orientation == 3 else (3 if current_orientation == 1 else 2)  # Forward move or turn
+#                 new_orientation = 3  # Update orientation after the move
+#             else:
+#                 print("That's not right")
+            
+#             # first case with manual goal orientation -1
+#             if current_orientation == -1:
+#                 cost = 1
+
+#             neighbors.add((new_pos[0], new_pos[1], new_orientation, cost))
+
+#         return neighbors
+
+#     # NOTE THAT WE REVERSE THE DIRECTION OF SEARCH SO THAT THE GSCORE WILL BE DISTANCE TO GOAL
+#     # swaps the values of start and goal and then convert them to tuples
+#     goal = (goal[0], goal[1], -1) # give the goal an arbitrary orientation
+    
+#     start, goal = goal, start
+#     start, goal = tuple(start), tuple(goal)
+#     # The set of nodes already evaluated
+#     closedSet = set()
+
+#     # The set of currently discovered nodes that are not evaluated yet.
+#     # Initially, only the start node is known.
+#     # each entry is (row, col, o)
+#     openSet = set()
+#     openSet.add(start) #! after swapping start and goal, this first element doesnt have an orientation
+
+#     # For each node, which node it can most efficiently be reached from.
+#     # If a node can be reached from many nodes, cameFrom will eventually contain the
+#     # most efficient previous step.
+#     cameFrom = dict()
+
+#     # For each node, the cost of getting from the start node to that node.
+#     # UPDATE: gScore will hold (x,y,orientation): score
+#     gScore = dict()  # default value infinity
+
+#     # The cost of going from start to start is zero.
+#     gScore[start] = 0
+
+#     # For each node, the total cost of getting from the start node to the goal
+#     # by passing by that node. That value is partly known, partly heuristic.
+#     # each entry is (x, y, o)
+#     fScore = dict()  # default infinity
+
+    
+    
+#     # def manhattan_heuristic_cost_estimate(current, goal):
+#     #     dx = abs(current[0] - goal[0])
+#     #     dy = abs(current[1] - goal[1])
+#     #     penalty = 0
+        
+#     #     # ! These orientation comparisons are not correct for the coordinate plane
+#     #     # for each orientation, if goal is opposite +2 penalty
+#     #     if current[2] == 0 and goal[0] < current[0]: # orient east, goal west
+#     #         penalty += 2
+#     #     elif current[2] == 1 and goal[1] > current[1]: # orient south, goal north
+#     #         penalty += 2
+#     #     elif current[2] == 2 and goal[0] > current[0]: # orient west, goal east
+#     #         penalty += 2
+#     #     elif current[2] == 3 and goal[1] < current[1]: # orient north, goal south
+#     #         penalty += 2
+            
+
+#     #     return dx + dy + penalty
+
+#     # our heuristic is euclidean distance to goal
+#     heuristic_cost_estimate = lambda a, b: math.hypot(a[0] - b[0], a[1] - b[1])
+
+#     # For the first node, that value is completely heuristic.
+#     fScore[start] = heuristic_cost_estimate(start, goal)
+
+#     while len(openSet) != 0:
+#         # current = the node in openSet having the lowest fScore value
+#         current = lowestF(fScore, openSet)
+        
+#         if current is None:
+#             print("CURRENT NODE IS NONE")
+#         openSet.remove(current) #! Error when trying to remove 'current' that isnt a key in the set
+#         closedSet.add(current[:2])
+#         for neighbor in getNeighbors(current): #neighbors have (row, col, o, cost from current to neighbor)
+#             if neighbor[:2] in closedSet:
+#                 continue  # Ignore the neighbor which is already evaluated.
+                
+#             # ! This may be inefficient since it will add all orientations for a given position. Check later.
+#             if neighbor not in openSet:  # Discover a new node
+#                 openSet.add((neighbor[0], neighbor[1], neighbor[2])) # only give openSet (row, col, o)
+
+#             # The distance from start to a neighbor
+#             # DONE distance to each neighbor depends on the orientation calculated from getNeighbor
+#             tentative_gScore = gScore[(current[0], current[1], current[2])] + neighbor[3]
+#             if tentative_gScore >= gScore.get((neighbor[0], neighbor[1], neighbor[2]), 2 ** 31 - 1): 
+#                 continue  # This is not a better path., the stored gScore of neighbor is already better
+
+#             # This path is the best until now. Record it!
+#             cameFrom[neighbor] = current
+#             if (neighbor[0], neighbor[1]) in gScore:
+#                 gScore[(neighbor[0], neighbor[1], neighbor[2])] = min(tentative_gScore, gScore[(neighbor[0], neighbor[1], neighbor[2])]) # We decided orientation not needed in gScore
+#             else:
+#                 gScore[(neighbor[0], neighbor[1], neighbor[2])] = tentative_gScore
+            
+#             fScore[(neighbor[0], neighbor[1], neighbor[2])] = tentative_gScore + heuristic_cost_estimate(neighbor, goal) # maintain fScore with just (row,col, orientation)
+
+#             # parse through the gScores
+#     Astar_map = map.copy()
+#     for key in gScore:  # Removed orientation in gScore
+#         Astar_map[key[0], key[1]] = gScore[key]
+#     return Astar_map 
 
 
 class Agent:
@@ -561,6 +724,14 @@ class World:
                 position_first = self.corridors[t]['Positions'][0]
                 self.corridors[t]['StoppingPoints'].append([position[0], position[1]])
                 self.corridors[t]['StoppingPoints'].append(None)
+        # print("printing corridor map")
+        # for key in self.corridor_map:
+        #     print(f"{key}: {self.corridor_map[key]}")
+        # print("printing self.corridors")
+        # for key in self.corridors:
+        #     for key2 in self.corridors[key]:
+        #         print(f"{key},{key2}: {self.corridors[key][key2]}")
+        # assert False
         return
 
     def check_for_singular_state(self, positions):
@@ -759,7 +930,7 @@ class World:
             
             #*MOVE CALLED
             self.agents[agentID].move(init_poss[idx]) # TODO .move() argument is a (row,col)
-            self.agents[agentID].distanceMap = getAstarDistanceMap(self.state, self.agents[agentID].position,
+            self.agents[agentID].distanceMap = getAstarDistanceMap3D(self.state, self.agents[agentID].position,
                                                                    self.agents[agentID].goal_pos)
 
     # DONE no changes needed after first pass
@@ -875,10 +1046,10 @@ class World:
                     refresh_distance_map = True
 
                 # compute distance map
-                self.agents[agentID].next_distanceMap = getAstarDistanceMap(self.state, self.agents[agentID].goal_pos,
+                self.agents[agentID].next_distanceMap = getAstarDistanceMap3D(self.state, self.agents[agentID].goal_pos,
                                                                             self.agents[agentID].next_goal)
                 if refresh_distance_map:
-                    self.agents[agentID].distanceMap = getAstarDistanceMap(self.state, self.agents[agentID].position,
+                    self.agents[agentID].distanceMap = getAstarDistanceMap3D(self.state, self.agents[agentID].position,
                                                                            self.agents[agentID].goal_pos)
             return 1
         else:
@@ -1093,8 +1264,8 @@ class MAPFEnv(gym.Env):
                     'action not in action space'
         
         status_dict, newPos_dict = self.world.CheckCollideStatus(movement_dict)
-        print("New Pos Dict: ", newPos_dict)
-        print("STATUS DICT:", status_dict)
+        # print("New Pos Dict: ", newPos_dict)
+        # print("STATUS DICT:", status_dict)
         self.world.state[self.world.state > 0] = 0  # remove agents in the map
         put_goal_list = []
         freeze_list = []
@@ -1109,9 +1280,11 @@ class MAPFEnv(gym.Env):
             self.world.state[new_cartesian] = agentID
             # Move is called with status_dic
             #* MOVE CALLED
+
             # newPos is coming from the newPos_dict which is the 2nd return of CheckCollideStatus
             self.world.agents[agentID].move(newPos, status_dict[agentID])
             self.give_moving_reward(agentID)
+
             if status_dict[agentID] == 1:
                 if not self.isOneShot:
                     if self.world.agents[agentID].freeze == 0:
@@ -1219,7 +1392,7 @@ class MAPFEnv(gym.Env):
 
         except:
             c_time = time.time() - start_time
-            print("failing cbs")
+            # print("failing cbs")
             if c_time > time_limit:
                 return expert_path  # should be None
 

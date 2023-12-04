@@ -63,7 +63,7 @@ class Primal2Observer(ObservationBuilder):
         obs_map = np.zeros(obs_shape)           # obstacle map
         astar_map = np.zeros([self.num_future_steps, self.observation_size, self.observation_size])
         astar_map_unpadded = np.zeros([self.num_future_steps, self.world.state.shape[0], self.world.state.shape[1]])
-        pathlength_map = np.zeros(obs_shape)
+        pathlength_map = np.zeros((self.observation_size, self.observation_size, 4))        # changed!!!!! now 3d
         deltax_map = np.zeros(obs_shape)
         deltay_map = np.zeros(obs_shape)
         blocking_map = np.zeros(obs_shape)
@@ -91,7 +91,10 @@ class Primal2Observer(ObservationBuilder):
                 if i >= self.world.state.shape[0] or i < 0 or j >= self.world.state.shape[1] or j < 0:
                     # out of bounds, just treat as an obstacle
                     obs_map[i - top_left[0], j - top_left[1]] = 1
-                    pathlength_map[i - top_left[0], j - top_left[1]] = -1
+                    pathlength_map[i - top_left[0], j - top_left[1],0] = -1
+                    pathlength_map[i - top_left[0], j - top_left[1],1] = -1
+                    pathlength_map[i - top_left[0], j - top_left[1],2] = -1
+                    pathlength_map[i - top_left[0], j - top_left[1],3] = -1
                     continue
 
                 astar_map[:self.num_future_steps, i - top_left[0], j - top_left[1]] = astar_map_unpadded[
@@ -115,7 +118,8 @@ class Primal2Observer(ObservationBuilder):
 
                 # we can keep this map even if on goal,
                 # since observation is computed after the refresh of new distance map
-                pathlength_map[i - top_left[0], j - top_left[1]] = self.world.agents[agent_id].distanceMap[i, j]
+                for depth in range(4):
+                    pathlength_map[i - top_left[0], j - top_left[1], depth] = self.world.agents[agent_id].distanceMap[i, j, depth]
 
         time3 = time.time() - start_time
         start_time = time.time()
@@ -188,26 +192,27 @@ class Primal2Observer(ObservationBuilder):
         free_spaces = list(np.argwhere(pathlength_map > 0))
         distance_list = []
         for arg in free_spaces:
-            dist = pathlength_map[arg[0], arg[1]]
+            dist = pathlength_map[arg[0], arg[1], arg[2]]
             if dist not in distance_list:
                 distance_list.append(dist)
         distance_list.sort()
         step_size = (1 / len(distance_list))
         for i in range(self.observation_size):
             for j in range(self.observation_size):
-                dist_mag = pathlength_map[i, j]
-                if dist_mag > 0:
-                    index = distance_list.index(dist_mag)
-                    pathlength_map[i, j] = (index + 1) * step_size
+                for k in range(4):      # to loop through the third dimension
+                    dist_mag = pathlength_map[i, j, k]
+                    if dist_mag > 0:
+                        index = distance_list.index(dist_mag)
+                        pathlength_map[i, j, k] = (index + 1) * step_size
 
-        state = np.array([poss_map, goal_map, goals_map, obs_map, pathlength_map, blocking_map, deltax_map,
+        state = np.array([poss_map, goal_map, goals_map, obs_map, pathlength_map[:,:,0], pathlength_map[:,:,1], pathlength_map[:,:,2], pathlength_map[:,:,3], blocking_map, deltax_map,
                           deltay_map])
         state = np.concatenate((state, astar_map), axis=0)
 
         time6 = time.time() - start_time
         start_time = time.time()
 
-        return state, [drow, dcol, mag], np.array([time1, time2, time3, time4, time5, time6])
+        return state, [drow, dcol, mag, agent_pos[2]], np.array([time1, time2, time3, time4, time5, time6])
 
     def get_many(self, handles=None):
         observations = {}
@@ -257,23 +262,38 @@ class Primal2Observer(ObservationBuilder):
             
                 for action in range(1, 4):
                     new_pos = action2position(action, position)     # does not include standing still
+                    # print(f"action number {action}")
+                    # print(f"checking position at {position} with distance {distance_map[position]}")
+                    # print(f"checking new position at {new_pos} with distance {distance_map[new_pos]}")
                     if 0 <= new_pos[0] < h and 0 <= new_pos[1] < w:
-                        if distance_map[new_pos[:2]] == distance_map[position[:2]] - 1 \
-                                and distance_map[new_pos[:2]] >= 0:
+                        if distance_map[new_pos] == distance_map[position] - 1 \
+                                and distance_map[new_pos] >= 0:
                             next_astar_cell.append(new_pos)
-                        elif position[2] != new_pos[2]:
-                            next_astar_cell.append(new_pos)
+                # if not next_astar_cell:
+                #     for action in range(1, 4):
+                #         new_pos = action2position(action, position)     # does not include standing still
+                #         print(f"action number {action}")
+                #         print(f"checking position at {position} with distance {distance_map[position]}")
+                #         print(f"checking new position at {new_pos} with distance {distance_map[new_pos]}")
+                #         print("returning an empty list")
+                #     for depth in range(4):
+                #         print(f"printing layer {depth}")
+                #         for i in range(distance_map[:,:,depth].shape[0]):
+                #             print([distance_map[i,j,depth] for j in range(distance_map.shape[1])])
                 return next_astar_cell
 
             path_counter = 0
             astar_list = [[start_position]]
-            # print("Start Position: ", start_position)
+            # print(f"starting position is: {start_position}")
+
+            count = 0
             while path_counter < path_len:
                 last_step_cells = astar_list[-1]
                 next_step_cells = []
                 for cells_per_step in last_step_cells:
                     new_cell_list = get_astar_one_step(cells_per_step)
                     if not new_cell_list:  # no next step, should be standing on goal
+                        # print(f"returning on count: {count}")
                         astar_list.pop(0)
                         return astar_list
                     next_step_cells.extend(new_cell_list)
@@ -297,7 +317,12 @@ class Primal2Observer(ObservationBuilder):
             # ensure that start_pos0 is a three element tuple
             assert (len(start_pos0) == 3), "start_pos0 should include orientation, got {}".format(start_pos0)
 
+            # print(f"start_pos0: {start_pos0}")
+            # print(f"num_future_steps: {self.num_future_steps}")
+            # print(f"goal position: {self.world.agents[agentID].goal_pos}")
             astar_path = get_single_astar_path(distance_map0, start_pos0, self.num_future_steps)
+            # if len(astar_path) <= 0:
+            #     print("astar_path is empty. check")
             
             assert len(astar_path) > 0, "astar_path should not be empty, got {} for agent {}".format(astar_path, agentID)
 
@@ -317,7 +342,7 @@ class Primal2Observer(ObservationBuilder):
             for step in range(self.num_future_steps):
                 for cell in astar_path[step]:
                     astar_maps[agentID][step, cell[0], cell[1]] = 1
-
+        # print("returning get astar map")
         return np.asarray([astar_maps[i] for i in range(1, self.world.num_agents + 1)])
 
     # TODO 

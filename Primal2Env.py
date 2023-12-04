@@ -58,6 +58,7 @@ class Primal2Env(MAPFEnv):
 
     # DONE change how to find and check for valid actions from given position
     def listValidActions(self, agent_ID, agent_obs):
+        # print("calling listValidActions")
         """
         :return: action:int, pos:(int,int)
         in non-corridor states:
@@ -89,6 +90,7 @@ class Primal2Env(MAPFEnv):
         pos = self.world.getPos(agent_ID)
         # if the agent is inside a corridor
         if self.world.corridor_map[pos[0], pos[1]][1] == 1:
+            # print("agent is in a corridor")
             corridor_id = self.world.corridor_map[pos[0], pos[1]][0]
             if [pos[0], pos[1]] not in self.world.corridors[corridor_id]['StoppingPoints']:
                 possible_moves = self.world.valid_neighbors_oriented(pos) # edit for orientation in Env_Builder
@@ -136,11 +138,13 @@ class Primal2Env(MAPFEnv):
                         available_actions.append(0)
         # agent not in corridor
         else:
+            # print("agent is not in a corridor")
             available_actions.append(0)  # standing still always allowed when not in corridor
             # DONE change logic for available_actions for orientaion
             num_actions = 4  # now only 0-3
-            for action in range(0, num_actions): 
+            for action in range(1, num_actions): 
                 # use new action2position(action, current_position) to get each of the potential new_positions
+                # print(f"checking action {action}")
                 new_position = action2position(action, pos)
 
                 lastpos = None
@@ -151,44 +155,57 @@ class Primal2Env(MAPFEnv):
                     lastpos = self.world.agents[agent_ID].position_history[-2]
                 except:
                     pass
+                # print(f"action: {action}")
+                # print(f"new_position: {new_position}")
+                # print(f"lastpos: {lastpos}")
                 if new_position == lastpos:
+                    # print("continue")
                     continue
                 if self.world.corridor_map[new_position[0], new_position[1]][1] == 1:
+                    # print("inside a corridor")
                     valid = self.get_convention_validity(agent_obs, agent_ID, new_position)
                     if not valid:
                         continue
-                if self.world.state[new_position[0], new_position[1]] == 0:
-                    available_actions.append(action)
 
+                if self.world.state[new_position[0], new_position[1]] == 0 or self.world.state[new_position[0], new_position[1]] == agent_ID:
+                    available_actions.append(action)
+        # print(f"returning: {available_actions}")
         return available_actions
 
     def get_blocking_validity(self, observation, agent_ID, pos):
         top_left = (self.world.getPos(agent_ID)[0] - self.obs_size // 2,
                     self.world.getPos(agent_ID)[1] - self.obs_size // 2)
-        blocking_map = observation[0][5]
+        blocking_map = observation[0][8]
         if blocking_map[pos[0] - top_left[0], pos[1] - top_left[1]] == 1:
+            # print("blocked")
             return 0
+        # print("not blocked")
         return 1
 
     def get_convention_validity(self, observation, agent_ID, pos):
         top_left = (self.world.getPos(agent_ID)[0] - self.obs_size // 2,
                     self.world.getPos(agent_ID)[1] - self.obs_size // 2)
-        blocking_map = observation[0][5]
+        blocking_map = observation[0][8]
         if blocking_map[pos[0] - top_left[0], pos[1] - top_left[1]] == -1:
-            deltacol_map = observation[0][7]
-            if deltacol_map[pos[0] - top_left[0], pos[1] - top_left[1]] > 0:
+            deltacol_map = observation[0][10]
+            if deltacol_map[pos[0] - top_left[0], pos[1] - top_left[1]] < 0:        # changed from >
+                # print("convention")
                 return 1
             elif deltacol_map[pos[0] - top_left[0], pos[1] - top_left[1]] == 0:
-                deltarow_map = observation[0][6]
-                if deltarow_map[pos[0] - top_left[0], pos[1] - top_left[1]] > 0:
+                deltarow_map = observation[0][9]
+                if deltarow_map[pos[0] - top_left[0], pos[1] - top_left[1]] < 0:    # changed from >
+                    # print("convention")
                     return 1
                 else:
+                    # print("opposite")
                     return 0
-            elif deltacol_map[pos[0] - top_left[0], pos[1] - top_left[1]] < 0:
+            elif deltacol_map[pos[0] - top_left[0], pos[1] - top_left[1]] > 0:      # changed from <
+                # print("opoosite")
                 return 0
             else:
                 print('Weird')
         else:
+            # print("convention")
             return 1
 
 

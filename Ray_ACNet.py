@@ -31,7 +31,7 @@ class ACNet:
             # self.inputs = tf.placeholder(shape=[None, NUM_CHANNEL, OBS_SIZE, OBS_SIZE], dtype=tf.float32)
             # self.goal_pos = tf.placeholder(shape=[None, 3], dtype=tf.float32)
             self.inputs = tf.compat.v1.placeholder(shape=[None, NUM_CHANNEL, OBS_SIZE, OBS_SIZE], dtype=tf.float32) # new edit
-            self.goal_pos = tf.compat.v1.placeholder(shape=[None, 3], dtype=tf.float32)                             # new edit
+            self.goal_pos = tf.compat.v1.placeholder(shape=[None, 4], dtype=tf.float32)                             # new edit. I changed shape from [None, 3] to [None, 4] so we can give the NN the orientation as well
             self.myinput = tf.transpose(self.inputs, perm=[0, 2, 3, 1])
             self.policy, self.value, self.state_out, self.state_in, self.state_init, self.valids = self._build_net(
                 self.myinput, self.goal_pos, RNN_SIZE, TRAINING, a_size)
