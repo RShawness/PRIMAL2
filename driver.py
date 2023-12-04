@@ -258,9 +258,9 @@ def main():
 
 
 if __name__ == "__main__": 
-    f = open("mylogs.txt", "w")
-    original_stdout = sys.stdout
-    sys.stdout = f
+    # f = open("mylogs.txt", "w")
+    # original_stdout = sys.stdout
+    # sys.stdout = f
     main()
-    f.close()
-    sys.stdout = original_stdout
+    # f.close()
+    # sys.stdout = original_stdout

@@ -14,6 +14,143 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 warnings.filterwarnings('ignore', category=Warning)
 
 
+# Used for Testing The Trained Model (by TestingEnv.py)
+class TestWorld(World):
+    def __init__(self, map_generator, world_info, isDiagonal=False, isConventional=False):
+        super().__init__(map_generator, num_agents=None, isDiagonal=isDiagonal)
+        [self.state, self.goals_map], \
+        self.agents_init_pos, self.corridor_map, self.corridors, self.agents = world_info
+        self.corridor_map, self.corridors = self.corridor_map[()], self.corridors[()]
+        # print("Initial Positions : ", self.agents_init_pos)
+        self.num_agents = len(self.agents_init_pos.keys())
+        self.isConventional = isConventional
+
+    def reset_world(self):
+        pass
+
+    def init_agents_and_goals(self):
+        pass
+
+    def put_goals(self, id_list, manual_pos=None):
+        """
+        NO DISTANCE MAPS FOR MSTAR!!
+        """
+
+        def random_goal_pos(previous_goals=None, distance=None):
+            next_goal_buffer = {agentID: self.agents[agentID].next_goal for agentID in range(1, self.num_agents + 1)}
+            curr_goal_buffer = {agentID: self.agents[agentID].goal_pos for agentID in range(1, self.num_agents + 1)}
+            if previous_goals is None:
+                previous_goals = {agentID: None for agentID in id_list}
+            if distance is None:
+                distance = self.goal_generate_distance
+            free_for_all = np.logical_and(self.state == 0, self.goals_map == 0)
+            # print(previous_goals)
+            if not all(previous_goals.values()):  # they are new born agents
+                free_space = np.argwhere(free_for_all == 1)
+                init_idx = np.random.choice(len(free_space), size=len(id_list), replace=False)
+                new_goals = {agentID: tuple(free_space[init_idx[agentID - 1]]) for agentID in id_list}
+                return new_goals
+            else:
+                new_goals = {}
+                for agentID in id_list:
+                    free_on_agents = np.logical_and(self.state > 0, self.state != agentID)
+                    free_spaces_for_previous_goal = np.logical_or(free_on_agents, free_for_all)
+                    # free_spaces_for_previous_goal = np.logical_and(free_spaces_for_previous_goal, self.goals_map==0)
+                    if distance > 0:
+                        previous_row, previous_col = previous_goals[agentID]
+                        row_lower_bound = (previous_row - distance) if (previous_row - distance) > 0 else 0
+                        row_upper_bound = previous_row + distance + 1
+                        col_lower_bound = (previous_col - distance) if (previous_row - distance) > 0 else 0
+                        col_upper_bound = previous_col + distance + 1
+                        free_spaces_for_previous_goal[row_lower_bound:row_upper_bound, col_lower_bound:col_upper_bound] = False
+                    free_spaces_for_previous_goal = list(np.argwhere(free_spaces_for_previous_goal == 1))
+                    free_spaces_for_previous_goal = [pos.tolist() for pos in free_spaces_for_previous_goal]
+
+                    try:
+                        unique = False
+                        counter = 0
+                        while unique == False and counter < 500:
+                            init_idx = np.random.choice(len(free_spaces_for_previous_goal))
+                            init_pos = free_spaces_for_previous_goal[init_idx]
+                            unique = True
+                            if tuple(init_pos) in next_goal_buffer.values() or tuple(
+                                    init_pos) in curr_goal_buffer.values() or tuple(init_pos) in new_goals.values():
+                                unique = False
+                            if previous_goals is not None:
+                                if tuple(init_pos) in previous_goals.values():
+                                    unique = False
+                            counter += 1
+                        if counter >= 500:
+                            print('Hard to find Non Conflicting Goal')
+                        new_goals.update({agentID: tuple(init_pos)})
+                    except ValueError:
+                        print('wrong goal')
+                        self.reset_world()
+                        print(self.agents[1].position)
+                        self.init_agents_and_goals()
+                        return None
+                return new_goals
+
+        previous_goals = {agentID: self.agents[agentID].goal_pos for agentID in id_list}
+        if manual_pos is None:
+            new_goals = random_goal_pos(previous_goals, distance=self.goal_generate_distance)
+        else:
+            new_goals = manual_pos
+        if new_goals is not None:  # recursive breaker
+            refresh_distance_map = False
+            for agentID in id_list:
+                if self.state[new_goals[agentID][0], new_goals[agentID][1]] >= 0:
+                    if self.agents[agentID].next_goal is None:  # no next_goal to use
+                        # set goals_map
+                        self.goals_map[new_goals[agentID][0], new_goals[agentID][1]] = agentID
+                        # set agent.goal_pos
+                        self.agents[agentID].goal_pos = (new_goals[agentID][0], new_goals[agentID][1])
+                        # set agent.next_goal
+                        new_next_goals = random_goal_pos(new_goals, distance=self.goal_generate_distance)
+                        if new_next_goals is None:
+                            return None
+                        self.agents[agentID].next_goal = (new_next_goals[agentID][0], new_next_goals[agentID][1])
+                        # remove previous goal
+                        if previous_goals[agentID] is not None:
+                            self.goals_map[previous_goals[agentID][0], previous_goals[agentID][1]] = 0
+                    else:  # use next_goal as new goal
+                        # set goals_map
+                        self.goals_map[self.agents[agentID].next_goal[0], self.agents[agentID].next_goal[1]] = agentID
+                        # set agent.goal_pos
+                        self.agents[agentID].goal_pos = self.agents[agentID].next_goal
+                        # set agent.next_goal
+                        self.agents[agentID].next_goal = (
+                            new_goals[agentID][0], new_goals[agentID][1])  # store new goal into next_goal
+                        # remove previous goal
+                        if previous_goals[agentID] is not None:
+                            self.goals_map[previous_goals[agentID][0], previous_goals[agentID][1]] = 0
+                else:
+                    print(self.state)
+                    print(self.goals_map)
+                    raise ValueError('invalid manual_pos for goal' + str(agentID) + ' at: ', str(new_goals[agentID]))
+                if previous_goals[agentID] is not None:  # it has a goal!
+                    if previous_goals[agentID] != self.agents[agentID].position:
+                        print(self.state)
+                        print(self.goals_map)
+                        print(previous_goals)
+                        raise RuntimeError("agent hasn't finished its goal but asking for a new goal!")
+
+                    refresh_distance_map = True
+
+                # compute distance map
+                if not self.isConventional:
+                    self.agents[agentID].next_distanceMap = getAstarDistanceMap(self.state,
+                                                                                self.agents[agentID].goal_pos,
+                                                                                self.agents[agentID].next_goal)
+                    if refresh_distance_map:
+                        self.agents[agentID].distanceMap = getAstarDistanceMap(self.state,
+                                                                               self.agents[agentID].position,
+                                                                               self.agents[agentID].goal_pos)
+            return 1
+        else:
+            return None
+
+
 class RL_Planner(MAPFEnv):
     """
     result saved for NN Continuous Planner:
@@ -94,6 +231,7 @@ class RL_Planner(MAPFEnv):
             self.world = World(self.map_generator, num_agents=self.num_agents, isDiagonal=self.IsDiagonal)
             # raise UserWarning('you are using re-computing env mode')
         self.num_agents = self.world.num_agents
+        print("World State: \n", self.world.state)
         self.observer.set_env(self.world)
         self.fresh = True
         if self.viewer is not None:
@@ -345,8 +483,8 @@ class ContinuousTestsRunner:
             elif env_size <= 80:
                 return 192
             return 256
-
-        # self.worker._reset(map_generator=manual_generator(maps[0], maps[1]),
+        
+        # self.worker._reset(map_generator=manual_generator(maps[0][0], maps[0][1]),
         #                    worldInfo=maps)
         self.worker._reset(map_generator=manual_generator(maps[0], maps[1]))
         env_name = name[:name.rfind('.')]
@@ -390,15 +528,15 @@ if __name__ == "__main__":
     original_stdout = sys.stdout
     sys.stdout = f
     
-    model_path = './hpc_checkpoint/'
+    model_path = './model_CBS_for_PRIMAL_Alpha/'
     parser = argparse.ArgumentParser()
     parser.add_argument("--result_path", default="./testing_result/")
     parser.add_argument("--env_path", default='./saved_environments/')
-    parser.add_argument("-r", "--resume_testing", default=True, help="resume testing")
+    parser.add_argument("-r", "--resume_testing", default=False, help="resume testing")
     parser.add_argument("-g", "--GIF_prob", default=0., help="write GIF")
     parser.add_argument("-t", "--type", default='continuous', help="choose between oneShot and continuous")
-    parser.add_argument("-p", "--planner", default='RL', help="choose between mstar and RL")
-    parser.add_argument("-n", "--mapName", default='4_agents_10_size_0_density_id_0_environment.npy', help="single map name for multiprocessing")
+    parser.add_argument("-p", "--planner", default='RL', help="choose between 'mstar' and 'RL'")
+    parser.add_argument("-n", "--mapName", default='16_agents_10_size_0.3_density_id_19_environment.npy', help="single map name for multiprocessing")
     args = parser.parse_args()
 
     # set a tester--------------------------------------------
@@ -426,11 +564,13 @@ if __name__ == "__main__":
         raise NameError('invalid planner type')
     # run the tests---------------------------------------------------------
 
-    maps = tester.read_single_env(args.mapName)
+    maps = tester.read_single_env(args.mapName) # unloads the .npy file
+    print("Maps[0]: \n", maps[0])
+    print("Maps[1]: \n", maps[1])
     if maps is None:
         print(args.mapName, " already completed")
     else:
         sequence = tester.run_1_test(args.mapName, maps)
-        print(sequence)
+        print("Action Sequence: \n",sequence)
     f.close()
     sys.stdout = original_stdout

@@ -37,6 +37,7 @@ class Primal2Env(MAPFEnv):
         if self.viewer is not None:
             self.viewer = None
 
+    #! TODO: Need to inspect this function to see if reward structure is effective...
     def give_moving_reward(self, agentID):
         """
         WARNING: ONLY CALL THIS AFTER MOVING AGENTS!
@@ -44,14 +45,14 @@ class Primal2Env(MAPFEnv):
         never get punishment.
         """
         collision_status = self.world.agents[agentID].status
-        if collision_status == 0:
+        if collision_status == 0: # Valid move
             reward = self.ACTION_COST
             self.isStandingOnGoal[agentID] = False
-        elif collision_status == 1:
+        elif collision_status == 1: # Valid move and standing on goal
             reward = self.ACTION_COST + self.GOAL_REWARD
             self.isStandingOnGoal[agentID] = True
             self.world.agents[agentID].dones += 1
-        else:
+        else: # collision move
             reward = self.ACTION_COST + self.COLLISION_REWARD
             self.isStandingOnGoal[agentID] = False
         self.individual_rewards[agentID] = reward
@@ -109,7 +110,7 @@ class Primal2Env(MAPFEnv):
                     elif len(self.world.corridors[corridor_id]['EndPoints']) == 1 and possible_position is not None \
                             and possible_moves.count(None) == 3: # where there is only 1 possible move and 3 "None" returned 
                         # temp_action = (tuple_minus(possible_position, pos))
-                        print("second list valid actions call primal env")
+                        # print("second list valid actions call primal env")
                         available_actions.append(positions2action(possible_position, pos))
 
                 if not available_actions:
@@ -123,7 +124,7 @@ class Primal2Env(MAPFEnv):
                         if possible_position is not None and possible_position != last_position \
                                 and self.world.state[possible_position[0], possible_position[1]] == 0:
                             # temp_action = (tuple_minus(possible_position, pos))
-                            print("third list valid actions call primal env")
+                            # print("third list valid actions call primal env")
                             available_actions.append(positions2action(possible_position, pos))
                 else:
                     for possible_position in possible_moves:

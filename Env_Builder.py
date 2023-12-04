@@ -480,8 +480,8 @@ class World:
                 else:
                     self.corridor_map[(i, j)] = [-1, -1]
         # Compute All Corridors and End-points, store them in self.corridors , update corridor_map
-        for i in range(self.state.shape[0]):
-            for j in range(self.state.shape[1]):
+        for i in range(self.state.shape[0]): # rows
+            for j in range(self.state.shape[1]): # columns
                 positions = self.blank_env_valid_neighbor(i, j)
                 if (positions.count(None)) == 2 and (i, j) not in self.visited:
                     allowed = self.check_for_singular_state(positions)
@@ -499,15 +499,16 @@ class World:
         # Get Delta x , Delta y for the computed corridors ( Delta= Displacement to corridor exit)       
         for k in range(1, corridor_count):
             if k in self.corridors:
+                # if a corridor has 2 endpoints:
                 if len(self.corridors[k]['EndPoints']) == 2:
-                    self.corridors[k]['DeltaX'] = {}
-                    self.corridors[k]['DeltaY'] = {}
-                    pos_a = self.corridors[k]['EndPoints'][0]
-                    pos_b = self.corridors[k]['EndPoints'][1]
-                    self.corridors[k]['DeltaX'][pos_a] = (pos_a[1] - pos_b[1])  # / (max(1, abs(pos_a[0] - pos_b[0])))
-                    self.corridors[k]['DeltaX'][pos_b] = -1 * self.corridors[k]['DeltaX'][pos_a]
-                    self.corridors[k]['DeltaY'][pos_a] = (pos_a[0] - pos_b[0])  # / (max(1, abs(pos_a[1] - pos_b[1])))
-                    self.corridors[k]['DeltaY'][pos_b] = -1 * self.corridors[k]['DeltaY'][pos_a]
+                    self.corridors[k]['DeltaCol'] = {}
+                    self.corridors[k]['DeltaRow'] = {}
+                    pos_a = self.corridors[k]['EndPoints'][0] # first end point
+                    pos_b = self.corridors[k]['EndPoints'][1] # second end point
+                    self.corridors[k]['DeltaCol'][pos_a] = (pos_a[1] - pos_b[1])  # / (max(1, abs(pos_a[0] - pos_b[0])))
+                    self.corridors[k]['DeltaCol'][pos_b] = -1 * self.corridors[k]['DeltaCol'][pos_a]
+                    self.corridors[k]['DeltaRow'][pos_a] = (pos_a[0] - pos_b[0])  # / (max(1, abs(pos_a[1] - pos_b[1])))
+                    self.corridors[k]['DeltaRow'][pos_b] = -1 * self.corridors[k]['DeltaRow'][pos_a]
             else:
                 print('Weird2')
 
@@ -516,12 +517,14 @@ class World:
         # adjacent to Endpoint[0] and the last element of the list is adjacent to EndPoint[1] 
         # If there is only 1 endpoint, the sorting doesn't matter since blocking is easy to compute
         for t in range(1, corridor_count):
+            # get the neighboring cells of 'pos_a' defined in line 505
             positions = self.blank_env_valid_neighbor(self.corridors[t]['EndPoints'][0][0],
                                                       self.corridors[t]['EndPoints'][0][1])
             for position in positions:
-                if position is not None and self.corridor_map[position][0] == t:
+                #! This line has a bandaid fix for the error: 'position not in list' (added last clause)
+                if position is not None and self.corridor_map[position][0] == t and position in self.corridors[t]['Positions']:
                     break
-            index = self.corridors[t]['Positions'].index(position)
+            index = self.corridors[t]['Positions'].index(position) #! throws value error 'position not in list'
 
             if index == 0:
                 pass
@@ -537,9 +540,10 @@ class World:
                 positions2 = self.blank_env_valid_neighbor(self.corridors[t]['EndPoints'][1][0],
                                                            self.corridors[t]['EndPoints'][1][1])
                 for position2 in positions2:
-                    if position2 is not None and self.corridor_map[position2][0] == t:
+                    #! This line has a bandaid fix for the error: 'position not in list' (added last clause)
+                    if position2 is not None and self.corridor_map[position2][0] == t and position2 in self.corridors[t]['Positions']:
                         break
-                index2 = self.corridors[t]['Positions'].index(position2)
+                index2 = self.corridors[t]['Positions'].index(position2) #! throwing value error??
                 temp_list = self.corridors[t]['Positions'][0:index2 + 1]
                 temp_list.reverse()
                 temp_end = self.corridors[t]['Positions'][index2 + 1:]
@@ -575,11 +579,11 @@ class World:
 
     def visit(self, i, j, corridor_id):
         positions = self.blank_env_valid_neighbor(i, j)
-        if positions.count(None) in [0, 1]:
+        if positions.count(None) in [0, 1]: # if there are at most 1 adjacent free cells
             self.corridors[corridor_id]['EndPoints'].append((i, j))
             self.corridor_map[(i, j)] = [corridor_id, 2]
             return
-        elif positions.count(None) in [2, 3]:
+        elif positions.count(None) in [2, 3]: # if there are more than 1 adjacent free cells
             self.visited.append((i, j))
             self.corridors[corridor_id]['Positions'].append((i, j))
             self.corridor_map[(i, j)] = [corridor_id, 1]
@@ -865,7 +869,6 @@ class World:
                     print(self.goals_map)
                     raise ValueError('invalid manual_pos for goal' + str(agentID) + ' at: ', str(new_goals[agentID]))
                 if previous_goals[agentID] is not None:  # it has a goal!
-                    # ! This probably will cause an error since its checking for equivalence between a 2-tuple and a 3-tuple
                     if previous_goals[agentID][0:2] != self.agents[agentID].position[0:2]:
                         print(self.state)
                         print(self.goals_map)
@@ -1019,7 +1022,8 @@ class MAPFEnv(gym.Env):
         else:
             self.action_space = spaces.Tuple([spaces.Discrete(self.num_agents), spaces.Discrete(4)]) # changed to 4 discrete actions (0-3)
 
-        self.ACTION_COST, self.GOAL_REWARD, self.COLLISION_REWARD = -0.3, 5., -2.
+        
+        self.ACTION_COST, self.GOAL_REWARD, self.COLLISION_REWARD = -0.3, 5., -2.5
 
     def getObstacleMap(self):
         return (self.world.state == -1).astype(int)
@@ -1093,8 +1097,8 @@ class MAPFEnv(gym.Env):
                     'action not in action space'
         
         status_dict, newPos_dict = self.world.CheckCollideStatus(movement_dict)
-        print("New Pos Dict: ", newPos_dict)
-        print("STATUS DICT:", status_dict)
+        # print("New Pos Dict: ", newPos_dict)
+        # print("STATUS DICT:", status_dict)
         self.world.state[self.world.state > 0] = 0  # remove agents in the map
         put_goal_list = []
         freeze_list = []
@@ -1257,19 +1261,17 @@ class MAPFEnv(gym.Env):
 
                 if dir == 0: # this is actually North....?
                     poly = rendering.FilledPolygon([pE, pN, pS])
-                # elif dir == 1:
-                #     poly = rendering.FilledPolygon([pS, pE, pW])
-                # elif dir == 2:
-                #     poly = rendering.FilledPolygon([pW, pS, pN])
-                # elif dir == 3:
-                #     poly = rendering.FilledPolygon([pN, pW, pE])
+                elif dir == 3:
+                    poly = rendering.FilledPolygon([pS, pE, pW])
+                elif dir == 2:
+                    poly = rendering.FilledPolygon([pW, pS, pN])
+                elif dir == 1:
+                    poly = rendering.FilledPolygon([pN, pW, pE])
                 
-                    arrow_color = darken_color(fill)
-                    poly.set_color(arrow_color[0], arrow_color[1], arrow_color[2])
-                    poly.add_attr(rendering.Transform())
-                    return poly
-                else:
-                    return rect
+                arrow_color = darken_color(fill)
+                poly.set_color(arrow_color[0], arrow_color[1], arrow_color[2])
+                poly.add_attr(rendering.Transform())
+                return poly
 
             def darken_color(color):  
                 return tuple([c * 0.8 for c in color])
@@ -1321,23 +1323,28 @@ class MAPFEnv(gym.Env):
                 rect = create_rectangle(0, 0, screen_width, screen_height, (.6, .6, .6))
                 self._add_rendering_entry(rect, permanent=True)
                 
-                for i in range(world_shape[0]):
+                for row in range(world_shape[0]): # loop over rows
                     start = 0
                     end = 1
                     scanning = False
                     write = False
-                    for j in range(world_shape[1]):
-                        if state_map[i, j] != -1 and not scanning:  # free
-                            start = j
-                            scanning = True
-                        if (j == world_shape[1] - 1 or state_map[i, j] == -1) and scanning:
-                            end = j + 1 if j == world_shape[1] - 1 else j
+                    for col in range(world_shape[1]): # loop over columns
+                        # if the current position is NOT an obstacle:
+                        if state_map[row, col] != -1 and not scanning:  # free
+                            start = col
+                            scanning = True # Scan while current position is free
+                        if (col == world_shape[1] - 1 and state_map[row, col] == -1) and scanning:
+                            end = col
+                            scanning = False
+                            write = True
+                        elif (col == world_shape[1] - 1 or state_map[row, col] == -1) and scanning:
+                            end = col + 1 if col == world_shape[1] - 1 else col
                             scanning = False
                             write = True
                         if write:
-                            x = i * world_size
-                            y = start * world_size
-                            rect = create_rectangle(x, y, world_size, world_size * (end - start), (1, 1, 1))
+                            scale_row = (world_shape[0] - row - 1) * world_size
+                            scale_col = start * world_size
+                            rect = create_rectangle(scale_col, scale_row, world_size * (end - start), world_size, (1, 1, 1))
                             self._add_rendering_entry(rect, permanent=True)
                             write = False
 
@@ -1345,19 +1352,16 @@ class MAPFEnv(gym.Env):
             for agent in range(1, num_agents + 1):
                 i, j = agents_dict[agent][:2] 
                 dir = agents_dict[agent][2]
-                x = i * world_size
-                y = j * world_size
+                y = (world_shape[0] - i - 1) * world_size
+                x = j * world_size
                 color = colors[state_map[i, j]]
-                # rect = create_rectangle_with_direction(x, y, dir, world_size, world_size, color)
-                if (dir == 0):
-                    rect = create_rectangle_with_direction(x, y, dir, world_size, world_size, color)
-                else: 
-                    rect = create_rectangle(x, y, world_size, world_size, color)
+                rect = create_rectangle_with_direction(x, y, dir, world_size, world_size, color)
+
                 self._add_rendering_entry(rect)
 
                 i, j = goals_dict[agent][:2]
-                x = i * world_size
-                y = j * world_size
+                y = (world_shape[0] - i - 1) * world_size
+                x = j * world_size
                 color = colors[agent]
                 circ = create_circle(x, y, world_size, world_size, color)
                 self._add_rendering_entry(circ)

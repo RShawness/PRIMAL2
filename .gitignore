@@ -96,3 +96,9 @@ results/
 .idea/
 model_v1_oIL_no_prune/checkpoint
 .vscode/settings.json
+.DS_Store
+
+*.lan
+checkpoint
+testing_result/*
+*.pyc

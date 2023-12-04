@@ -9,7 +9,7 @@ import time
 class Primal2Observer(ObservationBuilder):
     """
     obs shape: (8 + num_future_steps * obs_size * obs_size )
-    map order: poss_map, goal_map, goals_map, obs_map, pathlength_map, blocking_map, deltax_map, deltay_map, astar maps
+    map order: poss_map, goal_map, goals_map, obs_map, pathlength_map, blocking_map, delta_col_map, delta_row_map, astar maps
     """
     
 
@@ -64,8 +64,8 @@ class Primal2Observer(ObservationBuilder):
         astar_map = np.zeros([self.num_future_steps, self.observation_size, self.observation_size])
         astar_map_unpadded = np.zeros([self.num_future_steps, self.world.state.shape[0], self.world.state.shape[1]])
         pathlength_map = np.zeros(obs_shape)
-        deltax_map = np.zeros(obs_shape)
-        deltay_map = np.zeros(obs_shape)
+        delta_col_map = np.zeros(obs_shape)
+        delta_row_map = np.zeros(obs_shape)
         blocking_map = np.zeros(obs_shape)
 
         time1 = time.time() - start_time
@@ -158,23 +158,23 @@ class Primal2Observer(ObservationBuilder):
                                 corridor_id,
                                 0, agent_id,
                                 1)
-                    # Leave the DeltaX and DeltaY here, changed their functionality
+                    # Leave the DeltaCol and DeltaRow here, changed their functionality
                     elif [position[0], position[1]] == self.world.corridors[corridor_id]['StoppingPoints'][0]:
                         end_point_pos = self.world.corridors[corridor_id]['EndPoints'][0]
-                        deltax_map[position[0] - top_left[0], position[1] - top_left[1]] = (self.world.corridors[
-                            corridor_id]['DeltaX'][(end_point_pos[0], end_point_pos[1])])  # / max(mag, 1)
-                        deltay_map[position[0] - top_left[0], position[1] - top_left[1]] = (self.world.corridors[
-                            corridor_id]['DeltaY'][(end_point_pos[0], end_point_pos[1])])  # / max(mag, 1)
+                        delta_col_map[position[0] - top_left[0], position[1] - top_left[1]] = (self.world.corridors[
+                            corridor_id]['DeltaCol'][(end_point_pos[0], end_point_pos[1])])  # / max(mag, 1)
+                        delta_row_map[position[0] - top_left[0], position[1] - top_left[1]] = (self.world.corridors[
+                            corridor_id]['DeltaRow'][(end_point_pos[0], end_point_pos[1])])  # / max(mag, 1)
                         blocking_map[position[0] - top_left[0], position[1] - top_left[1]] = self.get_blocking(
                             corridor_id,
                             0, agent_id,
                             2)
                     elif [position[0], position[1]] == self.world.corridors[corridor_id]['StoppingPoints'][1]:
                         end_point_pos = self.world.corridors[corridor_id]['EndPoints'][1]
-                        deltax_map[position[0] - top_left[0], position[1] - top_left[1]] = (self.world.corridors[
-                            corridor_id]['DeltaX'][(end_point_pos[0], end_point_pos[1])])  # / max(mag, 1)
-                        deltay_map[position[0] - top_left[0], position[1] - top_left[1]] = (self.world.corridors[
-                            corridor_id]['DeltaY'][(end_point_pos[0], end_point_pos[1])])  # / max(mag, 1)
+                        delta_col_map[position[0] - top_left[0], position[1] - top_left[1]] = (self.world.corridors[
+                            corridor_id]['DeltaCol'][(end_point_pos[0], end_point_pos[1])])  # / max(mag, 1)
+                        delta_row_map[position[0] - top_left[0], position[1] - top_left[1]] = (self.world.corridors[
+                            corridor_id]['DeltaRow'][(end_point_pos[0], end_point_pos[1])])  # / max(mag, 1)
                         blocking_map[position[0] - top_left[0], position[1] - top_left[1]] = self.get_blocking(
                             corridor_id,
                             1, agent_id,
@@ -200,8 +200,8 @@ class Primal2Observer(ObservationBuilder):
                     index = distance_list.index(dist_mag)
                     pathlength_map[i, j] = (index + 1) * step_size
 
-        state = np.array([poss_map, goal_map, goals_map, obs_map, pathlength_map, blocking_map, deltax_map,
-                          deltay_map])
+        state = np.array([poss_map, goal_map, goals_map, obs_map, pathlength_map, blocking_map, delta_col_map,
+                          delta_row_map])
         state = np.concatenate((state, astar_map), axis=0)
 
         time6 = time.time() - start_time
