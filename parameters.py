@@ -7,7 +7,7 @@ ADAPT_LR                = True
 ADAPT_COEFF             = 5.e-5  # the coefficient A in LR_Q/sqrt(A*steps+1) for calculating LR
 EXPERIENCE_BUFFER_SIZE  = 256
 max_episode_length      = 256
-IL_MAX_EP_LENGTH        = 64
+IL_MAX_EP_LENGTH        = 128
 episode_count           = 0
 
 # observer parameters
@@ -22,21 +22,21 @@ OBSTACLE_DENSITY        = (0, 0.75)  # range of densities   Starting Params of C
 
 DIAG_MVMT               = False  # Diagonal movements allowed?
 a_size                  = 4 + int(DIAG_MVMT) * 4
-NUM_META_AGENTS         = 10
-NUM_IL_META_AGENTS      = 2
+NUM_META_AGENTS         = 9
+NUM_IL_META_AGENTS      = 3
                         # ! change the NUM_THREADS back to 4    
-NUM_THREADS             = 4 # int(multiprocessing.cpu_count() / (2 * NUM_META_AGENTS))
+NUM_THREADS             = 3 # int(multiprocessing.cpu_count() / (2 * NUM_META_AGENTS))
 NUM_BUFFERS             = 1  # NO EXPERIENCE REPLAY int(NUM_THREADS / 2)
 
 # training parameters
 SUMMARY_WINDOW          = 10
-load_model              = True
+load_model              = False
 RESET_TRAINER           = False
-training_version        = '3DPathLengthMap_canrotate'
+training_version        = '3DPathLengthMap_Rotation_Testing2'
 model_path              = 'model_' + training_version
 gifs_path               = 'gifs_' + training_version
 train_path              = 'train_' + training_version
-OUTPUT_GIFS             = False  # Only for RL gifs
+OUTPUT_GIFS             = False # Only for RL gifs
 GIFS_FREQUENCY_RL       = 512
 OUTPUT_IL_GIFS          = False
 IL_GIF_PROB             = 0.01

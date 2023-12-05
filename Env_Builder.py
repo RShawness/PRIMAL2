@@ -512,6 +512,8 @@ class Agent:
             
             assert pos in [self.position, forwardMove(self.position), action2position(2, self.position), action2position(3, self.position)], \
                 "only 1 step 1 cell in orientation allowed. Previous pos:" + str(self.position)
+            if (status is not None) and (status < 0) and (self.position != pos): # if status is negative, then the move is invalid
+                print(f"WEIRD BEHAVIOR: invalid move taken from {self.position} to {pos} with status {status}")
         self.add_history(pos, status)
 
     def add_history(self, position, status):
@@ -521,20 +523,12 @@ class Agent:
             AssertionError("position is not a 3 tuple: ", position)
         self.status = status
         self._path_count += 1 # +1 path_count for each forward move and/or turn?
+        # Update Agent Position
         self.position = tuple(position)
         if self._path_count != 0:
-            # retrieve previous position with new orientation
-            # <--old code-->
-                # direction = tuple_minus(position, self.position_history[-1])
-                # action = dir2action(direction)
-                # self.direction_history.append(direction)
-            # <--end old--->
-
-            # <---new code--->
-            # Do not need direction history, just action
-            # print("add history fx call")
+            # calculate the action taken from previous position to current position
             action = positions2action(position, self.position_history[-1])
-            # <---end new--->
+        
             assert action in list(range(4)), \
                 "direction not in actionDir, something going wrong"
             
@@ -679,10 +673,13 @@ class World:
         # adjacent to Endpoint[0] and the last element of the list is adjacent to EndPoint[1] 
         # If there is only 1 endpoint, the sorting doesn't matter since blocking is easy to compute
         for t in range(1, corridor_count):
+            # An inaccessible part of the map
+            if len(self.corridors[t]['EndPoints']) == 0:
+                continue
             positions = self.blank_env_valid_neighbor(self.corridors[t]['EndPoints'][0][0],
                                                       self.corridors[t]['EndPoints'][0][1])
             for position in positions:
-                if position is not None and self.corridor_map[position][0] == t:
+                if position is not None and self.corridor_map[position][0] == t and position in self.corridors[t]['Positions']:
                     break
             index = self.corridors[t]['Positions'].index(position)
 
@@ -700,7 +697,7 @@ class World:
                 positions2 = self.blank_env_valid_neighbor(self.corridors[t]['EndPoints'][1][0],
                                                            self.corridors[t]['EndPoints'][1][1])
                 for position2 in positions2:
-                    if position2 is not None and self.corridor_map[position2][0] == t:
+                    if position2 is not None and self.corridor_map[position2][0] == t and position2 in self.corridors[t]['Positions']:
                         break
                 index2 = self.corridors[t]['Positions'].index(position2)
                 temp_list = self.corridors[t]['Positions'][0:index2 + 1]
@@ -1190,7 +1187,8 @@ class MAPFEnv(gym.Env):
         else:
             self.action_space = spaces.Tuple([spaces.Discrete(self.num_agents), spaces.Discrete(4)]) # changed to 4 discrete actions (0-3)
 
-        self.ACTION_COST, self.GOAL_REWARD, self.COLLISION_REWARD = -0.3, 5., -2.
+        self.ACTION_COST, self.GOAL_REWARD, self.COLLISION_REWARD = -0.5, 32., -4.
+        self.WAIT_COST = -1.0
 
     def getObstacleMap(self):
         return (self.world.state == -1).astype(int)
@@ -1276,6 +1274,7 @@ class MAPFEnv(gym.Env):
             newPos = newPos_dict[agentID]
             # store the cartesian position of the agent
             new_cartesian = newPos[:2]
+
             # update state only on the cartesian position
             self.world.state[new_cartesian] = agentID
             # Move is called with status_dic
@@ -1430,19 +1429,17 @@ class MAPFEnv(gym.Env):
 
                 if dir == 0: # this is actually North....?
                     poly = rendering.FilledPolygon([pE, pN, pS])
-                # elif dir == 1:
-                #     poly = rendering.FilledPolygon([pS, pE, pW])
-                # elif dir == 2:
-                #     poly = rendering.FilledPolygon([pW, pS, pN])
-                # elif dir == 3:
-                #     poly = rendering.FilledPolygon([pN, pW, pE])
+                elif dir == 3:
+                    poly = rendering.FilledPolygon([pS, pE, pW])
+                elif dir == 2:
+                    poly = rendering.FilledPolygon([pW, pS, pN])
+                elif dir == 1:
+                    poly = rendering.FilledPolygon([pN, pW, pE])
                 
-                    arrow_color = darken_color(fill)
-                    poly.set_color(arrow_color[0], arrow_color[1], arrow_color[2])
-                    poly.add_attr(rendering.Transform())
-                    return poly
-                else:
-                    return rect
+                arrow_color = darken_color(fill)
+                poly.set_color(arrow_color[0], arrow_color[1], arrow_color[2])
+                poly.add_attr(rendering.Transform())
+                return poly
 
             def darken_color(color):  
                 return tuple([c * 0.8 for c in color])
@@ -1494,23 +1491,28 @@ class MAPFEnv(gym.Env):
                 rect = create_rectangle(0, 0, screen_width, screen_height, (.6, .6, .6))
                 self._add_rendering_entry(rect, permanent=True)
                 
-                for i in range(world_shape[0]):
+                for row in range(world_shape[0]): # loop over rows
                     start = 0
                     end = 1
                     scanning = False
                     write = False
-                    for j in range(world_shape[1]):
-                        if state_map[i, j] != -1 and not scanning:  # free
-                            start = j
-                            scanning = True
-                        if (j == world_shape[1] - 1 or state_map[i, j] == -1) and scanning:
-                            end = j + 1 if j == world_shape[1] - 1 else j
+                    for col in range(world_shape[1]): # loop over columns
+                        # if the current position is NOT an obstacle:
+                        if state_map[row, col] != -1 and not scanning:  # free
+                            start = col
+                            scanning = True # Scan while current position is free
+                        if (col == world_shape[1] - 1 and state_map[row, col] == -1) and scanning:
+                            end = col
+                            scanning = False
+                            write = True
+                        elif (col == world_shape[1] - 1 or state_map[row, col] == -1) and scanning:
+                            end = col + 1 if col == world_shape[1] - 1 else col
                             scanning = False
                             write = True
                         if write:
-                            x = i * world_size
-                            y = start * world_size
-                            rect = create_rectangle(x, y, world_size, world_size * (end - start), (1, 1, 1))
+                            scale_row = (world_shape[0] - row - 1) * world_size
+                            scale_col = start * world_size
+                            rect = create_rectangle(scale_col, scale_row, world_size * (end - start), world_size, (1, 1, 1))
                             self._add_rendering_entry(rect, permanent=True)
                             write = False
 
@@ -1518,19 +1520,16 @@ class MAPFEnv(gym.Env):
             for agent in range(1, num_agents + 1):
                 i, j = agents_dict[agent][:2] 
                 dir = agents_dict[agent][2]
-                x = i * world_size
-                y = j * world_size
+                y = (world_shape[0] - i - 1) * world_size
+                x = j * world_size
                 color = colors[state_map[i, j]]
-                # rect = create_rectangle_with_direction(x, y, dir, world_size, world_size, color)
-                if (dir == 0):
-                    rect = create_rectangle_with_direction(x, y, dir, world_size, world_size, color)
-                else: 
-                    rect = create_rectangle(x, y, world_size, world_size, color)
+                rect = create_rectangle_with_direction(x, y, dir, world_size, world_size, color)
+
                 self._add_rendering_entry(rect)
 
                 i, j = goals_dict[agent][:2]
-                x = i * world_size
-                y = j * world_size
+                y = (world_shape[0] - i - 1) * world_size
+                x = j * world_size
                 color = colors[agent]
                 circ = create_circle(x, y, world_size, world_size, color)
                 self._add_rendering_entry(circ)

@@ -228,7 +228,6 @@ def main():
                     print("not implemented")
                     assert(1==0)
 
-
                 # Every `SUMMARY_WINDOW` RL episodes, write RL episodes to tensorboard
                 if len(tensorboardData) >= SUMMARY_WINDOW:
                     writeToTensorBoard(global_summary, tensorboardData, curr_episode)
@@ -258,9 +257,9 @@ def main():
 
 
 if __name__ == "__main__": 
-    f = open("mylogs.txt", "w")
-    original_stdout = sys.stdout
-    sys.stdout = f
+    # f = open("mylogs.txt", "w")
+    # original_stdout = sys.stdout
+    # sys.stdout = f
     main()
-    f.close()
-    sys.stdout = original_stdout
+    # f.close()
+    # sys.stdout = original_stdout

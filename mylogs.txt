@@ -8,1071 +8,125 @@
 
 
 Hello World... From  global
-Loading Model...
-curr_episode set to  500
-[36m(RLRunner pid=17605)[0m Hello World... From  global
-[36m(RLRunner pid=17605)[0m starting episode 502 on metaAgent 2
-[36m(imitationRunner pid=17603)[0m running imitation job
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 2, 3]
-[36m(imitationRunner pid=17604)[0m Hello World... From  global[32m [repeated 3x across cluster][0m
-[36m(imitationRunner pid=17604)[0m starting episode 501 on metaAgent 1[32m [repeated 3x across cluster][0m
-[36m(imitationRunner pid=17604)[0m running imitation job
+[2m[36m(imitationRunner pid=77539)[0m Hello World... From  global
+[2m[36m(imitationRunner pid=77539)[0m starting episode 0 on metaAgent 0
+[2m[36m(imitationRunner pid=77539)[0m running imitation job
+[2m[36m(imitationRunner pid=77539)[0m finding path in cbs
+[2m[36m(imitationRunner pid=77539)[0m WDG+GR+C+T+BP+CHBP with AStar      : Optimal,95,0.00516,0,805,95,95,95,
+[2m[36m(imitationRunner pid=77539)[0m finding path in cbs
+[2m[36m(imitationRunner pid=77539)[0m WDG+GR+C+T+BP+CHBP with AStar      : Optimal,89,0.003559,0,563,89,89,89,
+[2m[36m(imitationRunner pid=77539)[0m finding path in cbs
+[2m[36m(imitationRunner pid=77539)[0m WDG+GR+C+T+BP+CHBP with AStar      : Optimal,50,0.001335,0,112,50,50,50,
+[2m[36m(imitationRunner pid=77539)[0m finding path in cbs
+[2m[36m(imitationRunner pid=77539)[0m WDG+GR+C+T+BP+CHBP with AStar      : Optimal,60,0.001368,0,146,60,60,60,
+[2m[36m(imitationRunner pid=77539)[0m finding path in cbs
+[2m[36m(imitationRunner pid=77539)[0m WDG+GR+C+T+BP+CHBP with AStar      : Optimal,87,0.023761,1,4210,87,77,77,
+[2m[36m(imitationRunner pid=77539)[0m finding path in cbs
+[2m[36m(imitationRunner pid=77539)[0m WDG+GR+C+T+BP+CHBP with AStar      : Optimal,81,0.023657,1,3817,81,71,71,
+[2m[36m(imitationRunner pid=77539)[0m finding path in cbs
+[2m[36m(imitationRunner pid=77539)[0m WDG+GR+C+T+BP+CHBP with AStar      : Optimal,104,0.006659,0,1133,104,104,104,
+[2m[36m(imitationRunner pid=77539)[0m finding path in cbs
+[2m[36m(imitationRunner pid=77539)[0m WDG+GR+C+T+BP+CHBP with AStar      : Optimal,103,0.004406,0,734,103,103,103,
 RL: 0 IL: 1
-[36m(imitationRunner pid=17603)[0m running imitation job
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3][32m [repeated 4x across cluster][0m
 RL: 0 IL: 2
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(imitationRunner pid=17604)[0m starting episode 510 on metaAgent 1[32m [repeated 2x across cluster][0m
-RL: 1 IL: 2
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 2, 3]
-[36m(RLRunner pid=17605)[0m 
-[36m(RLRunner pid=17606)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17605)[0m starting episode 511 on metaAgent 2
-RL: 2 IL: 2
-[36m(RLRunner pid=17606)[0m starting episode 512 on metaAgent 3
-[36m(autoscaler +37s)[0m Tip: use `ray status` to view detailed cluster status. To disable these messages, set RAY_SCHEDULER_EVENTS=0.
-[33m(autoscaler +37s)[0m Warning: The following resource request cannot be scheduled right now: {'CPU': 3.0}. This is likely due to all cluster resources being claimed by actors. Consider creating fewer actors or adding more nodes to this Ray cluster.
-[36m(RLRunner pid=17606)[0m 
-RL: 3 IL: 2
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 4x across cluster][0m
-[36m(RLRunner pid=17605)[0m starting episode 513 on metaAgent 2
-RL: 3 IL: 3
-[36m(imitationRunner pid=17604)[0m starting episode 514 on metaAgent 1
-[36m(imitationRunner pid=17604)[0m running imitation job
-RL: 3 IL: 4
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 4x across cluster][0m
-[36m(imitationRunner pid=17603)[0m starting episode 515 on metaAgent 0
-[36m(imitationRunner pid=17603)[0m running imitation job
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3][32m [repeated 4x across cluster][0m
-RL: 4 IL: 4
-[36m(RLRunner pid=17605)[0m starting episode 516 on metaAgent 2
-RL: 5 IL: 4
-[36m(RLRunner pid=17606)[0m targets done: 1[32m [repeated 4x across cluster][0m
-[36m(RLRunner pid=17605)[0m valid actions: [0][32m [repeated 4x across cluster][0m
-[36m(RLRunner pid=17605)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17605)[0m 
-[36m(RLRunner pid=17606)[0m starting episode 517 on metaAgent 3
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3][32m [repeated 4x across cluster][0m
-RL: 6 IL: 4
-[36m(RLRunner pid=17605)[0m starting episode 518 on metaAgent 2
-RL: 7 IL: 4
-[33m(autoscaler +1m12s)[0m Warning: The following resource request cannot be scheduled right now: {'CPU': 3.0}. This is likely due to all cluster resources being claimed by actors. Consider creating fewer actors or adding more nodes to this Ray cluster.
-[36m(RLRunner pid=17605)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17605)[0m 
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 6x across cluster][0m
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3][32m [repeated 4x across cluster][0m
-[36m(RLRunner pid=17606)[0m starting episode 519 on metaAgent 3
-RL: 8 IL: 4
-[36m(RLRunner pid=17605)[0m starting episode 520 on metaAgent 2
-RL: 8 IL: 5
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(RLRunner pid=17605)[0m valid actions: [1][32m [repeated 8x across cluster][0m
-[36m(imitationRunner pid=17604)[0m starting episode 521 on metaAgent 1
-RL: 8 IL: 6
-[36m(imitationRunner pid=17603)[0m starting episode 522 on metaAgent 0
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(imitationRunner pid=17603)[0m running imitation job
-RL: 9 IL: 6
-RL: 10 IL: 6
-[36m(RLRunner pid=17605)[0m valid actions: [1]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-RL: 10 IL: 7
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]valid actions: [0]
-[36m(RLRunner pid=17606)[0m 
-RL: 10 IL: 8
-[36m(imitationRunner pid=17603)[0m starting episode 526 on metaAgent 0[32m [repeated 4x across cluster][0m
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 4x across cluster][0m
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3][32m [repeated 2x across cluster][0m
-[36m(imitationRunner pid=17603)[0m running imitation job
-[36m(RLRunner pid=17605)[0m targets done: 1targets done: 0
-[36m(RLRunner pid=17605)[0m 
-RL: 10 IL: 9
-[36m(imitationRunner pid=17604)[0m running imitation job
-RL: 11 IL: 9
-RL: 12 IL: 9
-RL: 12 IL: 10
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(imitationRunner pid=17604)[0m starting episode 530 on metaAgent 1[32m [repeated 4x across cluster][0m
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 6x across cluster][0m
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3][32m [repeated 4x across cluster][0m
-[36m(RLRunner pid=17606)[0m valid actions: [0]valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m 
-[33m(autoscaler +1m47s)[0m Warning: The following resource request cannot be scheduled right now: {'CPU': 3.0}. This is likely due to all cluster resources being claimed by actors. Consider creating fewer actors or adding more nodes to this Ray cluster.
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 4x across cluster][0m
-[36m(RLRunner pid=17606)[0m valid actions: [0][32m [repeated 2x across cluster][0m
-RL: 13 IL: 10
-[36m(RLRunner pid=17605)[0m starting episode 531 on metaAgent 2
-RL: 13 IL: 11
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m 
-[36m(RLRunner pid=17605)[0m 
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 4x across cluster][0m
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3][32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17605)[0m Agent 4 collided with another agent at position (9, 19, 3)
-[36m(RLRunner pid=17605)[0m Reverting agent 4 to position (10, 19, 3)
-RL: 14 IL: 11
-[36m(RLRunner pid=17606)[0m starting episode 533 on metaAgent 3[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17605)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17605)[0m 
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3][32m [repeated 4x across cluster][0m
-[36m(RLRunner pid=17606)[0m Agent 3 collided with another agent at position (15, 12, 2)
-[36m(RLRunner pid=17606)[0m Reverting agent 3 to position (15, 13, 2)
-RL: 15 IL: 11
-[36m(RLRunner pid=17606)[0m 
-[36m(RLRunner pid=17605)[0m starting episode 534 on metaAgent 2
-[36m(RLRunner pid=17606)[0m targets done: 1targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3][32m [repeated 4x across cluster][0m
-RL: 16 IL: 11
-[36m(RLRunner pid=17606)[0m starting episode 535 on metaAgent 3
-RL: 16 IL: 12
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(RLRunner pid=17605)[0m targets done: 1[32m [repeated 4x across cluster][0m
-[36m(RLRunner pid=17606)[0m valid actions: [0][32m [repeated 4x across cluster][0m
-[36m(imitationRunner pid=17604)[0m starting episode 536 on metaAgent 1
-RL: 17 IL: 12
-[36m(RLRunner pid=17605)[0m starting episode 537 on metaAgent 2
-RL: 18 IL: 12
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m 
-[33m(autoscaler +2m22s)[0m Warning: The following resource request cannot be scheduled right now: {'CPU': 3.0}. This is likely due to all cluster resources being claimed by actors. Consider creating fewer actors or adding more nodes to this Ray cluster.
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 8x across cluster][0m
-[36m(RLRunner pid=17605)[0m valid actions: [1][32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17606)[0m starting episode 538 on metaAgent 3
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m 
-RL: 19 IL: 12
-[36m(RLRunner pid=17605)[0m starting episode 539 on metaAgent 2
-RL: 19 IL: 13
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3][32m [repeated 2x across cluster][0m
-[36m(imitationRunner pid=17604)[0m starting episode 540 on metaAgent 1
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m 
-[36m(RLRunner pid=17605)[0m 
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 1
-RL: 20 IL: 13
-[36m(RLRunner pid=17606)[0m starting episode 541 on metaAgent 3
-[36m(RLRunner pid=17606)[0m valid actions: [0, 2, 3][32m [repeated 6x across cluster][0m
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 4x across cluster][0m
-RL: 21 IL: 13
-[36m(RLRunner pid=17605)[0m starting episode 542 on metaAgent 2
-[36m(RLRunner pid=17605)[0m valid actions: [0]valid actions: [0, 2, 3]
-[36m(RLRunner pid=17605)[0m 
-RL: 22 IL: 13
-RL: 22 IL: 14
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(RLRunner pid=17605)[0m valid actions: [0, 2, 3][32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 4x across cluster][0m
-[36m(imitationRunner pid=17604)[0m starting episode 544 on metaAgent 1[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]valid actions: [0, 2, 3]
-[36m(RLRunner pid=17606)[0m 
-RL: 23 IL: 14
-[33m(autoscaler +2m57s)[0m Warning: The following resource request cannot be scheduled right now: {'CPU': 3.0}. This is likely due to all cluster resources being claimed by actors. Consider creating fewer actors or adding more nodes to this Ray cluster.
-RL: 23 IL: 14
-[36m(imitationRunner pid=17603)[0m ***CBS returned a len 0 path***
-[36m(imitationRunner pid=17603)[0m rollout is none -.-
-[36m(RLRunner pid=17605)[0m valid actions: [1][32m [repeated 6x across cluster][0m
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 4x across cluster][0m
-[36m(RLRunner pid=17605)[0m starting episode 545 on metaAgent 2
-[36m(imitationRunner pid=17603)[0m starting episode 546 on metaAgent 0
-[36m(imitationRunner pid=17603)[0m running imitation job
-RL: 23 IL: 15
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17605)[0m 
-[36m(imitationRunner pid=17604)[0m starting episode 547 on metaAgent 1
-[36m(imitationRunner pid=17604)[0m running imitation job
-RL: 24 IL: 15
-RL: 25 IL: 15
-[36m(RLRunner pid=17605)[0m starting episode 548 on metaAgent 2
-[36m(RLRunner pid=17606)[0m valid actions: [1]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 2, 3]
-RL: 25 IL: 16
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 8x across cluster][0m
-[36m(imitationRunner pid=17604)[0m starting episode 550 on metaAgent 1[32m [repeated 2x across cluster][0m
-RL: 26 IL: 16
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]valid actions: [1]
-[36m(RLRunner pid=17606)[0m 
-[36m(RLRunner pid=17606)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17606)[0m 
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17606)[0m starting episode 551 on metaAgent 3
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3][32m [repeated 2x across cluster][0m
-RL: 27 IL: 16
-[36m(RLRunner pid=17606)[0m starting episode 552 on metaAgent 3
-[33m(autoscaler +3m33s)[0m Warning: The following resource request cannot be scheduled right now: {'CPU': 3.0}. This is likely due to all cluster resources being claimed by actors. Consider creating fewer actors or adding more nodes to this Ray cluster.
-[36m(RLRunner pid=17605)[0m 
-RL: 28 IL: 16
-[36m(RLRunner pid=17605)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m starting episode 553 on metaAgent 2
-[36m(RLRunner pid=17606)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17606)[0m 
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17605)[0m valid actions: [0][32m [repeated 4x across cluster][0m
-RL: 29 IL: 16
-[36m(RLRunner pid=17606)[0m starting episode 554 on metaAgent 3
-RL: 30 IL: 16
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 4x across cluster][0m
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3][32m [repeated 8x across cluster][0m
-RL: 30 IL: 17
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(imitationRunner pid=17604)[0m starting episode 556 on metaAgent 1[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m 
-RL: 31 IL: 17
-RL: 32 IL: 17
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 2, 3]
-[33m(autoscaler +4m8s)[0m Warning: The following resource request cannot be scheduled right now: {'CPU': 3.0}. This is likely due to all cluster resources being claimed by actors. Consider creating fewer actors or adding more nodes to this Ray cluster.
-[36m(RLRunner pid=17605)[0m starting episode 558 on metaAgent 2[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 8x across cluster][0m
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3][32m [repeated 4x across cluster][0m
-RL: 33 IL: 17
-[36m(RLRunner pid=17606)[0m targets done: 0targets done: 1
-[36m(RLRunner pid=17606)[0m 
-RL: 34 IL: 17
-RL: 34 IL: 18
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(imitationRunner pid=17604)[0m starting episode 561 on metaAgent 1[32m [repeated 3x across cluster][0m
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17606)[0m valid actions: [0][32m [repeated 8x across cluster][0m
-RL: 34 IL: 18
-[36m(imitationRunner pid=17603)[0m ***CBS returned a len 0 path***
-[36m(imitationRunner pid=17603)[0m rollout is none -.-
-[36m(RLRunner pid=17605)[0m targets done: 1targets done: 0
-[36m(RLRunner pid=17605)[0m 
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 2x across cluster][0m
-[36m(imitationRunner pid=17603)[0m starting episode 562 on metaAgent 0
-[36m(imitationRunner pid=17603)[0m running imitation job
-RL: 35 IL: 18
-RL: 35 IL: 19
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 4x across cluster][0m
-RL: 35 IL: 20
-RL: 36 IL: 20
-[36m(imitationRunner pid=17603)[0m starting episode 565 on metaAgent 0[32m [repeated 3x across cluster][0m
-[36m(imitationRunner pid=17603)[0m running imitation job[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m 
-RL: 36 IL: 21
-RL: 36 IL: 22
-[36m(imitationRunner pid=17603)[0m starting episode 568 on metaAgent 0[32m [repeated 3x across cluster][0m
-[36m(imitationRunner pid=17603)[0m running imitation job[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-RL: 37 IL: 22
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [1]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m 
-[36m(RLRunner pid=17606)[0m starting episode 569 on metaAgent 3
-RL: 37 IL: 23
-[33m(autoscaler +4m43s)[0m Warning: The following resource request cannot be scheduled right now: {'CPU': 3.0}. This is likely due to all cluster resources being claimed by actors. Consider creating fewer actors or adding more nodes to this Ray cluster.
-[36m(imitationRunner pid=17603)[0m starting episode 570 on metaAgent 0
-[36m(imitationRunner pid=17603)[0m running imitation job
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3][32m [repeated 2x across cluster][0m
-RL: 37 IL: 24
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17606)[0m 
-[36m(imitationRunner pid=17604)[0m WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AS
-RL: 38 IL: 24
-RL: 38 IL: 25
-[36m(imitationRunner pid=17604)[0m starting episode 573 on metaAgent 1[32m [repeated 3x across cluster][0m
-[36m(imitationRunner pid=17604)[0m running imitation job[32m [repeated 2x across cluster][0m
-RL: 38 IL: 26
-[36m(RLRunner pid=17605)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(RLRunner pid=17605)[0m 
-RL: 39 IL: 26
-[36m(RLRunner pid=17605)[0m starting episode 575 on metaAgent 2[32m [repeated 2x across cluster][0m
-[36m(imitationRunner pid=17603)[0m running imitation job
-[36m(RLRunner pid=17606)[0m valid actions: [1]valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-RL: 39 IL: 27
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(RLRunner pid=17606)[0m 
-[36m(imitationRunner pid=17604)[0m starting episode 576 on metaAgent 1
-[36m(RLRunner pid=17605)[0m valid actions: [0][32m [repeated 4x across cluster][0m
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-RL: 40 IL: 27
-[36m(RLRunner pid=17606)[0m starting episode 577 on metaAgent 3
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m 
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3][32m [repeated 2x across cluster][0m
-RL: 41 IL: 27
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 4x across cluster][0m
-RL: 41 IL: 28
-[36m(imitationRunner pid=17603)[0m running imitation job
-[36m(imitationRunner pid=17603)[0m starting episode 579 on metaAgent 0[32m [repeated 2x across cluster][0m
-[33m(autoscaler +5m18s)[0m Warning: The following resource request cannot be scheduled right now: {'CPU': 3.0}. This is likely due to all cluster resources being claimed by actors. Consider creating fewer actors or adding more nodes to this Ray cluster.
-RL: 41 IL: 29
-[36m(imitationRunner pid=17603)[0m running imitation job
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-RL: 42 IL: 29
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0]
-[36m(RLRunner pid=17606)[0m valid actions: [1]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m starting episode 581 on metaAgent 3[32m [repeated 2x across cluster][0m
-RL: 42 IL: 30
-[36m(RLRunner pid=17605)[0m valid actions: [1][32m [repeated 4x across cluster][0m
-[36m(imitationRunner pid=17603)[0m starting episode 582 on metaAgent 0
-[36m(imitationRunner pid=17603)[0m running imitation job
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-RL: 43 IL: 30
-RL: 44 IL: 30
-[36m(RLRunner pid=17605)[0m starting episode 583 on metaAgent 2
-[36m(RLRunner pid=17605)[0m Agent 3 collided with another agent at position (14, 12, 1)
-[36m(RLRunner pid=17605)[0m Reverting agent 3 to position (13, 12, 1)
-RL: 44 IL: 31
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]valid actions: [1]
-[36m(RLRunner pid=17606)[0m 
-RL: 44 IL: 32
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3][32m [repeated 6x across cluster][0m
-[36m(imitationRunner pid=17603)[0m running imitation job[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 4x across cluster][0m
-[36m(imitationRunner pid=17603)[0m starting episode 586 on metaAgent 0[32m [repeated 3x across cluster][0m
-RL: 44 IL: 33
-[36m(RLRunner pid=17605)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17605)[0m 
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 2x across cluster][0m
-[36m(imitationRunner pid=17604)[0m starting episode 587 on metaAgent 1
-RL: 45 IL: 33
-[36m(RLRunner pid=17605)[0m starting episode 588 on metaAgent 2
-[36m(RLRunner pid=17605)[0m valid actions: [0]valid actions: [1]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0]
-[36m(RLRunner pid=17605)[0m 
-RL: 46 IL: 33
-[33m(autoscaler +5m53s)[0m Warning: The following resource request cannot be scheduled right now: {'CPU': 3.0}. This is likely due to all cluster resources being claimed by actors. Consider creating fewer actors or adding more nodes to this Ray cluster.
-RL: 46 IL: 34
-[36m(imitationRunner pid=17603)[0m running imitation job
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 4x across cluster][0m
-[36m(RLRunner pid=17605)[0m targets done: 0targets done: 1
-[36m(RLRunner pid=17605)[0m 
-[36m(imitationRunner pid=17603)[0m starting episode 590 on metaAgent 0[32m [repeated 2x across cluster][0m
-[36m(imitationRunner pid=17603)[0m WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AS
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [1]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 2, 3]valid actions: [1]
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 2x across cluster][0m
-RL: 47 IL: 34
-RL: 47 IL: 35
-[36m(imitationRunner pid=17603)[0m running imitation job
-RL: 47 IL: 36
-[36m(RLRunner pid=17606)[0m 
-[36m(imitationRunner pid=17604)[0m starting episode 593 on metaAgent 1[32m [repeated 3x across cluster][0m
-[36m(RLRunner pid=17605)[0m valid actions: [0][32m [repeated 4x across cluster][0m
-[36m(RLRunner pid=17606)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m 
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(imitationRunner pid=17604)[0m running imitation job
-RL: 48 IL: 36
-[36m(RLRunner pid=17606)[0m starting episode 594 on metaAgent 3
-RL: 48 IL: 37
-[36m(imitationRunner pid=17604)[0m running imitation job
-RL: 48 IL: 38
-[36m(RLRunner pid=17605)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17605)[0m 
-RL: 49 IL: 38
-[36m(RLRunner pid=17605)[0m starting episode 597 on metaAgent 2[32m [repeated 3x across cluster][0m
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m 
-[36m(imitationRunner pid=17603)[0m running imitation job
-[36m(RLRunner pid=17605)[0m Agent 3 collided with another agent at position (12, 13, 1)
-[36m(RLRunner pid=17605)[0m Reverting agent 3 to position (11, 13, 1)
-RL: 49 IL: 39
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(imitationRunner pid=17604)[0m starting episode 598 on metaAgent 1
-[36m(RLRunner pid=17605)[0m valid actions: [0, 2, 3][32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 1
-[33m(autoscaler +6m28s)[0m Warning: The following resource request cannot be scheduled right now: {'CPU': 3.0}. This is likely due to all cluster resources being claimed by actors. Consider creating fewer actors or adding more nodes to this Ray cluster.
-RL: 50 IL: 39
-RL: 51 IL: 39
-[36m(RLRunner pid=17605)[0m starting episode 599 on metaAgent 2
-Saving Model
-Saved Model
-RL: 51 IL: 40
-[36m(imitationRunner pid=17603)[0m running imitation job
-[36m(RLRunner pid=17606)[0m valid actions: [1]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [1]
-RL: 51 IL: 41
-[36m(imitationRunner pid=17603)[0m running imitation job
-[36m(RLRunner pid=17606)[0m targets done: 1[32m [repeated 4x across cluster][0m
-[36m(imitationRunner pid=17603)[0m starting episode 602 on metaAgent 0[32m [repeated 3x across cluster][0m
-RL: 51 IL: 42
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(RLRunner pid=17605)[0m valid actions: [0, 2, 3][32m [repeated 4x across cluster][0m
-[36m(RLRunner pid=17606)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17606)[0m 
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 2x across cluster][0m
-RL: 52 IL: 42
-[36m(RLRunner pid=17606)[0m starting episode 604 on metaAgent 3[32m [repeated 2x across cluster][0m
-RL: 52 IL: 43
-[36m(imitationRunner pid=17604)[0m running imitation job
-RL: 52 IL: 44
-[36m(imitationRunner pid=17603)[0m running imitation job
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(imitationRunner pid=17603)[0m starting episode 606 on metaAgent 0[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 0
-RL: 53 IL: 44
-[36m(RLRunner pid=17605)[0m valid actions: [0, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-RL: 53 IL: 45
-[36m(imitationRunner pid=17603)[0m running imitation job
-RL: 53 IL: 46
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(imitationRunner pid=17604)[0m starting episode 609 on metaAgent 1[32m [repeated 3x across cluster][0m
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 0
-RL: 54 IL: 46
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m 
-[33m(autoscaler +7m3s)[0m Warning: The following resource request cannot be scheduled right now: {'CPU': 3.0}. This is likely due to all cluster resources being claimed by actors. Consider creating fewer actors or adding more nodes to this Ray cluster.
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 1
-[36m(RLRunner pid=17605)[0m targets done: 2
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(RLRunner pid=17605)[0m starting episode 610 on metaAgent 2
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-RL: 55 IL: 46
-[36m(RLRunner pid=17605)[0m starting episode 611 on metaAgent 2
-RL: 55 IL: 47
-[36m(imitationRunner pid=17603)[0m running imitation job
-RL: 55 IL: 48
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(imitationRunner pid=17604)[0m starting episode 613 on metaAgent 1[32m [repeated 2x across cluster][0m
-[36m(imitationRunner pid=17604)[0m running imitation job
-RL: 56 IL: 48
-[36m(RLRunner pid=17606)[0m valid actions: [0, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [1]
-[36m(RLRunner pid=17606)[0m valid actions: [1]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-RL: 56 IL: 49
-[36m(imitationRunner pid=17603)[0m running imitation job
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(imitationRunner pid=17603)[0m starting episode 615 on metaAgent 0[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17605)[0m valid actions: [1][32m [repeated 4x across cluster][0m
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-RL: 57 IL: 49
-RL: 58 IL: 49
-RL: 58 IL: 50
-[36m(imitationRunner pid=17603)[0m running imitation job
-RL: 58 IL: 51
-[36m(imitationRunner pid=17604)[0m starting episode 619 on metaAgent 1[32m [repeated 4x across cluster][0m
-[36m(RLRunner pid=17606)[0m valid actions: [0][32m [repeated 4x across cluster][0m
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 4x across cluster][0m
-RL: 58 IL: 52
-[36m(imitationRunner pid=17603)[0m running imitation job[32m [repeated 2x across cluster][0m
-[33m(autoscaler +7m38s)[0m Warning: The following resource request cannot be scheduled right now: {'CPU': 3.0}. This is likely due to all cluster resources being claimed by actors. Consider creating fewer actors or adding more nodes to this Ray cluster.
-[36m(imitationRunner pid=17603)[0m starting episode 620 on metaAgent 0
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 4x across cluster][0m
-RL: 59 IL: 52
-[36m(RLRunner pid=17606)[0m starting episode 621 on metaAgent 3
-RL: 59 IL: 53
-[36m(imitationRunner pid=17603)[0m running imitation job
-RL: 59 IL: 54
-[36m(imitationRunner pid=17603)[0m running imitation job
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(imitationRunner pid=17603)[0m starting episode 623 on metaAgent 0[32m [repeated 2x across cluster][0m
-RL: 59 IL: 55
-[36m(imitationRunner pid=17604)[0m running imitation job
-RL: 59 IL: 56
-[36m(imitationRunner pid=17603)[0m running imitation job
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3][32m [repeated 4x across cluster][0m
-[36m(imitationRunner pid=17603)[0m starting episode 625 on metaAgent 0[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 0
-RL: 60 IL: 56
-RL: 61 IL: 56
-[36m(RLRunner pid=17606)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17606)[0m 
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]valid actions: [1]
-[36m(RLRunner pid=17606)[0m 
-RL: 61 IL: 57
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3][32m [repeated 6x across cluster][0m
-[36m(imitationRunner pid=17604)[0m starting episode 628 on metaAgent 1[32m [repeated 3x across cluster][0m
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 2x across cluster][0m
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(RLRunner pid=17605)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17605)[0m 
-[36m(RLRunner pid=17605)[0m targets done: 1[32m [repeated 2x across cluster][0m
-RL: 62 IL: 57
-[36m(RLRunner pid=17605)[0m starting episode 629 on metaAgent 2
-[36m(RLRunner pid=17605)[0m valid actions: [0, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0]
-[36m(RLRunner pid=17605)[0m valid actions: [0]
-RL: 63 IL: 57
-[33m(autoscaler +8m13s)[0m Warning: The following resource request cannot be scheduled right now: {'CPU': 3.0}. This is likely due to all cluster resources being claimed by actors. Consider creating fewer actors or adding more nodes to this Ray cluster.
-RL: 63 IL: 58
-[36m(imitationRunner pid=17603)[0m running imitation job
-RL: 63 IL: 59
-[36m(RLRunner pid=17606)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17606)[0m 
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 2x across cluster][0m
-[36m(imitationRunner pid=17604)[0m starting episode 632 on metaAgent 1[32m [repeated 3x across cluster][0m
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3][32m [repeated 4x across cluster][0m
-[36m(imitationRunner pid=17604)[0m running imitation job
-RL: 64 IL: 59
-[36m(RLRunner pid=17606)[0m targets done: 1targets done: 0
-[36m(RLRunner pid=17606)[0m 
-RL: 65 IL: 59
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]valid actions: [0, 1, 2, 3]
-RL: 65 IL: 60
-[36m(imitationRunner pid=17603)[0m running imitation job
-[36m(RLRunner pid=17606)[0m targets done: 1[32m [repeated 6x across cluster][0m
-[36m(imitationRunner pid=17603)[0m starting episode 635 on metaAgent 0[32m [repeated 3x across cluster][0m
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3][32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17605)[0m Agent 3 collided with another agent at position (2, 7, 1)
-[36m(RLRunner pid=17605)[0m Reverting agent 3 to position (1, 7, 1)
-[36m(RLRunner pid=17605)[0m 
-[36m(RLRunner pid=17605)[0m targets done: 1[32m [repeated 4x across cluster][0m
-RL: 66 IL: 60
-[36m(RLRunner pid=17605)[0m starting episode 636 on metaAgent 2
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-RL: 66 IL: 61
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(imitationRunner pid=17604)[0m tar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+C
-[36m(RLRunner pid=17605)[0m Agent 4 collided with another agent at position (20, 3, 0)
-[36m(RLRunner pid=17605)[0m Reverting agent 4 to position (20, 2, 0)
-[36m(imitationRunner pid=17604)[0m starting episode 637 on metaAgent 1
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3][32m [repeated 4x across cluster][0m
-RL: 66 IL: 62
-[36m(imitationRunner pid=17603)[0m starting episode 638 on metaAgent 0
-[33m(autoscaler +8m48s)[0m Warning: The following resource request cannot be scheduled right now: {'CPU': 3.0}. This is likely due to all cluster resources being claimed by actors. Consider creating fewer actors or adding more nodes to this Ray cluster.
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(imitationRunner pid=17603)[0m running imitation job
-RL: 67 IL: 62
-[36m(RLRunner pid=17606)[0m starting episode 639 on metaAgent 3
-RL: 68 IL: 62
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m 
-[36m(RLRunner pid=17605)[0m valid actions: [0, 2, 3]
-[36m(RLRunner pid=17605)[0m Agent 4 collided with another agent at position (6, 3, 2)
-[36m(RLRunner pid=17605)[0m Reverting agent 4 to position (6, 4, 2)
-[36m(RLRunner pid=17605)[0m Agent 2 collided with another agent at position (1, 7, 2)
-[36m(RLRunner pid=17605)[0m Reverting agent 2 to position (1, 8, 2)
-RL: 68 IL: 63
-[36m(imitationRunner pid=17603)[0m running imitation job
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 8x across cluster][0m
-[36m(imitationRunner pid=17603)[0m starting episode 641 on metaAgent 0[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17606)[0m valid actions: [0, 2, 3][32m [repeated 4x across cluster][0m
-RL: 69 IL: 63
-[36m(RLRunner pid=17605)[0m valid actions: [1]valid actions: [0, 2, 3]
-[36m(RLRunner pid=17605)[0m 
-[36m(imitationRunner pid=17603)[0m tar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+C
-[36m(RLRunner pid=17606)[0m targets done: 0targets done: 1
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17605)[0m starting episode 642 on metaAgent 2
-[36m(RLRunner pid=17605)[0m valid actions: [0][32m [repeated 2x across cluster][0m
-RL: 70 IL: 63
-[36m(RLRunner pid=17606)[0m starting episode 643 on metaAgent 3
-[36m(RLRunner pid=17606)[0m 
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 4x across cluster][0m
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3][32m [repeated 4x across cluster][0m
-RL: 71 IL: 63
-[36m(RLRunner pid=17605)[0m starting episode 644 on metaAgent 2
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]valid actions: [0, 1, 2, 3]valid actions: [0]
-[36m(RLRunner pid=17605)[0m 
-[36m(RLRunner pid=17605)[0m 
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 4x across cluster][0m
-[36m(RLRunner pid=17605)[0m valid actions: [1]
-RL: 72 IL: 63
-[36m(RLRunner pid=17606)[0m starting episode 645 on metaAgent 3
-[33m(autoscaler +9m23s)[0m Warning: The following resource request cannot be scheduled right now: {'CPU': 3.0}. This is likely due to all cluster resources being claimed by actors. Consider creating fewer actors or adding more nodes to this Ray cluster.
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0]
-[36m(RLRunner pid=17606)[0m valid actions: [1]
-[36m(RLRunner pid=17606)[0m 
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 4x across cluster][0m
-RL: 73 IL: 63
-[36m(RLRunner pid=17605)[0m starting episode 646 on metaAgent 2
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0]
-[36m(RLRunner pid=17605)[0m 
-RL: 73 IL: 64
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(imitationRunner pid=17604)[0m starting episode 647 on metaAgent 1
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-RL: 74 IL: 64
-[36m(RLRunner pid=17606)[0m starting episode 648 on metaAgent 3
-[36m(RLRunner pid=17606)[0m valid actions: [0]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [1]
-RL: 74 IL: 65
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(imitationRunner pid=17604)[0m starting episode 649 on metaAgent 1
-[36m(RLRunner pid=17605)[0m targets done: 1
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 0
-RL: 75 IL: 65
-[36m(RLRunner pid=17605)[0m starting episode 650 on metaAgent 2
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]valid actions: [0]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m 
-[36m(RLRunner pid=17606)[0m targets done: 0targets done: 0
-RL: 76 IL: 65
-[36m(RLRunner pid=17605)[0m Agent 3 collided with another agent at position (17, 3, 0)
-[36m(RLRunner pid=17605)[0m Reverting agent 3 to position (17, 2, 0)
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17606)[0m starting episode 651 on metaAgent 3
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3][32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17606)[0m [32m [repeated 2x across cluster][0m
-[33m(autoscaler +9m58s)[0m Warning: The following resource request cannot be scheduled right now: {'CPU': 3.0}. This is likely due to all cluster resources being claimed by actors. Consider creating fewer actors or adding more nodes to this Ray cluster.
-RL: 76 IL: 66
-[36m(imitationRunner pid=17604)[0m starting episode 652 on metaAgent 1
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 4x across cluster][0m
-RL: 77 IL: 66
-RL: 77 IL: 67
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(imitationRunner pid=17604)[0m starting episode 654 on metaAgent 1[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 4x across cluster][0m
-RL: 78 IL: 67
-RL: 78 IL: 68
-[36m(RLRunner pid=17606)[0m starting episode 655 on metaAgent 3
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(RLRunner pid=17606)[0m valid actions: [0]valid actions: [0, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 2, 3]
-[36m(RLRunner pid=17606)[0m 
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 4x across cluster][0m
-[36m(imitationRunner pid=17604)[0m starting episode 656 on metaAgent 1
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3][32m [repeated 4x across cluster][0m
-RL: 79 IL: 68
-[36m(RLRunner pid=17606)[0m starting episode 657 on metaAgent 3
-RL: 79 IL: 69
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(RLRunner pid=17605)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17605)[0m 
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3][32m [repeated 4x across cluster][0m
-[36m(imitationRunner pid=17604)[0m starting episode 658 on metaAgent 1
-RL: 80 IL: 69
-[36m(RLRunner pid=17605)[0m starting episode 659 on metaAgent 2
-[36m(RLRunner pid=17605)[0m Agent 3 collided with another agent at position (9, 1, 3)
-[36m(RLRunner pid=17605)[0m Reverting agent 3 to position (10, 1, 3)
-[33m(autoscaler +10m33s)[0m Warning: The following resource request cannot be scheduled right now: {'CPU': 3.0}. This is likely due to all cluster resources being claimed by actors. Consider creating fewer actors or adding more nodes to this Ray cluster.
-RL: 80 IL: 70
-[36m(imitationRunner pid=17603)[0m running imitation job
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3][32m [repeated 4x across cluster][0m
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(imitationRunner pid=17603)[0m starting episode 660 on metaAgent 0
-RL: 81 IL: 70
-[36m(RLRunner pid=17606)[0m starting episode 661 on metaAgent 3
-RL: 82 IL: 70
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 4x across cluster][0m
-[36m(RLRunner pid=17605)[0m valid actions: [1]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0]
-[36m(RLRunner pid=17605)[0m valid actions: [0]
-[36m(RLRunner pid=17606)[0m valid actions: [1]valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m 
-RL: 82 IL: 71
-[36m(imitationRunner pid=17603)[0m running imitation job
-[36m(imitationRunner pid=17603)[0m starting episode 663 on metaAgent 0[32m [repeated 2x across cluster][0m
-RL: 82 IL: 72
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3][32m [repeated 2x across cluster][0m
-RL: 82 IL: 73
-[36m(imitationRunner pid=17604)[0m running imitation job[32m [repeated 2x across cluster][0m
-[36m(imitationRunner pid=17604)[0m starting episode 665 on metaAgent 1[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17605)[0m 
-RL: 82 IL: 74
-RL: 83 IL: 74
-[36m(RLRunner pid=17605)[0m valid actions: [0]valid actions: [1]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m 
-RL: 84 IL: 74
-RL: 84 IL: 75
-[33m(autoscaler +11m8s)[0m Warning: The following resource request cannot be scheduled right now: {'CPU': 3.0}. This is likely due to all cluster resources being claimed by actors. Consider creating fewer actors or adding more nodes to this Ray cluster.
-RL: 84 IL: 76
-[36m(imitationRunner pid=17604)[0m running imitation job[32m [repeated 3x across cluster][0m
-[36m(imitationRunner pid=17604)[0m starting episode 670 on metaAgent 1[32m [repeated 5x across cluster][0m
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17606)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17606)[0m [32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3][32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17605)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17606)[0m Agent 2 collided with another agent at position (2, 10, 3)
-[36m(RLRunner pid=17606)[0m Reverting agent 2 to position (3, 10, 3)
-RL: 85 IL: 76
-[36m(RLRunner pid=17605)[0m starting episode 671 on metaAgent 2
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 4x across cluster][0m
-[36m(RLRunner pid=17606)[0m [32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17606)[0m targets done: 1targets done: 0
-RL: 86 IL: 76
-[36m(RLRunner pid=17606)[0m starting episode 672 on metaAgent 3
-[36m(RLRunner pid=17606)[0m valid actions: [1]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m Agent 2 collided with another agent at position (18, 17, 3)
-[36m(RLRunner pid=17606)[0m Reverting agent 2 to position (19, 17, 3)
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 4x across cluster][0m
-RL: 87 IL: 76
-[36m(RLRunner pid=17606)[0m starting episode 673 on metaAgent 3
-[36m(RLRunner pid=17606)[0m valid actions: [0]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]valid actions: [0, 2, 3]
-[36m(RLRunner pid=17606)[0m 
-[33m(autoscaler +11m43s)[0m Warning: The following resource request cannot be scheduled right now: {'CPU': 3.0}. This is likely due to all cluster resources being claimed by actors. Consider creating fewer actors or adding more nodes to this Ray cluster.
-[36m(RLRunner pid=17606)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3][32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17605)[0m valid actions: [0, 2, 3]valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m [32m [repeated 2x across cluster][0m
-RL: 88 IL: 76
-[36m(RLRunner pid=17606)[0m starting episode 674 on metaAgent 3
-RL: 89 IL: 76
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 8x across cluster][0m
-[36m(RLRunner pid=17605)[0m valid actions: [0, 2, 3][32m [repeated 8x across cluster][0m
-[36m(RLRunner pid=17605)[0m starting episode 675 on metaAgent 2
-RL: 90 IL: 76
-[36m(RLRunner pid=17605)[0m starting episode 676 on metaAgent 2
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]valid actions: [0, 2, 3]
-[36m(RLRunner pid=17605)[0m 
-[36m(RLRunner pid=17606)[0m targets done: 0targets done: 0
-RL: 91 IL: 76
-[33m(autoscaler +12m18s)[0m Warning: The following resource request cannot be scheduled right now: {'CPU': 3.0}. This is likely due to all cluster resources being claimed by actors. Consider creating fewer actors or adding more nodes to this Ray cluster.
-[36m(RLRunner pid=17605)[0m Agent 3 collided with another agent at position (7, 3, 3)
-[36m(RLRunner pid=17605)[0m Reverting agent 3 to position (8, 3, 3)
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3][32m [repeated 6x across cluster][0m
-[36m(RLRunner pid=17606)[0m starting episode 677 on metaAgent 3
-[36m(RLRunner pid=17606)[0m 
-[36m(RLRunner pid=17605)[0m targets done: 1[32m [repeated 4x across cluster][0m
-RL: 92 IL: 76
-[36m(RLRunner pid=17605)[0m starting episode 678 on metaAgent 2
-RL: 93 IL: 76
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0]valid actions: [0, 2, 3]
-[36m(RLRunner pid=17606)[0m 
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 4x across cluster][0m
-[36m(RLRunner pid=17606)[0m starting episode 679 on metaAgent 3
-[36m(RLRunner pid=17606)[0m valid actions: [0, 2, 3][32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 4x across cluster][0m
-RL: 94 IL: 76
-[36m(RLRunner pid=17605)[0m starting episode 680 on metaAgent 2
-[36m(RLRunner pid=17606)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17606)[0m 
-RL: 95 IL: 76
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]valid actions: [0, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0][32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 2x across cluster][0m
-[33m(autoscaler +12m53s)[0m Warning: The following resource request cannot be scheduled right now: {'CPU': 3.0}. This is likely due to all cluster resources being claimed by actors. Consider creating fewer actors or adding more nodes to this Ray cluster.
-[36m(RLRunner pid=17606)[0m starting episode 681 on metaAgent 3
-[36m(RLRunner pid=17605)[0m 
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 4x across cluster][0m
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [1]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-RL: 96 IL: 76
-[36m(RLRunner pid=17605)[0m starting episode 682 on metaAgent 2
-[36m(imitationRunner pid=17604)[0m ***CBS returned a len 0 path***
-[36m(imitationRunner pid=17604)[0m rollout is none -.-
-RL: 96 IL: 76
-[36m(imitationRunner pid=17604)[0m running imitation job
-RL: 96 IL: 77
-[36m(imitationRunner pid=17603)[0m starting episode 684 on metaAgent 0[32m [repeated 2x across cluster][0m
-[36m(imitationRunner pid=17603)[0m ***CBS returned a len 0 path***
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(imitationRunner pid=17603)[0m running imitation job
-RL: 97 IL: 77
-RL: 97 IL: 78
-[36m(imitationRunner pid=17603)[0m running imitation job
-[36m(imitationRunner pid=17603)[0m starting episode 686 on metaAgent 0[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m 
-[33m(autoscaler +13m29s)[0m Warning: The following resource request cannot be scheduled right now: {'CPU': 3.0}. This is likely due to all cluster resources being claimed by actors. Consider creating fewer actors or adding more nodes to this Ray cluster.
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 1
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3][32m [repeated 2x across cluster][0m
-RL: 98 IL: 78
-[36m(RLRunner pid=17606)[0m starting episode 687 on metaAgent 3
-[36m(RLRunner pid=17605)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17605)[0m 
-RL: 99 IL: 78
-[36m(RLRunner pid=17605)[0m valid actions: [0]valid actions: [0]
-[36m(RLRunner pid=17605)[0m 
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3][32m [repeated 6x across cluster][0m
-[36m(RLRunner pid=17606)[0m Agent 3 collided with another agent at position (5, 10, 1)
-[36m(RLRunner pid=17606)[0m Reverting agent 3 to position (4, 10, 1)
-[36m(RLRunner pid=17605)[0m starting episode 688 on metaAgent 2
-[36m(RLRunner pid=17606)[0m Agent 3 collided with another agent at position (6, 8, 0)
-[36m(RLRunner pid=17606)[0m Reverting agent 3 to position (6, 7, 0)
-[36m(RLRunner pid=17606)[0m Agent 4 collided with another agent at position (4, 9, 1)
-[36m(RLRunner pid=17606)[0m Reverting agent 4 to position (3, 9, 1)
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 4x across cluster][0m
-RL: 100 IL: 78
-[36m(RLRunner pid=17606)[0m starting episode 689 on metaAgent 3
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]valid actions: [0, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0]
-[36m(RLRunner pid=17606)[0m valid actions: [0]
-[36m(RLRunner pid=17606)[0m 
-[36m(RLRunner pid=17605)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 2x across cluster][0m
-RL: 101 IL: 78
-[36m(RLRunner pid=17605)[0m starting episode 690 on metaAgent 2
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3][32m [repeated 4x across cluster][0m
-[36m(RLRunner pid=17605)[0m 
-[33m(autoscaler +14m4s)[0m Warning: The following resource request cannot be scheduled right now: {'CPU': 3.0}. This is likely due to all cluster resources being claimed by actors. Consider creating fewer actors or adding more nodes to this Ray cluster.
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 4x across cluster][0m
-RL: 102 IL: 78
-[36m(RLRunner pid=17606)[0m starting episode 691 on metaAgent 3
-[36m(RLRunner pid=17606)[0m valid actions: [0, 2, 3]valid actions: [1]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0]
-[36m(RLRunner pid=17606)[0m 
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 4x across cluster][0m
-RL: 103 IL: 78
-[36m(RLRunner pid=17605)[0m starting episode 692 on metaAgent 2
-[36m(RLRunner pid=17605)[0m valid actions: [1]valid actions: [1]
-[36m(RLRunner pid=17605)[0m valid actions: [1]valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m 
-[36m(RLRunner pid=17605)[0m 
-RL: 103 IL: 79
-[36m(imitationRunner pid=17603)[0m running imitation job
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 4x across cluster][0m
-[36m(imitationRunner pid=17603)[0m starting episode 693 on metaAgent 0
-RL: 104 IL: 79
-[36m(RLRunner pid=17606)[0m starting episode 694 on metaAgent 3
-[36m(RLRunner pid=17606)[0m valid actions: [0]valid actions: [1]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m 
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-RL: 105 IL: 79
-RL: 105 IL: 80
-[36m(imitationRunner pid=17603)[0m running imitation job
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 4x across cluster][0m
-[36m(imitationRunner pid=17603)[0m starting episode 696 on metaAgent 0[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3][32m [repeated 4x across cluster][0m
-RL: 105 IL: 81
-[36m(RLRunner pid=17606)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17606)[0m 
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 2x across cluster][0m
-[36m(imitationRunner pid=17604)[0m starting episode 697 on metaAgent 1
-[33m(autoscaler +14m39s)[0m Warning: The following resource request cannot be scheduled right now: {'CPU': 3.0}. This is likely due to all cluster resources being claimed by actors. Consider creating fewer actors or adding more nodes to this Ray cluster.
-RL: 106 IL: 81
-[36m(RLRunner pid=17606)[0m starting episode 698 on metaAgent 3
-[36m(RLRunner pid=17606)[0m valid actions: [0]
-[36m(RLRunner pid=17606)[0m valid actions: [0]
-[36m(RLRunner pid=17606)[0m valid actions: [0]
-[36m(RLRunner pid=17606)[0m valid actions: [0]
-[36m(RLRunner pid=17605)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17605)[0m 
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 2x across cluster][0m
-RL: 107 IL: 81
-[36m(RLRunner pid=17605)[0m starting episode 699 on metaAgent 2
-RL: 107 IL: 82
-Saving Model
-[36m(imitationRunner pid=17604)[0m running imitation job
-Saved Model
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 4x across cluster][0m
-[36m(imitationRunner pid=17604)[0m starting episode 700 on metaAgent 1
-RL: 108 IL: 82
-[36m(RLRunner pid=17606)[0m starting episode 701 on metaAgent 3
-RL: 108 IL: 83
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(RLRunner pid=17606)[0m valid actions: [0]valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0]
-[36m(RLRunner pid=17606)[0m 
-RL: 108 IL: 84
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(imitationRunner pid=17604)[0m starting episode 703 on metaAgent 1[32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3][32m [repeated 4x across cluster][0m
-RL: 108 IL: 85
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(imitationRunner pid=17604)[0m starting episode 704 on metaAgent 1
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 0
-[36m(RLRunner pid=17606)[0m targets done: 1
-[36m(RLRunner pid=17606)[0m targets done: 0
-RL: 109 IL: 85
-[36m(RLRunner pid=17606)[0m starting episode 705 on metaAgent 3
-[36m(RLRunner pid=17606)[0m valid actions: [0]valid actions: [0]
-[36m(RLRunner pid=17606)[0m valid actions: [1]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m 
-[36m(imitationRunner pid=17604)[0m HBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+GR+C+T+BP+CHBP with AStar      : WDG+
-RL: 109 IL: 86
-[36m(imitationRunner pid=17604)[0m running imitation job
-[33m(autoscaler +15m14s)[0m Warning: The following resource request cannot be scheduled right now: {'CPU': 3.0}. This is likely due to all cluster resources being claimed by actors. Consider creating fewer actors or adding more nodes to this Ray cluster.
-[36m(RLRunner pid=17605)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 2x across cluster][0m
-[36m(imitationRunner pid=17604)[0m starting episode 706 on metaAgent 1
-[36m(RLRunner pid=17605)[0m 
-RL: 110 IL: 86
-[36m(RLRunner pid=17605)[0m starting episode 707 on metaAgent 2
-RL: 110 IL: 87
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(RLRunner pid=17605)[0m valid actions: [1]
-[36m(RLRunner pid=17605)[0m valid actions: [0]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0]
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 4x across cluster][0m
-RL: 111 IL: 87
-[36m(RLRunner pid=17606)[0m starting episode 709 on metaAgent 3[32m [repeated 2x across cluster][0m
-RL: 111 IL: 88
-[36m(imitationRunner pid=17604)[0m running imitation job
-[36m(RLRunner pid=17606)[0m valid actions: [0]valid actions: [1]
-[36m(RLRunner pid=17606)[0m 
-[36m(RLRunner pid=17606)[0m valid actions: [0][32m [repeated 2x across cluster][0m
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 4x across cluster][0m
-[36m(imitationRunner pid=17604)[0m starting episode 710 on metaAgent 1
-RL: 112 IL: 88
-[36m(RLRunner pid=17605)[0m starting episode 711 on metaAgent 2
-[36m(RLRunner pid=17605)[0m valid actions: [0]
-[36m(RLRunner pid=17605)[0m valid actions: [0]
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m valid actions: [0]
-[36m(RLRunner pid=17606)[0m targets done: 0targets done: 0
-[36m(RLRunner pid=17606)[0m 
-[36m(RLRunner pid=17606)[0m targets done: 0[32m [repeated 2x across cluster][0m
-RL: 113 IL: 88
-[36m(RLRunner pid=17606)[0m starting episode 712 on metaAgent 3
-[36m(RLRunner pid=17606)[0m valid actions: [0, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17606)[0m valid actions: [1]
-[36m(RLRunner pid=17606)[0m valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m targets done: 0[32m [repeated 4x across cluster][0m
-RL: 114 IL: 88
-[36m(RLRunner pid=17605)[0m starting episode 713 on metaAgent 2
-[36m(RLRunner pid=17605)[0m valid actions: [0, 1, 2, 3]valid actions: [0, 1, 2, 3]
-[36m(RLRunner pid=17605)[0m 
-[33m(autoscaler +15m49s)[0m Warning: The following resource request cannot be scheduled right now: {'CPU': 3.0}. This is likely due to all cluster resources being claimed by actors. Consider creating fewer actors or adding more nodes to this Ray cluster.
+RL: 0 IL: 3
+[2m[36m(RLRunner pid=77544)[0m valid actions: [0]
+[2m[36m(RLRunner pid=77544)[0m valid actions: [0, 1, 2, 3]
+[2m[36m(RLRunner pid=77544)[0m valid actions: [0, 1, 2, 3]
+[2m[36m(RLRunner pid=77544)[0m valid actions: [0, 2, 3]
+[2m[36m(imitationRunner pid=77541)[0m Hello World... From  global[32m [repeated 4x across cluster] (Ray deduplicates logs by default. Set RAY_DEDUP_LOGS=0 to disable log deduplication, or see https://docs.ray.io/en/master/ray-observability/ray-logging.html#log-deduplication for more options.)[0m
+RL: 0 IL: 4
+[2m[36m(imitationRunner pid=77540)[0m starting episode 13 on metaAgent 1[32m [repeated 7x across cluster][0m
+[2m[36m(imitationRunner pid=77540)[0m running imitation job[32m [repeated 6x across cluster][0m
+[2m[36m(imitationRunner pid=77539)[0m finding path in cbs[32m [repeated 31x across cluster][0m
+[2m[36m(imitationRunner pid=77539)[0m WDG+GR+C+T+BP+CHBP with AStar      : Optimal,181,0.012502,0,1885,181,181,181,[32m [repeated 30x across cluster][0m
+RL: 0 IL: 5
+RL: 0 IL: 6
+[2m[36m(RLRunner pid=77543)[0m valid actions: [0, 1, 2, 3]valid actions: [0, 1, 2, 3]
+[2m[36m(RLRunner pid=77543)[0m 
+RL: 0 IL: 7
+RL: 0 IL: 8
+RL: 0 IL: 9
+RL: 0 IL: 10
+[2m[36m(RLRunner pid=77543)[0m valid actions: [0][32m [repeated 2x across cluster][0m
+RL: 0 IL: 11
+[2m[36m(RLRunner pid=77543)[0m WDG+GR+C+T+BP+CHBP with AStar      : Optimal,65,0.002419,0,295,65,65,65,
+[2m[36m(RLRunner pid=77544)[0m targets done: 0
+[2m[36m(RLRunner pid=77544)[0m targets done: 0targets done: 0
+[2m[36m(RLRunner pid=77544)[0m targets done: 0
+RL: 1 IL: 11
+[2m[36m(RLRunner pid=77544)[0m starting episode 22 on metaAgent 5[32m [repeated 10x across cluster][0m
+[2m[36m(imitationRunner pid=77540)[0m running imitation job[32m [repeated 8x across cluster][0m
+[2m[36m(imitationRunner pid=77541)[0m finding path in cbs[32m [repeated 68x across cluster][0m
+[2m[36m(imitationRunner pid=77541)[0m WDG+GR+C+T+BP+CHBP with AStar      : Optimal,79,0.003044,0,390,79,79,79,[32m [repeated 69x across cluster][0m
+RL: 1 IL: 12
+RL: 1 IL: 13
+RL: 1 IL: 14
+[2m[36m(RLRunner pid=77544)[0m WDG+GR+C+T+BP+CHBP with AStar      : Optimal,166,0.01814,0,3076,166,166,166,
+RL: 1 IL: 15
+RL: 1 IL: 16
+RL: 1 IL: 17
+RL: 1 IL: 18
+RL: 1 IL: 19
+RL: 1 IL: 20
+[2m[36m(imitationRunner pid=77539)[0m starting episode 31 on metaAgent 0[32m [repeated 9x across cluster][0m
+[2m[36m(imitationRunner pid=77539)[0m running imitation job[32m [repeated 9x across cluster][0m
+[2m[36m(imitationRunner pid=77540)[0m finding path in cbs[32m [repeated 75x across cluster][0m
+[2m[36m(imitationRunner pid=77540)[0m WDG+GR+C+T+BP+CHBP with AStar      : Optimal,29,0.000913,0,58,29,29,29,[32m [repeated 75x across cluster][0m
+RL: 1 IL: 21
+RL: 1 IL: 22
+[2m[36m(RLRunner pid=77543)[0m targets done: 0targets done: 0
+[2m[36m(RLRunner pid=77543)[0m targets done: 0
+[2m[36m(RLRunner pid=77543)[0m 
+[2m[36m(RLRunner pid=77543)[0m targets done: 0
+RL: 2 IL: 22
+RL: 2 IL: 23
+[2m[36m(RLRunner pid=77544)[0m valid actions: [0, 1, 2, 3]
+[2m[36m(RLRunner pid=77544)[0m valid actions: [0, 1, 2, 3]
+[2m[36m(RLRunner pid=77544)[0m valid actions: [0, 1, 2, 3]
+[2m[36m(RLRunner pid=77544)[0m valid actions: [1]
+RL: 2 IL: 24
+RL: 2 IL: 25
+RL: 2 IL: 26
+[2m[36m(imitationRunner pid=77539)[0m starting episode 38 on metaAgent 0[32m [repeated 7x across cluster][0m
+[2m[36m(imitationRunner pid=77539)[0m running imitation job[32m [repeated 6x across cluster][0m
+[2m[36m(imitationRunner pid=77539)[0m finding path in cbs[32m [repeated 32x across cluster][0m
+[2m[36m(imitationRunner pid=77539)[0m WDG+GR+C+T+BP+CHBP with AStar      : Optimal,107,0.016832,3,2853,107,105,105,[32m [repeated 31x across cluster][0m
+RL: 2 IL: 27
+[2m[36m(RLRunner pid=77543)[0m valid actions: [0][32m [repeated 4x across cluster][0m
+RL: 2 IL: 28
+[2m[36m(RLRunner pid=77544)[0m targets done: 0
+[2m[36m(RLRunner pid=77544)[0m targets done: 0
+[2m[36m(RLRunner pid=77544)[0m targets done: 0
+[2m[36m(RLRunner pid=77544)[0m targets done: 0
+RL: 3 IL: 28
+RL: 3 IL: 29
+RL: 3 IL: 30
+[2m[36m(imitationRunner pid=77539)[0m starting episode 43 on metaAgent 0[32m [repeated 4x across cluster][0m
+[2m[36m(imitationRunner pid=77539)[0m running imitation job[32m [repeated 3x across cluster][0m
+[2m[36m(imitationRunner pid=77540)[0m finding path in cbs[32m [repeated 38x across cluster][0m
+[2m[36m(imitationRunner pid=77540)[0m WDG+GR+C+T+BP+CHBP with AStar      : Optimal,45,0.004056,3,643,45,42,42,[32m [repeated 38x across cluster][0m
+RL: 3 IL: 31
+RL: 3 IL: 32
+RL: 3 IL: 33
+RL: 4 IL: 33
+[2m[36m(RLRunner pid=77543)[0m targets done: 0[32m [repeated 4x across cluster][0m
+RL: 4 IL: 34
+RL: 4 IL: 35
+[2m[36m(RLRunner pid=77543)[0m valid actions: [0, 2, 3]
+[2m[36m(RLRunner pid=77543)[0m valid actions: [0, 2, 3]
+[2m[36m(RLRunner pid=77543)[0m valid actions: [1]
+[2m[36m(RLRunner pid=77543)[0m valid actions: [0]
+[2m[36m(imitationRunner pid=77540)[0m starting episode 49 on metaAgent 1[32m [repeated 7x across cluster][0m
+[2m[36m(imitationRunner pid=77540)[0m running imitation job[32m [repeated 6x across cluster][0m
+[2m[36m(imitationRunner pid=77540)[0m finding path in cbs[32m [repeated 40x across cluster][0m
+[2m[36m(imitationRunner pid=77540)[0m WDG+GR+C+T+BP+CHBP with AStar      : Optimal,25,0.000773,0,32,25,25,25,[32m [repeated 40x across cluster][0m
+RL: 4 IL: 36
+RL: 4 IL: 37
+[2m[36m(RLRunner pid=77544)[0m valid actions: [0, 2, 3][32m [repeated 4x across cluster][0m
+RL: 4 IL: 38
+[2m[36m(imitationRunner pid=77541)[0m starting episode 52 on metaAgent 2[32m [repeated 3x across cluster][0m
+[2m[36m(imitationRunner pid=77541)[0m running imitation job[32m [repeated 3x across cluster][0m
+[2m[36m(imitationRunner pid=77540)[0m finding path in cbs[32m [repeated 22x across cluster][0m
+[2m[36m(imitationRunner pid=77540)[0m WDG+GR+C+T+BP+CHBP with AStar      : Optimal,153,0.012652,0,2038,153,153,153,[32m [repeated 21x across cluster][0m
 CTRL-C pressed. killing remote workers

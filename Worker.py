@@ -199,7 +199,7 @@ class Worker():
                         saveGIF = True
                         self.nextGIF = episode_count + GIFS_FREQUENCY_RL
                         GIF_episode = int(episode_count)
-                        GIF_frames = [self.env._render()]
+                        GIF_frames = [self.env._render()] # RL GIF render initializer
 
                     # start RL
                     if (saveGIF is True):
@@ -383,7 +383,7 @@ class Worker():
         if np.random.rand() < IL_GIF_PROB:
             saveGIF = True
         if saveGIF and OUTPUT_IL_GIFS:
-            GIF_frames = [self.env._render()]
+            GIF_frames = [self.env._render()] # IL GIF render initializer
 
         single_done = False
         new_call = False
@@ -468,18 +468,9 @@ class Worker():
                     if (path_step >= len(path)):
                         continue
                     next_pos = path[path_step][i]
-                    # <--old code-->
-                    #  diff = tuple_minus(next_pos, self.env.world.getPos(agent_id))
-                    #  actions[agent_id] = dir2action(diff) 
 
-                    # print("parse_path call worker.py")
                     actions[agent_id] = positions2action(next_pos, self.env.world.getPos(agent_id))
-                    # does this actionlist ever return -1??   
-                # uses the returned path to create a series of actions to be checked for collisions
-                # step_all() returns Dict of all observation maps {agentid:[], ...}
-                # print("current time_step agent locations")
-                # print("Current Agent Positions:", self.env.getPositions())
-                # print("Parsed Actions: ", actions)
+                    
                 all_obs, _ = self.env.step_all(actions) 
                 for i in range(self.num_workers):
                     agent_id = i + 1
@@ -497,7 +488,7 @@ class Worker():
                         else:
                             new_call = True
                 if saveGIF and OUTPUT_IL_GIFS:
-                    GIF_frames.append(self.env._render())
+                    GIF_frames.append(self.env._render()) # IL GIF frame render
                 if single_done and new_EXPERT_call:
                     path = self.env.expert_until_first_goal()
                     # print(f"CBS Path (call 2): {path}")
@@ -508,40 +499,7 @@ class Worker():
                         for idx in range(1, len(path)):
                             assert positions2action(path[idx][i], path[idx-1][i]) != -1, \
                                 print(f"invalid move: {invalidMove} \n this is da invalid wae (call 2): {path}")
-                        # if invalidMove:
-                        #     print("invalid move: ", invalidMove)
-                        #     print("this is da invalid wae (call 2): \n", path)
-                        #     break
                     path_step = 0
-                # elif single_done and new_call:
-                #     path = path[path_step:]
-                #     path = [list(state) for state in path]
-                #     for finished_agent in completed_agents:
-                #         # WHAT IS THIS FUNCTION?????
-                #         print("----------------------------------LINE 426 WORKER.PY MERGE_PLANS IS CALLED----------------------------------------------")
-                #         # path = merge_plans(path, [None] * len(path), finished_agent)
-                #     try:
-                #         while path[-1] == path[-2]:
-                #             path = path[:-1]
-                #     except:
-                #         assert (len(path) <= 2)
-                #     start_positions_dir = self.env.getPositions()
-                #     goals_dir = self.env.getGoals()
-                #     for i in range(1, self.env.world.num_agents + 1):
-                #         start_positions.append(start_positions_dir[i])
-                #         goals.append(goals_dir[i])
-                #     world = self.env.getObstacleMap()
-                #     # print('OLD PATH', path) # print('CURRENT POSITIONS', start_positions) # print('CURRENT GOALS',goals) # print('WORLD',world)
-                #     try:
-                #         # Literally where the fuck does this function come from????
-                #         print("----------------------------------LINE 441 WORKER.PY PRIORITY_PLANNER IS CALLED----------------------------------------------")
-                #         # path = priority_planner(world, tuple(start_positions), tuple(goals), path)
-                #     except:
-                #         path = self.env.expert_until_first_goal()
-                #         print("this is da wae (call 3): \n", path)
-                #         if path is None:
-                #             return result, targets_done
-                #     path_step = 0
                 o = all_obs
                 step_count += 1
                 path_step += 1

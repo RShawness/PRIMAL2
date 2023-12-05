@@ -94,5 +94,8 @@ __pycache__/
 results/
 */build/
 .idea/
-model_v1_oIL_no_prune/checkpoint
+*/checkpoint
 .vscode/settings.json
+*.lan
+testing_result/*.txt
+model_3DPathLengthMap_Rotation/checkpoint

@@ -157,7 +157,6 @@ class Runner(object):
         
         return jobResults, all_metrics, is_imitation
     
-    #! this no work
     def imitationLearningJob(self, episodeNumber):
         workersPerMetaAgent = NUM_THREADS
         agentID=None

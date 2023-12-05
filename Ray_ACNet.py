@@ -64,21 +64,19 @@ class ACNet:
 
             self.optimal_actions_onehot = tf.one_hot(self.optimal_actions, a_size, dtype=tf.float32) # NEED THIS
             
-            # self.train_valids= tf.placeholder(tf.float32, [None,1])
             self.train_valids= tf.compat.v1.placeholder(tf.float32, [None,1])     # new edit
 
             # Loss Functions
             self.value_loss  = 0.1 * tf.reduce_mean(
                 self.train_value * tf.square(self.target_v - tf.reshape(self.value, shape=[-1])))
             
-            
-            # self.entropy     = - tf.reduce_mean(self.policy * tf.log(tf.clip_by_value(self.policy, 1e-10, 1.0)))
             self.entropy     = - tf.reduce_mean(self.policy * tf.math.log(tf.clip_by_value(self.policy, 1e-10, 1.0)))       # new edit
 
             
             # self.policy_loss = - 0.5 * tf.reduce_mean(self.train_policy*
             #     tf.log(tf.clip_by_value(self.responsible_outputs, 1e-15, 1.0)) * self.advantages)
-            self.policy_loss = - 0.5 * tf.reduce_mean(self.train_policy*tf.math.log(tf.clip_by_value(self.responsible_outputs, 1e-15, 1.0)) * self.advantages)  # new edit
+            self.policy_loss = - 0.5 * tf.reduce_mean(self.train_policy*
+                        tf.math.log(tf.clip_by_value(self.responsible_outputs, 1e-15, 1.0)) * self.advantages)  # new edit
 
             
             # self.valid_loss  = - 16 * tf.reduce_mean(self.train_valids * tf.log(tf.clip_by_value(self.valids, 1e-10, 1.0)) * \

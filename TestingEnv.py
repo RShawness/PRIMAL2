@@ -37,7 +37,7 @@ class RL_Planner(MAPFEnv):
         self.action_sequence = []
 
     def _set_testType(self):
-        self.ACTION_COST, self.GOAL_REWARD, self.COLLISION_REWARD = 0, 0.5, 1
+        self.ACTION_COST, self.GOAL_REWARD, self.COLLISION_REWARD = -0.3, 50., -5.0
         self.test_type = 'oneShot' if self.isOneShot else 'continuous'
         self.method = '_' + self.test_type + 'RL'
 
@@ -48,9 +48,9 @@ class RL_Planner(MAPFEnv):
         self.sess = tf.Session(config=config)
 
         # todo:HAS TO BE ENTERED MANUALLY TO MATCH THE MODEL, to be read from DRLMAPF...
-        self.num_channels = 11
+        self.num_channels = 11 + 3
 
-        self.network = ACNet("global", a_size=5, trainer=None, TRAINING=False,
+        self.network = ACNet("global", a_size=4, trainer=None, TRAINING=False,
                              NUM_CHANNEL=self.num_channels,
                              OBS_SIZE=self.observer.observation_size,
                              GLOBAL_NET_SCOPE="global")
@@ -390,15 +390,15 @@ if __name__ == "__main__":
     original_stdout = sys.stdout
     sys.stdout = f
     
-    model_path = './hpc_checkpoint/'
+    model_path = './model_3DPathLengthMap_Rotation_Testing/'
     parser = argparse.ArgumentParser()
     parser.add_argument("--result_path", default="./testing_result/")
     parser.add_argument("--env_path", default='./saved_environments/')
-    parser.add_argument("-r", "--resume_testing", default=True, help="resume testing")
+    parser.add_argument("-r", "--resume_testing", default=False, help="resume testing")
     parser.add_argument("-g", "--GIF_prob", default=0., help="write GIF")
     parser.add_argument("-t", "--type", default='continuous', help="choose between oneShot and continuous")
     parser.add_argument("-p", "--planner", default='RL', help="choose between mstar and RL")
-    parser.add_argument("-n", "--mapName", default='4_agents_10_size_0_density_id_0_environment.npy', help="single map name for multiprocessing")
+    parser.add_argument("-n", "--mapName", default='4_agents_10_size_0_density_id_10_environment.npy', help="single map name for multiprocessing")
     args = parser.parse_args()
 
     # set a tester--------------------------------------------
@@ -427,6 +427,7 @@ if __name__ == "__main__":
     # run the tests---------------------------------------------------------
 
     maps = tester.read_single_env(args.mapName)
+    print(f"Obstacle map: \n{maps[0]}\nGoal Map: \n{maps[1]}")
     if maps is None:
         print(args.mapName, " already completed")
     else:

@@ -44,14 +44,18 @@ class Primal2Env(MAPFEnv):
         never get punishment.
         """
         collision_status = self.world.agents[agentID].status
-        if collision_status == 0:
-            reward = self.ACTION_COST
+        if collision_status == 0: # Movement is valid
+            # Check if agent action is 0 (standing still)
+            if self.world.agents[agentID].action_history[-1] == 0:
+                reward = self.WAIT_COST
+            else:
+                reward = self.ACTION_COST
             self.isStandingOnGoal[agentID] = False
-        elif collision_status == 1:
+        elif collision_status == 1: # Robot is on goal
             reward = self.ACTION_COST + self.GOAL_REWARD
             self.isStandingOnGoal[agentID] = True
             self.world.agents[agentID].dones += 1
-        else:
+        else: # Movement resulted in collision
             reward = self.ACTION_COST + self.COLLISION_REWARD
             self.isStandingOnGoal[agentID] = False
         self.individual_rewards[agentID] = reward
@@ -146,6 +150,10 @@ class Primal2Env(MAPFEnv):
                 # use new action2position(action, current_position) to get each of the potential new_positions
                 # print(f"checking action {action}")
                 new_position = action2position(action, pos)
+                # skip if new_position is out of bounds or is an obstacle
+                if (new_position[0] < 0 or new_position[0] >= self.world.state.shape[0] or new_position[1] < 0 or new_position[1] >= self.world.state.shape[1]):
+                    if self.world.state[new_position[0], new_position[1]] == -1:
+                        continue
 
                 lastpos = None
                 blocking_valid = self.get_blocking_validity(agent_obs, agent_ID, new_position)
@@ -217,37 +225,3 @@ class DummyEnv(Primal2Env):
 
     def _render(self, mode='human', close=False, screen_width=800, screen_height=800):
         pass
-
-
-# if __name__ == '__main__':
-#     from matplotlib import pyplot
-#     from Primal2Observer import Primal2Observer
-#     from Map_Generator import maze_generator
-#     from Map_Generator import manual_generator
-
-#     state0 = [[-1, -1, -1, -1, -1, -1, -1],
-#               [-1, 1, -1, 0, 0, 0, -1],
-#               [-1, 0, -1, -1, -1, 0, -1],
-#               [-1, 0, 0, 0, -1, 0, -1],
-#               [-1, 0, -1, 0, 0, 0, -1],
-#               [-1, 2, -1, 0, 0, 0, -1],
-#               [-1, -1, -1, -1, -1, -1, -1]]
-#     n_agents = 3
-#     env = Primal2Env(num_agents=n_agents,
-#                       observer=Primal2Observer(observation_size=5),
-#                       map_generator=maze_generator(env_size=(8, 10),
-#                                                    wall_components=(3, 8), obstacle_density=(0.3, 0.7)),
-#                       IsDiagonal=False)
-#     print(env.world.state)
-#     print(env.world.goals_map)
-#     c = 0
-#     a = c
-#     b = c
-#     for j in range(0, 50):
-#           movement = {1: a, 2: b, 3: c, 4: c, 5: c, 6: c, 7: c, 8: c}  # TODO change this for our action space? c a b are weird
-#           env.step_all(movement)
-#           obs = env._observe()
-
-#           print(env.world.state)
-#           a = int(input())
-#           b = int(input())
