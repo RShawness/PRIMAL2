@@ -37,7 +37,8 @@ class RL_Planner(MAPFEnv):
         self.action_sequence = []
 
     def _set_testType(self):
-        self.ACTION_COST, self.GOAL_REWARD, self.COLLISION_REWARD = -0.3, 50., -5.0
+        self.ACTION_COST, self.GOAL_REWARD, self.COLLISION_REWARD = -0.5, 50., -5.0
+        self.WAIT_COST = -1.
         self.test_type = 'oneShot' if self.isOneShot else 'continuous'
         self.method = '_' + self.test_type + 'RL'
 
@@ -68,16 +69,42 @@ class RL_Planner(MAPFEnv):
     def set_world(self):
         return
 
+    # def give_moving_reward(self, agentID):
+    #     collision_status = self.world.agents[agentID].status
+    #     if collision_status == 0:
+    #         reward = self.ACTION_COST
+    #         self.isStandingOnGoal[agentID] = False
+    #     elif collision_status == 1:
+    #         reward = self.ACTION_COST + self.GOAL_REWARD
+    #         self.isStandingOnGoal[agentID] = True
+    #         self.world.agents[agentID].dones += 1
+    #     else:
+    #         reward = self.ACTION_COST + self.COLLISION_REWARD
+    #         self.isStandingOnGoal[agentID] = False
+    #     self.individual_rewards[agentID] = reward
+
     def give_moving_reward(self, agentID):
+        """
+        WARNING: ONLY CALL THIS AFTER MOVING AGENTS!
+        Only the moving agent that encounters the collision is penalized! Standing still agents
+        never get punishment.
+        """
         collision_status = self.world.agents[agentID].status
-        if collision_status == 0:
-            reward = self.ACTION_COST
+        if collision_status == 0: # Movement is valid
+            # Check if agent action is 0 (standing still)
+            if self.world.agents[agentID].action_history[-1] == 0:
+                reward = self.WAIT_COST
+            # elif len(self.world.agents[agentID].action_history) >= 3 and all(action in {0, 2, 3} for action in self.world.agents[agentID].action_history[-4:]):
+            #     print(f"Agent {agentID} is spinning in place...")
+            #     reward = 20 * self.WAIT_COST + self.COLLISION_REWARD
+            else: # Agent is moving
+                reward = self.ACTION_COST
             self.isStandingOnGoal[agentID] = False
-        elif collision_status == 1:
+        elif collision_status == 1: # Robot is on goal
             reward = self.ACTION_COST + self.GOAL_REWARD
             self.isStandingOnGoal[agentID] = True
             self.world.agents[agentID].dones += 1
-        else:
+        else: # Movement resulted in collision
             reward = self.ACTION_COST + self.COLLISION_REWARD
             self.isStandingOnGoal[agentID] = False
         self.individual_rewards[agentID] = reward
@@ -142,8 +169,11 @@ class RL_Planner(MAPFEnv):
 
         next_o, reward = self.step_all(action_dict)
 
-        for agentID in reward.keys():
-            if reward[agentID] // 1 != 0:
+        # for agentID in reward.keys():
+        #     if reward[agentID] // 1 != 0:
+        #         numCrashedAgents += 1
+        for agentID in range(1, self.num_agents + 1):
+            if self.world.agents[agentID].status < 0:
                 numCrashedAgents += 1
         assert numCrashedAgents <= self.num_agents
 
@@ -166,6 +196,7 @@ class RL_Planner(MAPFEnv):
             step_count = step
 
             if time_limit < computing_time:
+                print(f"Timeout on step {step_count}!")
                 episode_status = "timeout"
                 break
 
@@ -356,7 +387,7 @@ class ContinuousTestsRunner:
 
 
         # result = self.worker.find_path(max_length=int(max_length), saveImage=np.random.rand() < self.GIF_prob)
-        result = self.worker.find_path(max_length=int(max_length), saveImage=True)
+        result = self.worker.find_path(max_length=int(max_length), saveImage=True, time_limit=1)
 
         target_reached, computing_time_list, num_crash, episode_status, succeed_episode, step_count, frames = result
         results['target_reached'] = target_reached
@@ -368,6 +399,14 @@ class ContinuousTestsRunner:
 
         self.make_gif(frames, env_name, self.test_method)
         self.write_files(results, env_name, self.test_method)
+
+        print(f"Target Reached: {target_reached}")
+        print(f"Number of Crashes: {num_crash}")
+        print(f"Compute Times for {env_name}:")
+        i = 0
+        for value in computing_time_list:
+            print(f"    {i}: {value}")
+            i += 1
 
         return self.worker.action_sequence
 
@@ -390,7 +429,7 @@ if __name__ == "__main__":
     original_stdout = sys.stdout
     sys.stdout = f
     
-    model_path = './model_3DPathLengthMap_Rotation_Testing/'
+    model_path = './model_3DPathLengthMap_Rotation_V2/'
     parser = argparse.ArgumentParser()
     parser.add_argument("--result_path", default="./testing_result/")
     parser.add_argument("--env_path", default='./saved_environments/')
@@ -398,7 +437,11 @@ if __name__ == "__main__":
     parser.add_argument("-g", "--GIF_prob", default=0., help="write GIF")
     parser.add_argument("-t", "--type", default='continuous', help="choose between oneShot and continuous")
     parser.add_argument("-p", "--planner", default='RL', help="choose between mstar and RL")
-    parser.add_argument("-n", "--mapName", default='4_agents_10_size_0_density_id_10_environment.npy', help="single map name for multiprocessing")
+    parser.add_argument("-n", "--mapName", default='4_agents_10_size_0.2_density_id_1_environment.npy', help="single map name for multiprocessing")
+    # Possible agent numbers: 4, 8, 16, 32, 64, 128, 256, 512, 1024
+    # Possible environment sizes: 10, 20, 40, 80, 160
+    # Possible obstacle densities: 0, 0.1, 0.2, 0.3
+    # Possible environment IDs: [0, 99]
     args = parser.parse_args()
 
     # set a tester--------------------------------------------
@@ -432,6 +475,10 @@ if __name__ == "__main__":
         print(args.mapName, " already completed")
     else:
         sequence = tester.run_1_test(args.mapName, maps)
-        print(sequence)
+        # Iterate through the list of dictionaries
+        print("Action Sequence:")
+        for idx, dict_item in enumerate(sequence, start=1):
+            print(f"    {idx:3}:    {dict_item}")
+            
     f.close()
     sys.stdout = original_stdout

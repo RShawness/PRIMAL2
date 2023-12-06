@@ -30,9 +30,9 @@ NUM_BUFFERS             = 1  # NO EXPERIENCE REPLAY int(NUM_THREADS / 2)
 
 # training parameters
 SUMMARY_WINDOW          = 10
-load_model              = False
+load_model              = True
 RESET_TRAINER           = False
-training_version        = '3DPathLengthMap_Rotation_Testing2'
+training_version        = '3DPathLengthMap_Rotation_V2'
 model_path              = 'model_' + training_version
 gifs_path               = 'gifs_' + training_version
 train_path              = 'train_' + training_version
@@ -43,7 +43,7 @@ IL_GIF_PROB             = 0.01
 
 
 # Imitation options
-PRIMING_LENGTH          = 0   # number of episodes at the beginning to train only on demonstrations
+PRIMING_LENGTH          = 0  # number of episodes at the beginning to train only on demonstrations
 EXPERT_CALL_FREQUENCY    = 1
 
 # observation variables

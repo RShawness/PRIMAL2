@@ -99,3 +99,6 @@ results/
 *.lan
 testing_result/*.txt
 model_3DPathLengthMap_Rotation/checkpoint
+.DS_Store
+__pycache__/Ray_ACNet.cpython-38.pyc
+.DS_Store

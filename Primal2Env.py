@@ -86,12 +86,37 @@ class Primal2Env(MAPFEnv):
                     return pos
             return None
 
+        """TESTING THIS FUNCTION"""
+        def is_spinning(agentID):
+            """
+            check if an agent is spinning
+            """
+            action_history = copy.deepcopy(self.world.agents[agentID].action_history)
+            action_history.reverse()
+
+            # count how many orientations the agent has had on the same position
+            countCW = 0
+            countCCW = 0
+            if action_history == []:
+                return False
+            for action in action_history:
+                if action == 1 or countCW >= 2 or countCCW >= 2:
+                    break
+                elif action == 2:
+                    countCW += 1
+                elif action == 3:
+                    countCCW += 1
+            if countCW >= 2 or countCCW >= 2:
+                return True
+            return False
+
 
         # corridor_map[row,col][0] = corridor ID
         # corridor_map[row,col][1] = is agent inside corridor
 
         available_actions = []
         pos = self.world.getPos(agent_ID)
+        spinning = is_spinning(agent_ID)
         # if the agent is inside a corridor
         if self.world.corridor_map[pos[0], pos[1]][1] == 1:
             # print("agent is in a corridor")
@@ -108,7 +133,11 @@ class Primal2Env(MAPFEnv):
                         # temp_action = (tuple_minus(possible_position, pos))
                         # available_actions.append(positions2action(temp_action[0], temp_action[1]))
                         # print("first list valid actions call primal env")
-                        available_actions.append(positions2action(possible_position, pos))           
+                        """Testing this functionality"""
+                        if spinning and possible_position[:2] == pos[:2] and possible_position[2] != pos[2]:
+                                continue
+                        available_actions.append(positions2action(possible_position, pos))   
+
 
                     # TODO What does corridors[ID][Endpoints] ==1 mean... end of a corridor? 
                     #THIS ELIF statement should never get called - you should always be able to turn around if you can exist at current pos
@@ -116,6 +145,9 @@ class Primal2Env(MAPFEnv):
                             and possible_moves.count(None) == 3: # where there is only 1 possible move and 3 "None" returned 
                         # temp_action = (tuple_minus(possible_position, pos))
                         print("second list valid actions call primal env")
+                        """Testing this functionality"""
+                        if spinning and possible_position[:2] == pos[:2] and possible_position[2] != pos[2]:
+                                continue
                         available_actions.append(positions2action(possible_position, pos))
 
                 if not available_actions:
@@ -131,12 +163,18 @@ class Primal2Env(MAPFEnv):
                             # temp_action = (tuple_minus(possible_position, pos))
                             print("third list valid actions call primal env")
                             available_actions.append(positions2action(possible_position, pos))
+                            """Testing this functionality"""
+                            if spinning and possible_position[:2] == pos[:2]:
+                                continue
                 else:
                     for possible_position in possible_moves:
                         if possible_position is not None \
                                 and self.world.state[possible_position[0], possible_position[1]] == 0:
                             # temp_action = (tuple_minus(possible_position, pos))
                             # print("fourth list valid actions call primal env")
+                            """Testing this functionality"""
+                            if spinning and possible_position[:2] == pos[:2] and possible_position[2] != pos[2]:
+                                continue
                             available_actions.append(positions2action(possible_position, pos))
                     if not available_actions:
                         available_actions.append(0)
@@ -150,6 +188,9 @@ class Primal2Env(MAPFEnv):
                 # use new action2position(action, current_position) to get each of the potential new_positions
                 # print(f"checking action {action}")
                 new_position = action2position(action, pos)
+                """Testing this functionality"""
+                if is_spinning(agent_ID) and action in {2,3}:
+                    continue
                 # skip if new_position is out of bounds or is an obstacle
                 if (new_position[0] < 0 or new_position[0] >= self.world.state.shape[0] or new_position[1] < 0 or new_position[1] >= self.world.state.shape[1]):
                     if self.world.state[new_position[0], new_position[1]] == -1:

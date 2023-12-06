@@ -5,8 +5,8 @@ import numpy as np
 
 # parameters for training
 GRAD_CLIP = 10.0
-KEEP_PROB1 = 1  # was 0.5
-KEEP_PROB2 = 1  # was 0.7
+KEEP_PROB1 = 0.5  # was 0.5
+KEEP_PROB2 = 0.7  # was 0.7
 RNN_SIZE = 512
 GOAL_REPR_SIZE = 12
 

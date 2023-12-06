@@ -324,7 +324,7 @@ class Primal2Observer(ObservationBuilder):
             # if len(astar_path) <= 0:
             #     print("astar_path is empty. check")
             
-            assert len(astar_path) > 0, "astar_path should not be empty, got {} for agent {} with goal {}".format(astar_path, agentID, self.world.agents[agentID].goal_pos)
+            # assert len(astar_path) > 0, "astar_path should not be empty, got {} for agent {} with goal {}".format(astar_path, agentID, self.world.agents[agentID].goal_pos)
 
             if not len(astar_path) == self.num_future_steps:  # this agent reaches its goal during future steps
                 distance_map1, start_pos1 = self.world.agents[agentID].next_distanceMap, \

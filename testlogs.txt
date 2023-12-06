@@ -3,197 +3,298 @@ Hello World... From  global
 starting ContinuousTestsRunner...
 loading a single testing env...
 Obstacle map: 
-[[ 0  0  0  0  0  0  2  0  1  0]
+[[-1  0  0  0  0  0  0  0  0  0]
+ [ 0  0  0  0  3  0  0  0  0  0]
+ [ 0  0  0 -1  0  0  0  0  0 -1]
  [ 0  0  0  0  0  0  0  0  0  0]
+ [-1  0  0 -1  0  0  0  0  4  0]
+ [ 0  1  0  0 -1  0  0  0  0  0]
+ [ 0  0  0  0  0  0  0  0 -1  0]
+ [ 0  0  0 -1  0  0 -1  0  2  0]
  [ 0  0  0  0  0  0  0  0  0  0]
- [ 0  0  0  0  0  0  0  3  0  0]
- [ 0  0  0  0  0  0  0  0  0  0]
- [ 0  0  0  0  0  0  0  0  0  0]
- [ 0  0  0  0  0  0  0  0  0  0]
- [ 0  0  0  0  0  0  0  0  0  0]
- [ 0  0  0  0  0  0  0  0  0  0]
- [-1  0  0  0  0  0  4  0  0  0]]
+ [ 0  0  0  0  0  0  0 -1  0  0]]
 Goal Map: 
-[[0 0 3 0 0 0 0 0 0 0]
+[[0 0 0 0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0 0 0 0]
+ [0 1 0 0 0 0 4 0 0 0]
  [0 0 0 0 0 0 0 0 0 0]
  [0 0 0 0 0 0 0 0 0 0]
+ [0 0 0 2 0 0 0 0 0 0]
+ [0 0 0 0 0 0 3 0 0 0]
  [0 0 0 0 0 0 0 0 0 0]
  [0 0 0 0 0 0 0 0 0 0]
- [0 0 0 0 0 0 0 0 0 0]
- [0 0 0 0 0 0 0 0 0 0]
- [0 0 0 0 0 0 2 0 0 0]
- [0 0 0 0 0 4 0 0 1 0]
  [0 0 0 0 0 0 0 0 0 0]]
-Agent 3 collided with env at position (3, 10, 0)
-Agent 3 collided with env at position (3, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 3 collided with env at position (3, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 3 collided with env at position (3, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 2 collided with env at position (0, -1, 2)
-Agent 3 collided with env at position (3, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 2 collided with env at position (0, -1, 2)
-Agent 3 collided with env at position (3, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 2 collided with env at position (0, -1, 2)
-Agent 3 collided with env at position (3, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 1 collided with env at position (10, 8, 1)
-Agent 2 collided with env at position (0, -1, 2)
-Agent 3 collided with env at position (3, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 1 collided with env at position (10, 8, 1)
-Agent 3 collided with env at position (3, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 1 collided with env at position (10, 8, 1)
-Agent 3 collided with env at position (3, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 1 collided with env at position (10, 8, 1)
-Agent 3 collided with env at position (3, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 1 collided with env at position (10, 8, 1)
-Agent 3 collided with env at position (3, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 1 collided with env at position (10, 8, 1)
-Agent 3 collided with env at position (3, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 1 collided with env at position (10, 8, 1)
-Agent 3 collided with env at position (3, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 1 collided with env at position (10, 8, 1)
-Agent 3 collided with env at position (3, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 1 collided with env at position (10, 8, 1)
-Agent 3 collided with env at position (3, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 1 collided with env at position (10, 8, 1)
-Agent 3 collided with env at position (3, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 1 collided with env at position (10, 8, 1)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 1 collided with env at position (10, 8, 1)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 1 collided with env at position (10, 8, 1)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 1 collided with env at position (10, 8, 1)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 1 collided with env at position (10, 8, 1)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 1 collided with env at position (10, 8, 1)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 1 collided with env at position (10, 8, 1)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 1 collided with env at position (10, 8, 1)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 1 collided with env at position (10, 8, 1)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 1 collided with env at position (10, 8, 1)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 1 collided with env at position (10, 8, 1)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 1 collided with env at position (10, 8, 1)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 1 collided with env at position (10, 8, 1)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 1 collided with env at position (10, 8, 1)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 1 collided with env at position (10, 8, 1)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
-Agent 4 collided with env at position (9, 10, 0)
+Using Manual Goals
+Agent 2 collided with env at position (7, 10, 0)
+Agent 3 collided with env at position (-1, 4, 3)
+Agent 1 collided with env at position (5, 4, 0)
+Agent 2 collided with env at position (7, 10, 0)
+Agent 3 collided with env at position (-1, 4, 3)
+Agent 1 collided with env at position (5, 4, 0)
+Agent 2 collided with env at position (7, 10, 0)
+Agent 3 collided with env at position (-1, 4, 3)
+Agent 1 collided with env at position (5, 4, 0)
+Agent 2 collided with env at position (7, 10, 0)
+Agent 3 collided with env at position (-1, 4, 3)
+Agent 1 collided with env at position (5, 4, 0)
 wrote gif
-[{1: 1, 2: 1, 3: 1, 4: 1}, {1: 1, 2: 1, 3: 1, 4: 1}, {1: 1, 2: 1, 3: 1, 4: 1}, {1: 1, 2: 1, 3: 1, 4: 1}, {1: 1, 2: 1, 3: 1, 4: 1}, {1: 1, 2: 1, 3: 1, 4: 1}, {1: 1, 2: 1, 3: 1, 4: 1}, {1: 1, 2: 1, 3: 1, 4: 1}, {1: 1, 2: 1, 3: 1, 4: 1}, {1: 1, 2: 1, 3: 1, 4: 1}, {1: 1, 2: 0, 3: 1, 4: 1}, {1: 1, 2: 0, 3: 1, 4: 1}, {1: 1, 2: 0, 3: 1, 4: 1}, {1: 1, 2: 0, 3: 1, 4: 1}, {1: 1, 2: 0, 3: 1, 4: 1}, {1: 1, 2: 0, 3: 1, 4: 1}, {1: 1, 2: 0, 3: 1, 4: 1}, {1: 1, 2: 0, 3: 1, 4: 1}, {1: 1, 2: 0, 3: 1, 4: 1}, {1: 1, 2: 0, 3: 0, 4: 1}, {1: 1, 2: 0, 3: 0, 4: 1}, {1: 1, 2: 0, 3: 0, 4: 1}, {1: 1, 2: 0, 3: 0, 4: 1}, {1: 1, 2: 0, 3: 0, 4: 1}, {1: 1, 2: 0, 3: 0, 4: 1}, {1: 1, 2: 0, 3: 0, 4: 1}, {1: 1, 2: 0, 3: 0, 4: 1}, {1: 1, 2: 0, 3: 0, 4: 1}, {1: 1, 2: 0, 3: 0, 4: 1}, {1: 1, 2: 0, 3: 0, 4: 1}, {1: 1, 2: 0, 3: 0, 4: 1}, {1: 1, 2: 0, 3: 0, 4: 1}, {1: 1, 2: 0, 3: 0, 4: 1}, {1: 1, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}, {1: 0, 2: 0, 3: 0, 4: 1}]
+Target Reached: 0
+Number of Crashes: 12
+Compute Times for 4_agents_10_size_0.2_density_id_1_environment:
+    0: 0.07652091979980469
+    1: 0.016162633895874023
+    2: 0.016709089279174805
+    3: 0.015586614608764648
+    4: 0.009852886199951172
+    5: 0.006928920745849609
+    6: 0.009030818939208984
+    7: 0.010956764221191406
+    8: 0.007791280746459961
+    9: 0.006882190704345703
+    10: 0.009576082229614258
+    11: 0.009004831314086914
+    12: 0.009384870529174805
+    13: 0.008300065994262695
+    14: 0.0242922306060791
+    15: 0.024302959442138672
+    16: 0.017837047576904297
+    17: 0.018964052200317383
+    18: 0.015609264373779297
+    19: 0.015267133712768555
+    20: 0.014293909072875977
+    21: 0.009031057357788086
+    22: 0.019757747650146484
+    23: 0.023999929428100586
+    24: 0.01996302604675293
+    25: 0.026726245880126953
+    26: 0.02582693099975586
+    27: 0.02822399139404297
+    28: 0.018924951553344727
+    29: 0.016604185104370117
+    30: 0.02053976058959961
+    31: 0.021373987197875977
+    32: 0.028409957885742188
+    33: 0.02626180648803711
+    34: 0.01742386817932129
+    35: 0.025029897689819336
+    36: 0.019422292709350586
+    37: 0.023953914642333984
+    38: 0.03453803062438965
+    39: 0.021158695220947266
+    40: 0.027415990829467773
+    41: 0.021619081497192383
+    42: 0.024626970291137695
+    43: 0.028722047805786133
+    44: 0.02672886848449707
+    45: 0.025009870529174805
+    46: 0.0285797119140625
+    47: 0.02724003791809082
+    48: 0.02008199691772461
+    49: 0.028033971786499023
+    50: 0.01862502098083496
+    51: 0.02534198760986328
+    52: 0.024075984954833984
+    53: 0.019964933395385742
+    54: 0.026765823364257812
+    55: 0.020715951919555664
+    56: 0.022155046463012695
+    57: 0.026093721389770508
+    58: 0.01919698715209961
+    59: 0.020420074462890625
+    60: 0.017058134078979492
+    61: 0.011698007583618164
+    62: 0.01857304573059082
+    63: 0.017583847045898438
+    64: 0.008170127868652344
+    65: 0.008116006851196289
+    66: 0.01908707618713379
+    67: 0.01740288734436035
+    68: 0.01766681671142578
+    69: 0.01048898696899414
+    70: 0.0062677860260009766
+    71: 0.009412050247192383
+    72: 0.013633966445922852
+    73: 0.010270118713378906
+    74: 0.008250951766967773
+    75: 0.012422800064086914
+    76: 0.011332035064697266
+    77: 0.009870767593383789
+    78: 0.013595342636108398
+    79: 0.019603967666625977
+    80: 0.008730173110961914
+    81: 0.005623817443847656
+    82: 0.00692296028137207
+    83: 0.008961200714111328
+    84: 0.0073909759521484375
+    85: 0.0059528350830078125
+    86: 0.005838871002197266
+    87: 0.0051157474517822266
+    88: 0.005326032638549805
+    89: 0.005789041519165039
+    90: 0.00596928596496582
+    91: 0.006020784378051758
+    92: 0.005657196044921875
+    93: 0.0058209896087646484
+    94: 0.006180286407470703
+    95: 0.005632877349853516
+    96: 0.00588536262512207
+    97: 0.006066799163818359
+    98: 0.006088972091674805
+    99: 0.004755973815917969
+    100: 0.006442070007324219
+    101: 0.00569915771484375
+    102: 0.0054509639739990234
+    103: 0.006452798843383789
+    104: 0.005960941314697266
+    105: 0.0058901309967041016
+    106: 0.005791902542114258
+    107: 0.005897998809814453
+    108: 0.005759000778198242
+    109: 0.00569915771484375
+    110: 0.005795955657958984
+    111: 0.0062940120697021484
+    112: 0.006968975067138672
+    113: 0.011705160140991211
+    114: 0.009679079055786133
+    115: 0.005872964859008789
+    116: 0.006769895553588867
+    117: 0.006797075271606445
+    118: 0.006125926971435547
+    119: 0.006719827651977539
+    120: 0.006515026092529297
+    121: 0.006650209426879883
+    122: 0.0063018798828125
+    123: 0.006851911544799805
+    124: 0.0064051151275634766
+    125: 0.0065212249755859375
+    126: 0.007224082946777344
+    127: 0.006529092788696289
+Action Sequence:
+      1:    {1: 1, 2: 1, 3: 1, 4: 1}
+      2:    {1: 1, 2: 1, 3: 1, 4: 1}
+      3:    {1: 1, 2: 1, 3: 1, 4: 1}
+      4:    {1: 1, 2: 1, 3: 1, 4: 1}
+      5:    {1: 1, 2: 1, 3: 1, 4: 2}
+      6:    {1: 1, 2: 0, 3: 0, 4: 0}
+      7:    {1: 0, 2: 0, 3: 0, 4: 0}
+      8:    {1: 0, 2: 0, 3: 0, 4: 0}
+      9:    {1: 0, 2: 0, 3: 0, 4: 0}
+     10:    {1: 0, 2: 0, 3: 0, 4: 0}
+     11:    {1: 0, 2: 0, 3: 0, 4: 0}
+     12:    {1: 0, 2: 0, 3: 0, 4: 0}
+     13:    {1: 0, 2: 0, 3: 0, 4: 0}
+     14:    {1: 0, 2: 0, 3: 0, 4: 0}
+     15:    {1: 0, 2: 0, 3: 0, 4: 0}
+     16:    {1: 0, 2: 0, 3: 0, 4: 0}
+     17:    {1: 0, 2: 0, 3: 0, 4: 0}
+     18:    {1: 0, 2: 0, 3: 0, 4: 0}
+     19:    {1: 0, 2: 0, 3: 0, 4: 0}
+     20:    {1: 0, 2: 0, 3: 0, 4: 0}
+     21:    {1: 0, 2: 0, 3: 0, 4: 0}
+     22:    {1: 0, 2: 0, 3: 0, 4: 0}
+     23:    {1: 0, 2: 0, 3: 0, 4: 0}
+     24:    {1: 0, 2: 0, 3: 0, 4: 0}
+     25:    {1: 0, 2: 0, 3: 0, 4: 0}
+     26:    {1: 0, 2: 0, 3: 0, 4: 0}
+     27:    {1: 0, 2: 0, 3: 0, 4: 0}
+     28:    {1: 0, 2: 0, 3: 0, 4: 0}
+     29:    {1: 0, 2: 0, 3: 0, 4: 0}
+     30:    {1: 0, 2: 0, 3: 0, 4: 0}
+     31:    {1: 0, 2: 0, 3: 0, 4: 0}
+     32:    {1: 0, 2: 0, 3: 0, 4: 0}
+     33:    {1: 0, 2: 0, 3: 0, 4: 0}
+     34:    {1: 0, 2: 0, 3: 0, 4: 0}
+     35:    {1: 0, 2: 0, 3: 0, 4: 0}
+     36:    {1: 0, 2: 0, 3: 0, 4: 0}
+     37:    {1: 0, 2: 0, 3: 0, 4: 0}
+     38:    {1: 0, 2: 0, 3: 0, 4: 0}
+     39:    {1: 0, 2: 0, 3: 0, 4: 0}
+     40:    {1: 0, 2: 0, 3: 0, 4: 0}
+     41:    {1: 0, 2: 0, 3: 0, 4: 0}
+     42:    {1: 0, 2: 0, 3: 0, 4: 0}
+     43:    {1: 0, 2: 0, 3: 0, 4: 0}
+     44:    {1: 0, 2: 0, 3: 0, 4: 0}
+     45:    {1: 0, 2: 0, 3: 0, 4: 0}
+     46:    {1: 0, 2: 0, 3: 0, 4: 0}
+     47:    {1: 0, 2: 0, 3: 0, 4: 0}
+     48:    {1: 0, 2: 0, 3: 0, 4: 0}
+     49:    {1: 0, 2: 0, 3: 0, 4: 0}
+     50:    {1: 0, 2: 0, 3: 0, 4: 0}
+     51:    {1: 0, 2: 0, 3: 0, 4: 0}
+     52:    {1: 0, 2: 0, 3: 0, 4: 0}
+     53:    {1: 0, 2: 0, 3: 0, 4: 0}
+     54:    {1: 0, 2: 0, 3: 0, 4: 0}
+     55:    {1: 0, 2: 0, 3: 0, 4: 0}
+     56:    {1: 0, 2: 0, 3: 0, 4: 0}
+     57:    {1: 0, 2: 0, 3: 0, 4: 0}
+     58:    {1: 0, 2: 0, 3: 0, 4: 0}
+     59:    {1: 0, 2: 0, 3: 0, 4: 0}
+     60:    {1: 0, 2: 0, 3: 0, 4: 0}
+     61:    {1: 0, 2: 0, 3: 0, 4: 0}
+     62:    {1: 0, 2: 0, 3: 0, 4: 0}
+     63:    {1: 0, 2: 0, 3: 0, 4: 0}
+     64:    {1: 0, 2: 0, 3: 0, 4: 0}
+     65:    {1: 0, 2: 0, 3: 0, 4: 0}
+     66:    {1: 0, 2: 0, 3: 0, 4: 0}
+     67:    {1: 0, 2: 0, 3: 0, 4: 0}
+     68:    {1: 0, 2: 0, 3: 0, 4: 0}
+     69:    {1: 0, 2: 0, 3: 0, 4: 0}
+     70:    {1: 0, 2: 0, 3: 0, 4: 0}
+     71:    {1: 0, 2: 0, 3: 0, 4: 0}
+     72:    {1: 0, 2: 0, 3: 0, 4: 0}
+     73:    {1: 0, 2: 0, 3: 0, 4: 0}
+     74:    {1: 0, 2: 0, 3: 0, 4: 0}
+     75:    {1: 0, 2: 0, 3: 0, 4: 0}
+     76:    {1: 0, 2: 0, 3: 0, 4: 0}
+     77:    {1: 0, 2: 0, 3: 0, 4: 0}
+     78:    {1: 0, 2: 0, 3: 0, 4: 0}
+     79:    {1: 0, 2: 0, 3: 0, 4: 0}
+     80:    {1: 0, 2: 0, 3: 0, 4: 0}
+     81:    {1: 0, 2: 0, 3: 0, 4: 0}
+     82:    {1: 0, 2: 0, 3: 0, 4: 0}
+     83:    {1: 0, 2: 0, 3: 0, 4: 0}
+     84:    {1: 0, 2: 0, 3: 0, 4: 0}
+     85:    {1: 0, 2: 0, 3: 0, 4: 0}
+     86:    {1: 0, 2: 0, 3: 0, 4: 0}
+     87:    {1: 0, 2: 0, 3: 0, 4: 0}
+     88:    {1: 0, 2: 0, 3: 0, 4: 0}
+     89:    {1: 0, 2: 0, 3: 0, 4: 0}
+     90:    {1: 0, 2: 0, 3: 0, 4: 0}
+     91:    {1: 0, 2: 0, 3: 0, 4: 0}
+     92:    {1: 0, 2: 0, 3: 0, 4: 0}
+     93:    {1: 0, 2: 0, 3: 0, 4: 0}
+     94:    {1: 0, 2: 0, 3: 0, 4: 0}
+     95:    {1: 0, 2: 0, 3: 0, 4: 0}
+     96:    {1: 0, 2: 0, 3: 0, 4: 0}
+     97:    {1: 0, 2: 0, 3: 0, 4: 0}
+     98:    {1: 0, 2: 0, 3: 0, 4: 0}
+     99:    {1: 0, 2: 0, 3: 0, 4: 0}
+    100:    {1: 0, 2: 0, 3: 0, 4: 0}
+    101:    {1: 0, 2: 0, 3: 0, 4: 0}
+    102:    {1: 0, 2: 0, 3: 0, 4: 0}
+    103:    {1: 0, 2: 0, 3: 0, 4: 0}
+    104:    {1: 0, 2: 0, 3: 0, 4: 0}
+    105:    {1: 0, 2: 0, 3: 0, 4: 0}
+    106:    {1: 0, 2: 0, 3: 0, 4: 0}
+    107:    {1: 0, 2: 0, 3: 0, 4: 0}
+    108:    {1: 0, 2: 0, 3: 0, 4: 0}
+    109:    {1: 0, 2: 0, 3: 0, 4: 0}
+    110:    {1: 0, 2: 0, 3: 0, 4: 0}
+    111:    {1: 0, 2: 0, 3: 0, 4: 0}
+    112:    {1: 0, 2: 0, 3: 0, 4: 0}
+    113:    {1: 0, 2: 0, 3: 0, 4: 0}
+    114:    {1: 0, 2: 0, 3: 0, 4: 0}
+    115:    {1: 0, 2: 0, 3: 0, 4: 0}
+    116:    {1: 0, 2: 0, 3: 0, 4: 0}
+    117:    {1: 0, 2: 0, 3: 0, 4: 0}
+    118:    {1: 0, 2: 0, 3: 0, 4: 0}
+    119:    {1: 0, 2: 0, 3: 0, 4: 0}
+    120:    {1: 0, 2: 0, 3: 0, 4: 0}
+    121:    {1: 0, 2: 0, 3: 0, 4: 0}
+    122:    {1: 0, 2: 0, 3: 0, 4: 0}
+    123:    {1: 0, 2: 0, 3: 0, 4: 0}
+    124:    {1: 0, 2: 0, 3: 0, 4: 0}
+    125:    {1: 0, 2: 0, 3: 0, 4: 0}
+    126:    {1: 0, 2: 0, 3: 0, 4: 0}
+    127:    {1: 0, 2: 0, 3: 0, 4: 0}
+    128:    {1: 0, 2: 0, 3: 0, 4: 0}

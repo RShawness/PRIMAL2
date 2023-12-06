@@ -600,6 +600,7 @@ class World:
             self.agents = {i: copy.deepcopy(Agent()) for i in range(1, self.num_agents + 1)}
         # detect manual goals_map
         if self.goals_map is not None:
+            print("Using Manual Goals")
             self.manual_goal = True
             self.goals_init_pos = scan_for_agents(self.goals_map) if self.manual_goal else None
 
@@ -994,6 +995,7 @@ class World:
                         self.init_agents_and_goals()
                         return None
                 return new_goals
+        """END OF FUNCTION random_goal_pos"""
 
         previous_goals = {agentID: self.agents[agentID].goal_pos for agentID in id_list}
         if manual_pos is None:
@@ -1187,8 +1189,8 @@ class MAPFEnv(gym.Env):
         else:
             self.action_space = spaces.Tuple([spaces.Discrete(self.num_agents), spaces.Discrete(4)]) # changed to 4 discrete actions (0-3)
 
-        self.ACTION_COST, self.GOAL_REWARD, self.COLLISION_REWARD = -0.5, 32., -4.
-        self.WAIT_COST = -1.0
+        self.ACTION_COST, self.GOAL_REWARD, self.COLLISION_REWARD = -0.5, 32., -5.
+        self.WAIT_COST = -0.5
 
     def getObstacleMap(self):
         return (self.world.state == -1).astype(int)
