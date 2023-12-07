@@ -539,6 +539,12 @@ class Agent:
         # direction_history only used in get_history() which is not used ever
         # self.direction_history = _heap(self.direction_history, 30) 
         self.action_history = _heap(self.action_history, 30)
+    
+    def get_goal_distance(self):
+        """
+        return the A* distance to goal
+        """
+        return self.distanceMap[self.position[0], self.position[1], self.position[2]]
 
 
 class World:
@@ -1191,6 +1197,7 @@ class MAPFEnv(gym.Env):
 
         self.ACTION_COST, self.GOAL_REWARD, self.COLLISION_REWARD = -0.5, 32., -5.
         self.WAIT_COST = -0.5
+        self.DISTANCE_COST = -0.01
 
     def getObstacleMap(self):
         return (self.world.state == -1).astype(int)

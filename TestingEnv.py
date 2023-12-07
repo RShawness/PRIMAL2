@@ -94,9 +94,9 @@ class RL_Planner(MAPFEnv):
             # Check if agent action is 0 (standing still)
             if self.world.agents[agentID].action_history[-1] == 0:
                 reward = self.WAIT_COST
-            # elif len(self.world.agents[agentID].action_history) >= 3 and all(action in {0, 2, 3} for action in self.world.agents[agentID].action_history[-4:]):
-            #     print(f"Agent {agentID} is spinning in place...")
-            #     reward = 20 * self.WAIT_COST + self.COLLISION_REWARD
+            elif len(self.world.agents[agentID].action_history) >= 3 and all(action in {0, 2, 3} for action in self.world.agents[agentID].action_history[-4:]):
+                print(f"Agent {agentID} is spinning in place...")
+                reward = 20 * self.WAIT_COST + self.COLLISION_REWARD
             else: # Agent is moving
                 reward = self.ACTION_COST
             self.isStandingOnGoal[agentID] = False
@@ -437,7 +437,7 @@ if __name__ == "__main__":
     parser.add_argument("-g", "--GIF_prob", default=0., help="write GIF")
     parser.add_argument("-t", "--type", default='continuous', help="choose between oneShot and continuous")
     parser.add_argument("-p", "--planner", default='RL', help="choose between mstar and RL")
-    parser.add_argument("-n", "--mapName", default='4_agents_10_size_0.2_density_id_1_environment.npy', help="single map name for multiprocessing")
+    parser.add_argument("-n", "--mapName", default='8_agents_20_size_0.2_density_id_1_environment.npy', help="single map name for multiprocessing")
     # Possible agent numbers: 4, 8, 16, 32, 64, 128, 256, 512, 1024
     # Possible environment sizes: 10, 20, 40, 80, 160
     # Possible obstacle densities: 0, 0.1, 0.2, 0.3
