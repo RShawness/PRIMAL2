@@ -37,8 +37,9 @@ class RL_Planner(MAPFEnv):
         self.action_sequence = []
 
     def _set_testType(self):
-        self.ACTION_COST, self.GOAL_REWARD, self.COLLISION_REWARD = -0.5, 50., -5.0
+        self.ACTION_COST, self.GOAL_REWARD, self.COLLISION_REWARD = -0.5, 50., -6.0
         self.WAIT_COST = -1.
+        self.DISTANCE_COST = 0.5
         self.test_type = 'oneShot' if self.isOneShot else 'continuous'
         self.method = '_' + self.test_type + 'RL'
 
@@ -107,18 +108,26 @@ class RL_Planner(MAPFEnv):
         else: # Movement resulted in collision
             reward = self.ACTION_COST + self.COLLISION_REWARD
             self.isStandingOnGoal[agentID] = False
+        
+        # Add distance reward
+        if (collision_status != 1):
+            distance_term = (1 - (self.world.agents[agentID].get_goal_distance() / self.world.agents[agentID].initial_goal_distance)) * self.DISTANCE_COST
+            reward += distance_term        
         self.individual_rewards[agentID] = reward
 
     def listValidActions(self, agent_ID, agent_obs):
         return
 
-    def _reset(self, map_generator=None, worldInfo=None):
+    def _reset(self, map_generator=None, worldInfo=None, num_agent_override=None):
         self.map_generator = map_generator
         if worldInfo is not None:
             self.world = TestWorld(self.map_generator, world_info=worldInfo, isDiagonal=self.IsDiagonal,
                                    isConventional=False)
         else:
-            self.world = World(self.map_generator, num_agents=self.num_agents, isDiagonal=self.IsDiagonal)
+            if num_agent_override is not None:
+                self.world = World(self.map_generator, num_agents=num_agent_override, isDiagonal=self.IsDiagonal)
+            else:
+                self.world = World(self.map_generator, num_agents=self.num_agents, isDiagonal=self.IsDiagonal)
             # raise UserWarning('you are using re-computing env mode')
         self.num_agents = self.world.num_agents
         self.observer.set_env(self.world)
@@ -215,11 +224,12 @@ class RL_Planner(MAPFEnv):
                 frames]
 
 
-class MstarContinuousPlanner(MAPFEnv):
+class CBSContinuousPlanner(MAPFEnv):
     def __init__(self, IsDiagonal=False, frozen_steps=0):
         super().__init__(observer=DummyObserver(), map_generator=DummyGenerator(), num_agents=1,
                          IsDiagonal=IsDiagonal, frozen_steps=frozen_steps, isOneShot=False)
         self._set_testType()
+        self.action_sequence = []
 
     def set_world(self):
         return
@@ -245,15 +255,18 @@ class MstarContinuousPlanner(MAPFEnv):
     def _set_testType(self):
         self.ACTION_COST, self.GOAL_REWARD, self.COLLISION_REWARD = 0, 0.5, 1
         self.test_type = 'continuous'
-        self.method = '_' + self.test_type + 'mstar'
+        self.method = '_' + self.test_type + 'CBS'
 
-    def _reset(self, map_generator=None, worldInfo=None):
+    def _reset(self, map_generator=None, worldInfo=None, num_agent_override=None):
         self.map_generator = map_generator
         if worldInfo is not None:
             self.world = TestWorld(self.map_generator, world_info=worldInfo, isDiagonal=self.IsDiagonal,
                                    isConventional=True)
         else:
-            self.world = World(self.map_generator, num_agents=self.num_agents, isDiagonal=self.IsDiagonal)
+            if num_agent_override is not None:
+                self.world = World(self.map_generator, num_agents=num_agent_override, isDiagonal=self.IsDiagonal)
+            else:
+                self.world = World(self.map_generator, num_agents=self.num_agents, isDiagonal=self.IsDiagonal)
         self.num_agents = self.world.num_agents
         self.observer.set_env(self.world)
         self.fresh = True
@@ -279,18 +292,18 @@ class MstarContinuousPlanner(MAPFEnv):
         def parse_path(path, step_count):
             on_goal = False
             path_step = 0
-            while step_count < max_length and not on_goal:
+            while step_count < max_length and path_step < len(path) and not on_goal:
                 actions = {}
                 for i in range(self.num_agents):
                     agent_id = i + 1
                     next_pos = path[path_step][i]
-                    diff = tuple_minus(next_pos, self.world.getPos(agent_id))
-                    actions[agent_id] = dir2action(diff)
-
+                    actions[agent_id] = positions2action(next_pos=next_pos, current_pos=self.world.getPos(agent_id))
+                    
                     if self.world.agents[agent_id].goal_pos == next_pos and not on_goal:
                         on_goal = True
 
-                self.step_all(actions, check_col=False)
+                self.step_all(actions)
+                self.action_sequence.append(actions)
                 if saveImage:
                     frames.append(self._render(mode='rgb_array'))
 
@@ -313,6 +326,7 @@ class MstarContinuousPlanner(MAPFEnv):
         target_reached, step_count, episode_status = 0, 0, 'succeed'
 
         while step_count < max_length:
+            print(f"Step {step_count} of {max_length}")
             path_piece, succeed_piece, c_time = compute_path_piece(time_limit)
             computing_time_list.append(c_time)
             if not succeed_piece:  # no solution, skip out of loop
@@ -336,12 +350,12 @@ class ContinuousTestsRunner:
     metrics:
         target_reached      [int ]: num_target that is reached during the episode.
                                     Affected by timeout or non-solution
-        computing_time_list [list]: a computing time record of each run of M*
+        computing_time_list [list]: a computing time record of each run of Expert Planner Call
         num_crash           [int ]: number of crash during the episode
         episode_status      [str ]: whether the episode is 'succeed', 'timeout' or 'no-solution'
         succeed_episode     [bool]: whether the episode is successful (i.e. no timeout, no non-solution) or not
         step_count          [int ]: num_step taken during the episode. The 64 timeout step is included
-        frames              [list]: list of GIP frames
+        frames              [list]: list of GIF frames
     """
 
     def __init__(self, env_path, result_path, Planner, resume_testing=False, GIF_prob=0.):
@@ -353,6 +367,10 @@ class ContinuousTestsRunner:
         self.worker = Planner
 
         self.test_method = self.worker.method
+
+        self.grid_data = None
+        self.num_agents_loaded = 0
+        self.goal_queue = []
 
         if not os.path.exists(self.result_path):
             os.mkdir(self.result_path)
@@ -387,7 +405,7 @@ class ContinuousTestsRunner:
 
 
         # result = self.worker.find_path(max_length=int(max_length), saveImage=np.random.rand() < self.GIF_prob)
-        result = self.worker.find_path(max_length=int(max_length), saveImage=True, time_limit=1)
+        result = self.worker.find_path(max_length=int(max_length), saveImage=np.random.rand() < self.GIF_prob, time_limit=300)
 
         target_reached, computing_time_list, num_crash, episode_status, succeed_episode, step_count, frames = result
         results['target_reached'] = target_reached
@@ -409,6 +427,43 @@ class ContinuousTestsRunner:
             i += 1
 
         return self.worker.action_sequence
+    
+    def run_domain_test(self, name, maps):
+        def get_maxLength(env_size):
+            if env_size <= 40:
+                return 128
+            elif env_size <= 80:
+                return 192
+            return 256
+
+        self.worker._reset(map_generator=manual_generator(maps[0], maps[1]), num_agent_override=self.num_agents_loaded)
+        map_name = name.split('/')[-1]
+        env_name = map_name[:map_name.rfind('.')]
+        env_size = int(len(maps[0][0]))
+        max_length = get_maxLength(env_size)
+        results = dict()
+
+
+        # result = self.worker.find_path(max_length=int(max_length), saveImage=np.random.rand() < self.GIF_prob)
+        result = self.worker.find_path(max_length=int(max_length), saveImage=np.random.rand() < self.GIF_prob, time_limit=300)
+
+        target_reached, computing_time_list, num_crash, episode_status, succeed_episode, step_count, frames = result
+        results['target_reached'] = target_reached
+        results['computing time'] = computing_time_list
+        results['num_crash'] = num_crash
+        results['status'] = episode_status
+        results['isSuccessful'] = succeed_episode
+        results['steps'] = str(step_count) + '/' + str(max_length)
+
+        print(f"Target Reached: {target_reached}")
+        print(f"Number of Crashes: {num_crash}")
+        print(f"Average Compute Times for {env_name}: {np.mean(computing_time_list)}")
+        
+
+        self.make_gif(frames, env_name, self.test_method)
+        self.write_files(results, env_name, self.test_method)
+
+        return self.worker.action_sequence
 
     def make_gif(self, image, env_name, ext):
         if image:
@@ -423,21 +478,189 @@ class ContinuousTestsRunner:
         f.close()
 
 
+    def parse_map_file(self, file_path):
+        """
+        Used for loading map files from the MAPF benchmark dataset.
+
+        Parse the .map file to extract the width, height, and grid data.
+        Returns the dimensions and the grid as a list of lists.
+        """
+        with open(file_path, 'r') as file:
+            lines = file.readlines()
+
+        # Extracting width and height from the file
+        # Assuming this information is in the first few lines
+        width = height = None
+        for line in lines:
+            if 'width' in line:
+                width = int(line.split()[-1])
+            elif 'height' in line:
+                height = int(line.split()[-1])
+            if width is not None and height is not None:
+                break
+
+        # Parsing the grid data
+        grid_data = np.zeros(shape=(2, height, width), dtype=np.int16)
+
+        row = 0
+        for line in lines:
+            if line.startswith('@') or line.startswith('.'):
+                grid_line = [-1 if char == '@' or char == 'T' else 0 for char in line.strip()]
+                col = 0
+                for loc in grid_line:
+                    grid_data[0][row][col] = loc
+                    col += 1
+                row += 1
+        
+        print('Processed map file with dimensions: ' + str(width) + 'x' + str(height) + '...')
+
+        self.grid_data = grid_data
+
+        return width, height, grid_data
+    
+    def load_agent_locations(self, file_path):
+        """
+        Used for loading agent locations from the MAPF benchmark dataset.
+
+        Parse the .agents file to extract the agent locations.
+        Updates the location of each agent in the grid_data array
+        """
+        assert file_path.endswith('.agents'),\
+            'Error: agent locations file_path should be a .agents file'
+        
+        with open(file_path, 'r') as file:
+            lines = file.readlines()
+        
+        # first line should be a number indicating the number of agents
+        try:
+            num_agents = int(lines[0])
+        except ValueError:
+            print('Error: first line of .agents file should be an integer indicating the number of agents')
+            return None
+        
+        agentID = 1
+        for line in lines[1:]:
+            linear_index = int(line)
+            row = linear_index // self.grid_data.shape[1]
+            col = linear_index % self.grid_data.shape[1]
+            self.grid_data[0][row][col] = agentID
+
+            agentID += 1
+        
+        assert agentID == num_agents + 1, \
+            'Error: number of agents in .agents file does not match number of agents in .map file'
+
+        self.num_agents_loaded = num_agents
+        print("Number of agents loaded: " + str(self.num_agents_loaded))
+
+    def load_initial_goal_locations(self, file_path):
+        """
+        Used for loading goal locations from the MAPF benchmark dataset.
+
+        Parse the .tasks file to extract the goal locations.
+        Updates the location of each goal in the grid_data array
+        """
+
+        assert file_path.endswith('.tasks'),\
+            'Error: goal locations file_path should be a .tasks file'
+        
+        with open(file_path, 'r') as file:
+            lines = file.readlines()
+        
+        try:
+            num_goals = int(lines[0])
+        except ValueError:
+            print('Error: first line of .tasks file should be an integer indicating the number of goals')
+            return None
+        goal_dict = {}
+        goalID = 1
+        for line in lines[1:self.num_agents_loaded+1]:
+            linear_index = int(line)
+            row = linear_index // self.grid_data.shape[1]
+            col = linear_index % self.grid_data.shape[1]
+            self.grid_data[1][row][col] = goalID
+            print(f"Goal {goalID} at ({row}, {col}) = {self.grid_data[1][row][col]}")
+            goal_dict[goalID] = (row, col)
+            goalID += 1
+        
+        for line in lines[self.num_agents_loaded+1:]:
+            linear_index = int(line)
+            row = linear_index // self.grid_data.shape[1]
+            col = linear_index % self.grid_data.shape[1]
+            self.goal_queue.append((row, col))
+        
+        assert goalID == self.num_agents_loaded + 1, \
+            'Error: number of goals loaded in .tasks file does not match number of agents in .map file'
+        
+        
+    
+    def process_domain(self, directory_path):
+        """
+        Used for processing a domain from the MAPF benchmark dataset.
+
+        Loops through all .json files in the directory and processes each one.
+        Each .json file is of the structure:
+            mapFile: <path to .map file>
+            agentFile: <path to .agents file>
+            teamSize: <number of agents>
+            taskFile: <path to .tasks file>
+
+        Parses the .map, .agents, and .tasks files and runs a test for each json file.
+        Updates the location of each agent and goal in the grid_data array
+        """
+        def process_json_file(filepath):
+            """
+            Used for processing a single json file from the MAPF benchmark dataset.
+
+            Parses the .map, .agents, and .tasks files and runs a test for each json file.
+            Updates the location of each agent and goal in the grid_data array
+            """
+            # reset some stuff
+            self.grid_data = None
+            self.goal_queue = []
+
+            print(f"Processing {filepath}...")
+            with open(filepath, 'r') as file:
+                json_data = json.load(file)
+            
+            map_file = directory_path + json_data['mapFile']
+            agent_file = directory_path + json_data['agentFile']
+            team_size = json_data['teamSize']
+            task_file = directory_path + json_data['taskFile']
+            
+            self.parse_map_file(map_file)
+            self.load_agent_locations(agent_file)
+            self.load_initial_goal_locations(task_file)
+            self.worker.num_agents = team_size
+
+            # run a test
+            self.run_domain_test(map_file, self.grid_data)
+
+
+        assert directory_path.endswith('.domain/'),\
+            'Error: path should end with /'
+        
+        for filename in os.listdir(directory_path):
+            if filename.endswith('.json'):
+                process_json_file(directory_path + filename)
+
+
 if __name__ == "__main__":
     import time
     f = open("testlogs.txt", "w")
     original_stdout = sys.stdout
     sys.stdout = f
     
-    model_path = './model_3DPathLengthMap_Rotation_V2/'
+    model_path = './model_Distance_Reward_2/'
     parser = argparse.ArgumentParser()
     parser.add_argument("--result_path", default="./testing_result/")
-    parser.add_argument("--env_path", default='./saved_environments/')
+    # parser.add_argument("--env_path", default='./saved_environments/')
+    parser.add_argument("--env_path", default='./MAPF_Benchmarks/random.domain/')
     parser.add_argument("-r", "--resume_testing", default=False, help="resume testing")
     parser.add_argument("-g", "--GIF_prob", default=0., help="write GIF")
     parser.add_argument("-t", "--type", default='continuous', help="choose between oneShot and continuous")
-    parser.add_argument("-p", "--planner", default='RL', help="choose between mstar and RL")
-    parser.add_argument("-n", "--mapName", default='8_agents_20_size_0.2_density_id_1_environment.npy', help="single map name for multiprocessing")
+    parser.add_argument("-p", "--planner", default='RL', help="choose between CBS and RL")
+    parser.add_argument("-n", "--mapName", default='4_agents_10_size_0.2_density_id_5_environment.npy', help="single map name for multiprocessing")
     # Possible agent numbers: 4, 8, 16, 32, 64, 128, 256, 512, 1024
     # Possible environment sizes: 10, 20, 40, 80, 160
     # Possible obstacle densities: 0, 0.1, 0.2, 0.3
@@ -445,11 +668,11 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # set a tester--------------------------------------------
-    if args.planner == 'mstar':
+    if args.planner == 'CBS':
         print("Starting {} {} tests...".format(args.planner, args.type))
         tester = ContinuousTestsRunner(args.env_path,
                                        args.result_path,
-                                       Planner=MstarContinuousPlanner(),
+                                       Planner=CBSContinuousPlanner(),
                                        resume_testing=args.resume_testing,
                                        GIF_prob=args.GIF_prob
                                        )
@@ -469,16 +692,15 @@ if __name__ == "__main__":
         raise NameError('invalid planner type')
     # run the tests---------------------------------------------------------
 
-    maps = tester.read_single_env(args.mapName)
-    print(f"Obstacle map: \n{maps[0]}\nGoal Map: \n{maps[1]}")
-    if maps is None:
-        print(args.mapName, " already completed")
+    if args.env_path.endswith('.domain/'):
+        tester.process_domain(args.env_path)
     else:
-        sequence = tester.run_1_test(args.mapName, maps)
-        # Iterate through the list of dictionaries
-        print("Action Sequence:")
-        for idx, dict_item in enumerate(sequence, start=1):
-            print(f"    {idx:3}:    {dict_item}")
+        maps = tester.read_single_env(args.mapName)
+        # print(f"Obstacle map: \n{maps[0]}\nGoal Map: \n{maps[1]}")
+        if maps is None:
+            print(args.mapName, " already completed")
+        else:
+            sequence = tester.run_1_test(args.mapName, maps)
             
     f.close()
     sys.stdout = original_stdout

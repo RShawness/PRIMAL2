@@ -58,7 +58,11 @@ class Primal2Env(MAPFEnv):
         else: # Movement resulted in collision
             reward = self.WAIT_COST + self.COLLISION_REWARD
             self.isStandingOnGoal[agentID] = False
-        reward += self.world.agents[agentID].get_goal_distance() * self.DISTANCE_COST
+
+        # Add distance reward
+        if (collision_status != 1):
+            distance_term = (1 - (self.world.agents[agentID].get_goal_distance() / self.world.agents[agentID].initial_goal_distance)) * self.DISTANCE_COST
+            reward += distance_term
         self.individual_rewards[agentID] = reward
 
     # DONE change how to find and check for valid actions from given position

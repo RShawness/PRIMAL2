@@ -1,375 +1,1558 @@
 Starting RL continuous tests...
 Hello World... From  global
 starting ContinuousTestsRunner...
-loading a single testing env...
-Obstacle map: 
-[[ 0  0  0  0  0  0  0  0 -1  0 -1  0 -1  0  0  0 -1  0  0 -1]
- [ 0  0  5  0  0  0 -1  7 -1  0  0  0 -1  0  0  0  0  0  0 -1]
- [ 0 -1  0 -1  0  0  0 -1  0  0  0 -1 -1  0  0 -1  0 -1  0  0]
- [ 0 -1  6  0  0 -1 -1  0  0 -1 -1  0  0 -1  0  0  0  0 -1  0]
- [ 0 -1  0  0  0  0  0  0  0  0 -1  0  0  0 -1  0  0  0  0  0]
- [ 0  0 -1  0  0  0 -1  0  0  0  0 -1  0  0 -1 -1  0  0  0  0]
- [ 0  0  0 -1  0 -1 -1  0  0  0 -1  0  0  0  2  0  0  0 -1  0]
- [-1  0  0  0  0  0  0  0  0  0  0  0  3  0  0  0  0  0  0  0]
- [ 0 -1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
- [ 0  0  0  0  0 -1  0  0 -1 -1  0 -1 -1  0  0  0  0  0  0  0]
- [ 0 -1  0 -1  0  0  0 -1  0  0  0  0  0  0  0  0  0  0  0  0]
- [ 0  0  0  0  0 -1 -1  0  0 -1  0  0  0  0  0 -1  0 -1 -1  0]
- [-1  0  0 -1  0  0  0 -1  0 -1  0 -1 -1  0  0  0  0 -1  0  0]
- [-1 -1  0 -1  0  0 -1  0  0  0  0  0  0  0  0  0 -1  0  0  0]
- [ 0 -1  0  0  0  0  0 -1  0 -1  0  0  0  0  0  0  0  0  0 -1]
- [ 0  0 -1  0  0  0  0  0 -1  0  0  0 -1  0  0  0  0  0  0 -1]
- [-1  0  0  0 -1  0 -1  0  1  0  0 -1  0  0 -1  0 -1  0  0  0]
- [ 0  0  0  0 -1  0  0  0 -1  0 -1  0 -1  0  0  0  0 -1  0 -1]
- [ 0  0  0  0  0  0  0  0  0  0  0  0  0  0 -1  0  4  0 -1  0]
- [ 0 -1  8  0 -1  0  0  0 -1  0  0  0  0  0  0  0  0 -1  0  0]]
-Goal Map: 
-[[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
- [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
- [0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0]
- [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
- [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 7 0 0 6]
- [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
- [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 4 0 0]
- [0 0 0 0 0 0 0 0 0 0 0 8 0 0 0 0 0 0 0 0]
- [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
- [0 0 0 0 0 0 5 0 0 0 0 0 0 3 0 0 0 0 0 0]
- [0 0 0 0 0 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0]
- [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
- [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
- [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
- [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
- [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
- [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
- [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
- [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
- [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]]
+Processing ./MAPF_Benchmarks/random.domain/random_50.json...
+Processed map file with dimensions: 32x32...
+Number of agents loaded: 50
+Goal 1 at (18, 16) = 1
+Goal 2 at (0, 2) = 2
+Goal 3 at (8, 7) = 3
+Goal 4 at (2, 27) = 4
+Goal 5 at (30, 24) = 5
+Goal 6 at (30, 28) = 6
+Goal 7 at (19, 11) = 7
+Goal 8 at (23, 23) = 8
+Goal 9 at (22, 1) = 9
+Goal 10 at (24, 5) = 10
+Goal 11 at (22, 0) = 11
+Goal 12 at (30, 17) = 12
+Goal 13 at (1, 29) = 13
+Goal 14 at (10, 13) = 14
+Goal 15 at (4, 10) = 15
+Goal 16 at (22, 16) = 16
+Goal 17 at (28, 25) = 17
+Goal 18 at (14, 29) = 18
+Goal 19 at (21, 8) = 19
+Goal 20 at (24, 4) = 20
+Goal 21 at (12, 18) = 21
+Goal 22 at (27, 30) = 22
+Goal 23 at (30, 21) = 23
+Goal 24 at (15, 6) = 24
+Goal 25 at (19, 7) = 25
+Goal 26 at (2, 13) = 26
+Goal 27 at (20, 28) = 27
+Goal 28 at (26, 2) = 28
+Goal 29 at (28, 12) = 29
+Goal 30 at (9, 0) = 30
+Goal 31 at (23, 2) = 31
+Goal 32 at (25, 12) = 32
+Goal 33 at (15, 18) = 33
+Goal 34 at (5, 23) = 34
+Goal 35 at (1, 24) = 35
+Goal 36 at (27, 18) = 36
+Goal 37 at (9, 22) = 37
+Goal 38 at (4, 0) = 38
+Goal 39 at (3, 23) = 39
+Goal 40 at (10, 24) = 40
+Goal 41 at (26, 7) = 41
+Goal 42 at (11, 19) = 42
+Goal 43 at (8, 10) = 43
+Goal 44 at (19, 28) = 44
+Goal 45 at (22, 23) = 45
+Goal 46 at (20, 2) = 46
+Goal 47 at (8, 29) = 47
+Goal 48 at (31, 23) = 48
+Goal 49 at (11, 9) = 49
+Goal 50 at (5, 8) = 50
+num updated: 50
 Using Manual Goals
-Agent 1 collided with env at position (17, 8, 1)
-Agent 1 collided with env at position (17, 8, 1)
-Agent 3 collided with env at position (9, 12, 1)
-Agent 4 collided with env at position (16, 16, 3)
-Agent 6 collided with env at position (3, 1, 2)
-Agent 1 collided with env at position (17, 8, 1)
-Agent 3 collided with env at position (9, 12, 1)
-Agent 4 collided with env at position (16, 16, 3)
-Agent 6 collided with env at position (3, 1, 2)
-Agent 1 collided with env at position (17, 8, 1)
-Agent 3 collided with env at position (9, 12, 1)
-Agent 4 collided with env at position (16, 16, 3)
-Agent 6 collided with env at position (3, 1, 2)
-Agent 1 collided with env at position (17, 8, 1)
-Agent 3 collided with env at position (9, 12, 1)
-Agent 4 collided with env at position (16, 16, 3)
-Agent 6 collided with env at position (3, 1, 2)
-Agent 8 collided with env at position (15, 2, 3)
-Agent 1 collided with env at position (17, 8, 1)
-Agent 3 collided with env at position (9, 12, 1)
-Agent 4 collided with env at position (16, 16, 3)
-Agent 6 collided with env at position (3, 1, 2)
-Agent 8 collided with env at position (15, 2, 3)
-Agent 1 collided with env at position (17, 8, 1)
-Agent 3 collided with env at position (9, 12, 1)
-Agent 4 collided with env at position (16, 16, 3)
-Agent 8 collided with env at position (15, 2, 3)
-Agent 3 collided with env at position (9, 12, 1)
-Agent 4 collided with env at position (16, 16, 3)
-Agent 8 collided with env at position (15, 2, 3)
-Agent 3 collided with env at position (9, 12, 1)
-Agent 4 collided with env at position (16, 16, 3)
-Agent 8 collided with env at position (15, 2, 3)
-Agent 2 collided with env at position (16, 14, 1)
-Agent 3 collided with env at position (9, 12, 1)
-Agent 4 collided with env at position (16, 16, 3)
-Agent 8 collided with env at position (15, 2, 3)
-Agent 2 collided with env at position (16, 14, 1)
-Agent 3 collided with env at position (9, 12, 1)
-Agent 4 collided with env at position (16, 16, 3)
-Agent 8 collided with env at position (15, 2, 3)
-Agent 2 collided with env at position (16, 14, 1)
-Agent 3 collided with env at position (9, 12, 1)
-Agent 8 collided with env at position (15, 2, 3)
-Agent 2 collided with env at position (16, 14, 1)
-Agent 3 collided with env at position (9, 12, 1)
-Agent 8 collided with env at position (15, 2, 3)
-Agent 2 collided with env at position (16, 14, 1)
-Agent 3 collided with env at position (9, 12, 1)
-Agent 8 collided with env at position (15, 2, 3)
-Agent 3 collided with env at position (9, 12, 1)
-Agent 8 collided with env at position (15, 2, 3)
-Agent 3 collided with env at position (9, 12, 1)
-Agent 3 collided with env at position (9, 12, 1)
-Agent 3 collided with env at position (9, 12, 1)
-Agent 3 collided with env at position (9, 12, 1)
-Agent 3 collided with env at position (9, 12, 1)
-Agent 3 collided with env at position (9, 12, 1)
-Agent 3 collided with env at position (9, 12, 1)
-Agent 3 collided with env at position (9, 12, 1)
-Agent 3 collided with env at position (9, 12, 1)
-Agent 3 collided with env at position (9, 12, 1)
-Agent 3 collided with env at position (9, 12, 1)
-Agent 3 collided with env at position (9, 12, 1)
-Agent 3 collided with env at position (9, 12, 1)
-Agent 3 collided with env at position (9, 12, 1)
-Agent 3 collided with env at position (9, 12, 1)
-wrote gif
-Target Reached: 0
-Number of Crashes: 67
-Compute Times for 8_agents_20_size_0.2_density_id_1_environment:
-    0: 0.08845210075378418
-    1: 0.015632152557373047
-    2: 0.014763116836547852
-    3: 0.011608123779296875
-    4: 0.010030984878540039
-    5: 0.011462926864624023
-    6: 0.010632038116455078
-    7: 0.011193990707397461
-    8: 0.01073598861694336
-    9: 0.011425018310546875
-    10: 0.011804342269897461
-    11: 0.010126113891601562
-    12: 0.010987043380737305
-    13: 0.011195898056030273
-    14: 0.011091947555541992
-    15: 0.013667106628417969
-    16: 0.013067960739135742
-    17: 0.011296987533569336
-    18: 0.011469841003417969
-    19: 0.013788938522338867
-    20: 0.014414072036743164
-    21: 0.011846065521240234
-    22: 0.011939048767089844
-    23: 0.011285066604614258
-    24: 0.010370969772338867
-    25: 0.010736227035522461
-    26: 0.010226011276245117
-    27: 0.015435218811035156
-    28: 0.011306047439575195
-    29: 0.010013818740844727
-    30: 0.010754108428955078
-    31: 0.010908126831054688
-    32: 0.011009693145751953
-    33: 0.010579109191894531
-    34: 0.010701894760131836
-    35: 0.01090097427368164
-    36: 0.010372638702392578
-    37: 0.011043071746826172
-    38: 0.011397838592529297
-    39: 0.010397911071777344
-    40: 0.013063907623291016
-    41: 0.012000083923339844
-    42: 0.012795209884643555
-    43: 0.011219978332519531
-    44: 0.01267385482788086
-    45: 0.012237071990966797
-    46: 0.014156818389892578
-    47: 0.041877031326293945
-    48: 0.03872823715209961
-    49: 0.026848793029785156
-    50: 0.025803565979003906
-    51: 0.011595726013183594
-    52: 0.0187070369720459
-    53: 0.01713418960571289
-    54: 0.0328822135925293
-    55: 0.03943610191345215
-    56: 0.034684181213378906
-    57: 0.031156301498413086
-    58: 0.03520369529724121
-    59: 0.03388714790344238
-    60: 0.04026603698730469
-    61: 0.04676103591918945
-    62: 0.03800082206726074
-    63: 0.03746485710144043
-    64: 0.04100990295410156
-    65: 0.032199859619140625
-    66: 0.03926873207092285
-    67: 0.05080580711364746
-    68: 0.03600120544433594
-    69: 0.037380218505859375
-    70: 0.038249969482421875
-    71: 0.07087898254394531
-    72: 0.052248239517211914
-    73: 0.04059600830078125
-    74: 0.03683614730834961
-    75: 0.026563167572021484
-    76: 0.0447239875793457
-    77: 0.03199005126953125
-    78: 0.04177689552307129
-    79: 0.05141091346740723
-    80: 0.04597973823547363
-    81: 0.08516621589660645
-    82: 0.05420327186584473
-    83: 0.027883052825927734
-    84: 0.04984903335571289
-    85: 0.03406381607055664
-    86: 0.023373126983642578
-    87: 0.043848276138305664
-    88: 0.03063178062438965
-    89: 0.01477503776550293
-    90: 0.018798112869262695
-    91: 0.037892818450927734
-    92: 0.02762007713317871
-    93: 0.02380228042602539
-    94: 0.027198076248168945
-    95: 0.030108928680419922
-    96: 0.019774913787841797
-    97: 0.046357154846191406
-    98: 0.04663801193237305
-    99: 0.027132272720336914
-    100: 0.03207993507385254
-    101: 0.018058061599731445
-    102: 0.02621173858642578
-    103: 0.012895345687866211
-    104: 0.01125025749206543
-    105: 0.01124119758605957
-    106: 0.015580177307128906
-    107: 0.010949134826660156
-    108: 0.014114856719970703
-    109: 0.0216672420501709
-    110: 0.0323028564453125
-    111: 0.030764102935791016
-    112: 0.014079809188842773
-    113: 0.010495901107788086
-    114: 0.018538951873779297
-    115: 0.015208005905151367
-    116: 0.018342971801757812
-    117: 0.01827716827392578
-    118: 0.03481292724609375
-    119: 0.026225805282592773
-    120: 0.012659311294555664
-    121: 0.022759199142456055
-    122: 0.010639667510986328
-    123: 0.011878252029418945
-    124: 0.0200803279876709
-    125: 0.015287160873413086
-    126: 0.014110326766967773
-    127: 0.015887975692749023
-Action Sequence:
-      1:    {1: 1, 2: 1, 3: 1, 4: 1, 5: 3, 6: 0, 7: 0, 8: 3}
-      2:    {1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 1, 7: 1, 8: 1}
-      3:    {1: 1, 2: 1, 3: 1, 4: 1, 5: 0, 6: 1, 7: 0, 8: 1}
-      4:    {1: 1, 2: 1, 3: 1, 4: 1, 5: 0, 6: 1, 7: 0, 8: 1}
-      5:    {1: 1, 2: 1, 3: 1, 4: 1, 5: 0, 6: 1, 7: 0, 8: 1}
-      6:    {1: 1, 2: 1, 3: 1, 4: 1, 5: 0, 6: 1, 7: 0, 8: 1}
-      7:    {1: 1, 2: 1, 3: 1, 4: 1, 5: 0, 6: 0, 7: 0, 8: 1}
-      8:    {1: 0, 2: 1, 3: 1, 4: 1, 5: 0, 6: 0, 7: 0, 8: 1}
-      9:    {1: 0, 2: 1, 3: 1, 4: 1, 5: 0, 6: 0, 7: 0, 8: 1}
-     10:    {1: 0, 2: 1, 3: 1, 4: 1, 5: 0, 6: 0, 7: 0, 8: 1}
-     11:    {1: 0, 2: 1, 3: 1, 4: 1, 5: 0, 6: 0, 7: 0, 8: 1}
-     12:    {1: 0, 2: 1, 3: 1, 4: 0, 5: 0, 6: 0, 7: 0, 8: 1}
-     13:    {1: 0, 2: 1, 3: 1, 4: 0, 5: 0, 6: 0, 7: 0, 8: 1}
-     14:    {1: 0, 2: 1, 3: 1, 4: 0, 5: 0, 6: 0, 7: 0, 8: 1}
-     15:    {1: 0, 2: 0, 3: 1, 4: 0, 5: 0, 6: 0, 7: 0, 8: 1}
-     16:    {1: 0, 2: 0, 3: 1, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     17:    {1: 0, 2: 0, 3: 1, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     18:    {1: 0, 2: 0, 3: 1, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     19:    {1: 0, 2: 0, 3: 1, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     20:    {1: 0, 2: 0, 3: 1, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     21:    {1: 0, 2: 0, 3: 1, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     22:    {1: 0, 2: 0, 3: 1, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     23:    {1: 0, 2: 0, 3: 1, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     24:    {1: 0, 2: 0, 3: 1, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     25:    {1: 0, 2: 0, 3: 1, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     26:    {1: 0, 2: 0, 3: 1, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     27:    {1: 0, 2: 0, 3: 1, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     28:    {1: 0, 2: 0, 3: 1, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     29:    {1: 0, 2: 0, 3: 1, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     30:    {1: 0, 2: 0, 3: 1, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     31:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     32:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     33:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     34:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     35:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     36:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     37:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     38:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     39:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     40:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     41:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     42:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     43:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     44:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     45:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     46:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     47:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     48:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     49:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     50:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     51:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     52:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     53:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     54:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     55:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     56:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     57:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     58:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     59:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     60:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     61:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     62:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     63:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     64:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     65:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     66:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     67:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     68:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     69:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     70:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     71:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     72:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     73:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     74:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     75:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     76:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     77:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     78:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     79:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     80:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     81:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     82:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     83:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     84:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     85:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     86:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     87:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     88:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     89:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     90:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     91:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     92:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     93:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     94:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     95:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     96:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     97:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     98:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-     99:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-    100:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-    101:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-    102:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-    103:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-    104:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-    105:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-    106:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-    107:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-    108:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-    109:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-    110:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-    111:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-    112:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-    113:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-    114:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-    115:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-    116:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-    117:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-    118:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-    119:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-    120:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-    121:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-    122:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-    123:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-    124:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-    125:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-    126:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-    127:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
-    128:    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
+num updated: 50
+goals_init_pos:  {2: (0, 2), 35: (1, 24), 13: (1, 29), 26: (2, 13), 4: (2, 27), 39: (3, 23), 38: (4, 0), 15: (4, 10), 50: (5, 8), 34: (5, 23), 3: (8, 7), 43: (8, 10), 47: (8, 29), 30: (9, 0), 37: (9, 22), 14: (10, 13), 40: (10, 24), 49: (11, 9), 42: (11, 19), 21: (12, 18), 18: (14, 29), 24: (15, 6), 33: (15, 18), 1: (18, 16), 25: (19, 7), 7: (19, 11), 44: (19, 28), 46: (20, 2), 27: (20, 28), 19: (21, 8), 11: (22, 0), 9: (22, 1), 16: (22, 16), 45: (22, 23), 31: (23, 2), 8: (23, 23), 20: (24, 4), 10: (24, 5), 32: (25, 12), 28: (26, 2), 41: (26, 7), 36: (27, 18), 22: (27, 30), 29: (28, 12), 17: (28, 25), 12: (30, 17), 23: (30, 21), 5: (30, 24), 6: (30, 28), 48: (31, 23)}
+Agent 25 collided with env at position (24, 23, 3)
+Agent 14 collided with env at position (15, 20, 2)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 7 collided with another agent at position (5, 4, 3)
+Reverting agent 7 to position (6, 4, 3)
+Agent 50 collided with another agent at position (23, 1, 1)
+Reverting agent 50 to position (22, 1, 1)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 42 collided with env at position (7, 26, 1)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 42 collided with env at position (7, 26, 1)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 27 collided with another agent at position (5, 13, 0)
+Reverting agent 27 to position (5, 12, 0)
+Agent 8 collided with env at position (24, 17, 3)
+Agent 22 collided with env at position (8, 6, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 30 collided with env at position (25, 25, 3)
+Agent 42 collided with env at position (7, 26, 1)
+Agent 1 collided with another agent at position (5, 13, 1)
+Agent 7 collided with env at position (7, 5, 1)
+Agent 8 collided with env at position (24, 17, 3)
+Agent 22 collided with env at position (8, 6, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 30 collided with env at position (25, 25, 3)
+Agent 31 collided with env at position (1, 4, 0)
+Agent 42 collided with env at position (7, 26, 1)
+Agent 1 collided with another agent at position (5, 13, 1)
+Agent 39 collided with another agent at position (15, 29, 2)
+Reverting agent 39 to position (15, 30, 2)
+Agent 7 collided with env at position (7, 5, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 22 collided with env at position (8, 6, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 30 collided with env at position (25, 25, 3)
+Agent 42 collided with env at position (7, 26, 1)
+Agent 44 collided with env at position (10, 26, 1)
+Agent 1 collided with another agent at position (5, 13, 1)
+Agent 7 collided with env at position (7, 5, 1)
+Agent 8 collided with env at position (25, 16, 2)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 11 collided with env at position (29, 19, 3)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 17 collided with env at position (15, 8, 0)
+Agent 19 collided with env at position (9, 17, 0)
+Agent 21 collided with env at position (26, 31, 0)
+Agent 22 collided with env at position (8, 6, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 30 collided with env at position (25, 25, 3)
+Agent 42 collided with env at position (7, 26, 1)
+Agent 43 collided with env at position (17, 20, 2)
+Agent 44 collided with env at position (10, 26, 1)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 10 collided with env at position (10, 12, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 17 collided with env at position (15, 8, 0)
+Agent 22 collided with env at position (8, 6, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 30 collided with env at position (25, 25, 3)
+Agent 42 collided with env at position (7, 26, 1)
+Agent 44 collided with env at position (10, 26, 1)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 17 collided with env at position (15, 8, 0)
+Agent 22 collided with env at position (8, 6, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 30 collided with env at position (25, 25, 3)
+Agent 42 collided with env at position (7, 26, 1)
+Agent 44 collided with env at position (10, 26, 1)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 22 collided with env at position (8, 6, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 30 collided with env at position (25, 25, 3)
+Agent 42 collided with env at position (7, 26, 1)
+Agent 44 collided with env at position (10, 26, 1)
+Agent 1 collided with another agent at position (5, 13, 1)
+Agent 36 collided with another agent at position (14, 14, 3)
+Reverting agent 36 to position (14, 14, 3)
+Agent 17 is spinning in place...
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 22 collided with env at position (8, 6, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 30 collided with env at position (25, 25, 3)
+Agent 42 collided with env at position (7, 26, 1)
+Agent 44 collided with env at position (10, 26, 1)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 22 collided with env at position (8, 6, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 30 collided with env at position (25, 25, 3)
+Agent 42 collided with env at position (7, 26, 1)
+Agent 44 collided with env at position (10, 26, 1)
+Agent 1 collided with another agent at position (5, 13, 1)
+Agent 48 collided with another agent at position (13, 14, 0)
+Reverting agent 48 to position (13, 13, 0)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 22 collided with env at position (8, 6, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 42 collided with env at position (7, 26, 1)
+Agent 44 collided with env at position (10, 26, 1)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 49 collided with another agent at position (19, 11, 1)
+Reverting agent 49 to position (19, 11, 1)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 22 collided with env at position (8, 6, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 42 collided with env at position (7, 26, 1)
+Agent 44 collided with env at position (10, 26, 1)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 22 collided with env at position (8, 6, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 42 collided with env at position (7, 26, 1)
+Agent 44 collided with env at position (10, 26, 1)
+Agent 26 is spinning in place...
+Agent 2 collided with env at position (6, 10, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 11 collided with env at position (30, 27, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 42 collided with env at position (7, 26, 1)
+Agent 44 collided with env at position (10, 26, 1)
+Agent 45 collided with another agent at position (25, 13, 3)
+Reverting agent 45 to position (25, 13, 3)
+Agent 22 is spinning in place...
+Agent 26 is spinning in place...
+Agent 2 collided with env at position (6, 10, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 11 collided with env at position (30, 27, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 42 collided with env at position (7, 26, 1)
+Agent 44 collided with env at position (10, 26, 1)
+Agent 26 is spinning in place...
+Agent 2 collided with env at position (6, 10, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 11 collided with env at position (30, 27, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 42 collided with env at position (7, 26, 1)
+Agent 44 collided with env at position (10, 26, 1)
+Agent 26 is spinning in place...
+Agent 2 collided with env at position (6, 10, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 11 collided with env at position (30, 27, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 42 collided with env at position (7, 26, 1)
+Agent 44 collided with env at position (10, 26, 1)
+Agent 46 collided with env at position (17, 31, 1)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 2 collided with env at position (6, 10, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 11 collided with env at position (30, 27, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 42 collided with env at position (7, 26, 1)
+Agent 44 collided with env at position (10, 26, 1)
+Agent 46 collided with env at position (17, 31, 1)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 8 is spinning in place...
+Agent 2 collided with env at position (6, 10, 3)
+Agent 6 collided with env at position (22, 12, 2)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 11 collided with env at position (30, 27, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (4, 17, 1)
+Agent 42 collided with env at position (7, 26, 1)
+Agent 44 collided with env at position (10, 26, 1)
+Agent 46 collided with env at position (17, 31, 1)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 11 collided with env at position (30, 27, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 42 collided with env at position (7, 26, 1)
+Agent 44 collided with env at position (10, 26, 1)
+Agent 46 collided with env at position (17, 31, 1)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 2 is spinning in place...
+Agent 9 collided with env at position (19, 18, 1)
+Agent 11 collided with env at position (30, 27, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 42 collided with env at position (7, 26, 1)
+Agent 44 collided with env at position (10, 26, 1)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 11 collided with env at position (30, 27, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 42 collided with env at position (7, 26, 1)
+Agent 44 collided with env at position (10, 26, 1)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 11 collided with env at position (30, 27, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 42 collided with env at position (7, 26, 1)
+Agent 44 collided with env at position (10, 26, 1)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 11 collided with env at position (30, 27, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 44 collided with env at position (10, 26, 1)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 11 collided with env at position (30, 27, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 44 collided with env at position (10, 26, 1)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 11 collided with env at position (30, 27, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 29 collided with another agent at position (14, 25, 1)
+Reverting agent 29 to position (13, 25, 1)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 11 collided with env at position (30, 27, 0)
+Agent 19 collided with env at position (9, 17, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 44 collided with env at position (10, 26, 1)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 29 collided with another agent at position (14, 25, 1)
+Reverting agent 29 to position (13, 25, 1)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 11 collided with env at position (30, 27, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 29 collided with another agent at position (14, 25, 1)
+Reverting agent 29 to position (13, 25, 1)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 11 collided with env at position (30, 27, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 29 collided with another agent at position (14, 25, 1)
+Reverting agent 29 to position (13, 25, 1)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 29 collided with another agent at position (14, 25, 1)
+Reverting agent 29 to position (13, 25, 1)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 29 collided with another agent at position (14, 25, 1)
+Reverting agent 29 to position (13, 25, 1)
+Agent 8 is spinning in place...
+Agent 9 collided with env at position (19, 18, 1)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 29 collided with another agent at position (14, 25, 1)
+Reverting agent 29 to position (13, 25, 1)
+Agent 6 collided with env at position (21, 21, 1)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 29 collided with another agent at position (14, 25, 1)
+Reverting agent 29 to position (13, 25, 1)
+Agent 6 collided with env at position (21, 21, 1)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 29 collided with another agent at position (14, 25, 1)
+Reverting agent 29 to position (13, 25, 1)
+Agent 6 collided with env at position (21, 21, 1)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 29 collided with another agent at position (14, 25, 1)
+Reverting agent 29 to position (13, 25, 1)
+Agent 6 collided with env at position (21, 21, 1)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 29 collided with another agent at position (14, 25, 1)
+Reverting agent 29 to position (13, 25, 1)
+Agent 6 collided with env at position (21, 21, 1)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 29 collided with another agent at position (14, 25, 1)
+Reverting agent 29 to position (13, 25, 1)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 29 collided with another agent at position (14, 25, 1)
+Reverting agent 29 to position (13, 25, 1)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 29 collided with another agent at position (14, 25, 1)
+Reverting agent 29 to position (13, 25, 1)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 29 collided with another agent at position (14, 25, 1)
+Reverting agent 29 to position (13, 25, 1)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 29 collided with another agent at position (14, 25, 1)
+Reverting agent 29 to position (13, 25, 1)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 29 collided with another agent at position (14, 25, 1)
+Reverting agent 29 to position (13, 25, 1)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 29 collided with another agent at position (14, 25, 1)
+Reverting agent 29 to position (13, 25, 1)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 29 collided with another agent at position (14, 25, 1)
+Reverting agent 29 to position (13, 25, 1)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 29 collided with another agent at position (14, 25, 1)
+Reverting agent 29 to position (13, 25, 1)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 29 collided with another agent at position (14, 25, 1)
+Reverting agent 29 to position (13, 25, 1)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 29 collided with another agent at position (14, 25, 1)
+Reverting agent 29 to position (13, 25, 1)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 9 collided with env at position (19, 18, 1)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Agent 8 collided with env at position (23, 22, 3)
+Agent 12 collided with env at position (24, 17, 2)
+Agent 20 collided with env at position (21, 18, 0)
+Agent 23 collided with env at position (27, 2, 0)
+Agent 25 collided with env at position (24, 23, 3)
+Agent 35 collided with env at position (2, 24, 3)
+Agent 48 collided with env at position (29, 10, 3)
+Agent 26 collided with another agent at position (4, 13, 3)
+Reverting agent 26 to position (5, 13, 3)
+Agent 41 collided with another agent at position (20, 6, 3)
+Reverting agent 41 to position (21, 6, 3)
+Target Reached: 6
+Number of Crashes: 1165
+Average Compute Times for random-32-32-20: 0.0716440174728632
+Processing ./MAPF_Benchmarks/random.domain/random_100.json...
+Processed map file with dimensions: 32x32...
+Number of agents loaded: 100
+Goal 1 at (13, 19) = 1
+Goal 2 at (11, 11) = 2
+Goal 3 at (31, 13) = 3
+Goal 4 at (19, 0) = 4
+Goal 5 at (19, 8) = 5
+Goal 6 at (11, 9) = 6
+Goal 7 at (11, 9) = 7
+Goal 8 at (16, 29) = 8
+Goal 9 at (27, 16) = 9
+Goal 10 at (14, 16) = 10
+Goal 11 at (17, 19) = 11
+Goal 12 at (15, 22) = 12
+Goal 13 at (3, 17) = 13
+Goal 14 at (19, 27) = 14
+Goal 15 at (23, 12) = 15
+Goal 16 at (0, 12) = 16
+Goal 17 at (3, 17) = 17
+Goal 18 at (11, 26) = 18
+Goal 19 at (23, 4) = 19
+Goal 20 at (29, 8) = 20
+Goal 21 at (23, 11) = 21
+Goal 22 at (13, 22) = 22
+Goal 23 at (1, 2) = 23
+Goal 24 at (25, 27) = 24
+Goal 25 at (15, 9) = 25
+Goal 26 at (0, 6) = 26
+Goal 27 at (23, 23) = 27
+Goal 28 at (9, 25) = 28
+Goal 29 at (30, 13) = 29
+Goal 30 at (12, 20) = 30
+Goal 31 at (31, 29) = 31
+Goal 32 at (29, 26) = 32
+Goal 33 at (20, 18) = 33
+Goal 34 at (2, 5) = 34
+Goal 35 at (11, 10) = 35
+Goal 36 at (12, 3) = 36
+Goal 37 at (24, 5) = 37
+Goal 38 at (9, 23) = 38
+Goal 39 at (13, 17) = 39
+Goal 40 at (15, 26) = 40
+Goal 41 at (28, 5) = 41
+Goal 42 at (1, 22) = 42
+Goal 43 at (25, 26) = 43
+Goal 44 at (19, 5) = 44
+Goal 45 at (11, 10) = 45
+Goal 46 at (3, 14) = 46
+Goal 47 at (31, 6) = 47
+Goal 48 at (13, 19) = 48
+Goal 49 at (4, 21) = 49
+Goal 50 at (3, 26) = 50
+Goal 51 at (15, 2) = 51
+Goal 52 at (13, 0) = 52
+Goal 53 at (22, 23) = 53
+Goal 54 at (14, 26) = 54
+Goal 55 at (4, 9) = 55
+Goal 56 at (25, 0) = 56
+Goal 57 at (30, 5) = 57
+Goal 58 at (0, 11) = 58
+Goal 59 at (3, 15) = 59
+Goal 60 at (2, 11) = 60
+Goal 61 at (30, 10) = 61
+Goal 62 at (3, 10) = 62
+Goal 63 at (8, 21) = 63
+Goal 64 at (30, 24) = 64
+Goal 65 at (1, 5) = 65
+Goal 66 at (17, 6) = 66
+Goal 67 at (19, 0) = 67
+Goal 68 at (2, 30) = 68
+Goal 69 at (12, 27) = 69
+Goal 70 at (27, 10) = 70
+Goal 71 at (23, 30) = 71
+Goal 72 at (24, 9) = 72
+Goal 73 at (20, 24) = 73
+Goal 74 at (29, 24) = 74
+Goal 75 at (4, 7) = 75
+Goal 76 at (6, 3) = 76
+Goal 77 at (5, 4) = 77
+Goal 78 at (18, 13) = 78
+Goal 79 at (0, 15) = 79
+Goal 80 at (3, 27) = 80
+Goal 81 at (14, 11) = 81
+Goal 82 at (1, 3) = 82
+Goal 83 at (1, 29) = 83
+Goal 84 at (13, 22) = 84
+Goal 85 at (7, 12) = 85
+Goal 86 at (30, 10) = 86
+Goal 87 at (22, 13) = 87
+Goal 88 at (29, 25) = 88
+Goal 89 at (27, 11) = 89
+Goal 90 at (22, 28) = 90
+Goal 91 at (8, 21) = 91
+Goal 92 at (10, 21) = 92
+Goal 93 at (30, 24) = 93
+Goal 94 at (0, 26) = 94
+Goal 95 at (16, 21) = 95
+Goal 96 at (27, 12) = 96
+Goal 97 at (9, 22) = 97
+Goal 98 at (28, 13) = 98
+Goal 99 at (23, 15) = 99
+Goal 100 at (12, 17) = 100
+num updated: 100
+Using Manual Goals
+num updated: 91
+goals_init_pos:  {26: (0, 6), 58: (0, 11), 16: (0, 12), 79: (0, 15), 94: (0, 26), 23: (1, 2), 82: (1, 3), 65: (1, 5), 42: (1, 22), 83: (1, 29), 34: (2, 5), 60: (2, 11), 68: (2, 30), 62: (3, 10), 46: (3, 14), 59: (3, 15), 17: (3, 17), 50: (3, 26), 80: (3, 27), 75: (4, 7), 55: (4, 9), 49: (4, 21), 77: (5, 4), 76: (6, 3), 85: (7, 12), 91: (8, 21), 97: (9, 22), 38: (9, 23), 28: (9, 25), 92: (10, 21), 7: (11, 9), 45: (11, 10), 2: (11, 11), 18: (11, 26), 36: (12, 3), 100: (12, 17), 30: (12, 20), 69: (12, 27), 52: (13, 0), 39: (13, 17), 48: (13, 19), 84: (13, 22), 81: (14, 11), 10: (14, 16), 54: (14, 26), 51: (15, 2), 25: (15, 9), 12: (15, 22), 40: (15, 26), 95: (16, 21), 8: (16, 29), 66: (17, 6), 11: (17, 19), 78: (18, 13), 67: (19, 0), 44: (19, 5), 5: (19, 8), 14: (19, 27), 33: (20, 18), 73: (20, 24), 87: (22, 13), 53: (22, 23), 90: (22, 28), 19: (23, 4), 21: (23, 11), 15: (23, 12), 99: (23, 15), 27: (23, 23), 71: (23, 30), 37: (24, 5), 72: (24, 9), 56: (25, 0), 43: (25, 26), 24: (25, 27), 70: (27, 10), 89: (27, 11), 96: (27, 12), 9: (27, 16), 41: (28, 5), 98: (28, 13), 20: (29, 8), 74: (29, 24), 88: (29, 25), 32: (29, 26), 57: (30, 5), 86: (30, 10), 29: (30, 13), 93: (30, 24), 47: (31, 6), 3: (31, 13), 31: (31, 29)}

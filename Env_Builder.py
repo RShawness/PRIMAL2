@@ -490,6 +490,7 @@ class Agent:
         self.position, self.position_history, self.ID, self.direction, self.direction_history, \
         self.action_history, self.goal_pos, self.distanceMap, self.dones, self.status, self.next_goal, self.next_distanceMap \
             = None, [], None, None, [(None, None)], [(None, None)], None, None, 0, None, None, None
+        self.initial_goal_distance = 1
 
     def reset(self):
         self._path_count = -1
@@ -497,7 +498,7 @@ class Agent:
         self.position, self.position_history, self.ID, self.direction, self.direction_history, \
         self.action_history, self.goal_pos, self.distanceMap, self.dones, self.status, self.next_goal, self.next_distanceMap \
             = None, [], None, None, [(None, None)], [(None, None)], None, None, 0, None, None, None
-
+        self.initial_goal_distance = 1
 
     # Legacy code used move() to check if it was a valid direction move and add the move to all the history dictionaries
     # If move is invalid, add the current position 
@@ -576,11 +577,14 @@ class World:
 
         def scan_for_agents(state_map):
             agents = {}
+            num_updates = 0
             for i in range(state_map.shape[0]):
                 for j in range(state_map.shape[1]):
                     if state_map[i, j] > 0:
                         agentID = state_map[i, j]
                         agents.update({agentID: (i, j)})
+                        num_updates += 1
+            print(f"num updated: {num_updates}")
             return agents
         
         # self.state is the size of the world map and can have values [-1, 0, 1, ..., num_agents]
@@ -609,6 +613,7 @@ class World:
             print("Using Manual Goals")
             self.manual_goal = True
             self.goals_init_pos = scan_for_agents(self.goals_map) if self.manual_goal else None
+            print("goals_init_pos: ", self.goals_init_pos)
 
         else:
             self.goals_map = np.zeros([self.state.shape[0], self.state.shape[1]])
@@ -936,7 +941,10 @@ class World:
             self.agents[agentID].move(init_poss[idx]) # TODO .move() argument is a (row,col)
             self.agents[agentID].distanceMap = getAstarDistanceMap3D(self.state, self.agents[agentID].position,
                                                                    self.agents[agentID].goal_pos)
-
+            self.agents[agentID].initial_goal_distance = self.agents[agentID].distanceMap[self.agents[agentID].position[0],
+                                                                                     self.agents[agentID].position[1],
+                                                                                     self.agents[agentID].position[2]]
+            
     # DONE no changes needed after first pass
     def put_goals(self, id_list, manual_pos=None):
         """
@@ -1056,6 +1064,11 @@ class World:
                 if refresh_distance_map:
                     self.agents[agentID].distanceMap = getAstarDistanceMap3D(self.state, self.agents[agentID].position,
                                                                            self.agents[agentID].goal_pos)
+                    self.agents[agentID].initial_goal_distance = self.agents[agentID].distanceMap[self.agents[agentID].position[0],
+                                                                                     self.agents[agentID].position[1],
+                                                                                     self.agents[agentID].position[2]]
+                    if (self.agents[agentID].initial_goal_distance == 1):
+                        print(f"Agent {agentID} has initial goal distance {self.agents[agentID].initial_goal_distance}")
             return 1
         else:
             return None
@@ -1195,9 +1208,9 @@ class MAPFEnv(gym.Env):
         else:
             self.action_space = spaces.Tuple([spaces.Discrete(self.num_agents), spaces.Discrete(4)]) # changed to 4 discrete actions (0-3)
 
-        self.ACTION_COST, self.GOAL_REWARD, self.COLLISION_REWARD = -0.5, 32., -5.
+        self.ACTION_COST, self.GOAL_REWARD, self.COLLISION_REWARD = -0.5, 64., -5.
         self.WAIT_COST = -0.5
-        self.DISTANCE_COST = -0.01
+        self.DISTANCE_COST = 0.5
 
     def getObstacleMap(self):
         return (self.world.state == -1).astype(int)

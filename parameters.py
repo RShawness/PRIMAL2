@@ -25,14 +25,14 @@ a_size                  = 4 + int(DIAG_MVMT) * 4
 NUM_META_AGENTS         = 9
 NUM_IL_META_AGENTS      = 3
                         # ! change the NUM_THREADS back to 4    
-NUM_THREADS             = 3 # int(multiprocessing.cpu_count() / (2 * NUM_META_AGENTS))
+NUM_THREADS             = 4 # int(multiprocessing.cpu_count() / (2 * NUM_META_AGENTS))
 NUM_BUFFERS             = 1  # NO EXPERIENCE REPLAY int(NUM_THREADS / 2)
 
 # training parameters
 SUMMARY_WINDOW          = 10
 load_model              = True
 RESET_TRAINER           = False
-training_version        = 'Distance_Reward_1'
+training_version        = 'Distance_Reward_2'
 model_path              = 'model_' + training_version
 gifs_path               = 'gifs_' + training_version
 train_path              = 'train_' + training_version
