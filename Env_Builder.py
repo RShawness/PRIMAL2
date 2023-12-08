@@ -574,7 +574,6 @@ class World:
         """
         generate/re-generate a world map, and compute its corridor map
         """
-
         def scan_for_agents(state_map):
             agents = {}
             num_updates = 0
@@ -834,7 +833,6 @@ class World:
         place all agents and goals in the blank env. If turning on corridor population restriction, only 1 agent is
         allowed to be born in each corridor.
         """
-
         def corridor_restricted_init_poss(state_map, corridor_map, goal_map, id_list=None):
             """
             generate agent init positions when corridor init population is restricted
@@ -1019,6 +1017,12 @@ class World:
         if new_goals is not None:  # recursive breaker
             refresh_distance_map = False
             for agentID in id_list:
+                try:
+                    temp = new_goals[agentID][0]
+                except Exception:
+                    print(len(previous_goals))
+                    print(len(new_goals))
+                    print(agentID)
                 if self.state[new_goals[agentID][0], new_goals[agentID][1]] >= 0:
                     if self.agents[agentID].next_goal is None:  # no next_goal to use
                         # set goals_map

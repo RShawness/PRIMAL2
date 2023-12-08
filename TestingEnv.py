@@ -176,6 +176,47 @@ class RL_Planner(MAPFEnv):
         action_dict = run_network(o)
         computing_time = time.time() - start_time
 
+        # check if agent has been spinning for more than 2 rounds. Added to break out of spinning
+        for agentID in range(1, self.num_agents+1):
+            # self.recognize_pattern(agentID, action_dict)
+            h = self.world.agents[agentID].distanceMap.shape[0]
+            w = self.world.agents[agentID].distanceMap.shape[1]
+
+            history = self.world.agents[agentID].position_history
+            if len(history) < 3:
+                break
+            p1 = history[-1]
+            p2 = history[-2]
+            # p3 = history[-3]
+            next_pos = action2position(1, self.world.agents[agentID].position)
+
+            if p1[:2] == p2[:2] and action_dict[agentID] != 1:
+                if next_pos[0] < 0 or next_pos[1] < 0 or next_pos[0] >= h or next_pos[1] >= w:
+                    continue
+
+                if self.world.state[next_pos[:2]] != 0:
+                    shortest_dist = 2 ** 31 - 1
+                    best_action = 2
+                    neighbor = [2,3]
+                    for action in neighbor:
+                        new_pos = action2position(action, self.world.agents[agentID].position)
+                        
+                        if new_pos[0] < 0 or new_pos[1] < 0 or new_pos[0] >= h or new_pos[1] >= w:
+                            continue
+                        if new_pos == history[-2]:
+                            continue
+                        distance = self.world.agents[agentID].distanceMap[new_pos]
+                        if distance == -1:
+                            continue
+                        if distance < shortest_dist:
+                            best_action = action
+                            shortest_dist = distance
+                    action_dict[agentID] = best_action
+                
+                else:
+                    action_dict[agentID] = 1
+
+
         next_o, reward = self.step_all(action_dict)
 
         # for agentID in reward.keys():
@@ -435,7 +476,6 @@ class ContinuousTestsRunner:
             elif env_size <= 80:
                 return 192
             return 256
-
         self.worker._reset(map_generator=manual_generator(maps[0], maps[1]), num_agent_override=self.num_agents_loaded)
         map_name = name.split('/')[-1]
         env_name = map_name[:map_name.rfind('.')]
@@ -445,8 +485,9 @@ class ContinuousTestsRunner:
 
 
         # result = self.worker.find_path(max_length=int(max_length), saveImage=np.random.rand() < self.GIF_prob)
+        start_time = time.time()
         result = self.worker.find_path(max_length=int(max_length), saveImage=np.random.rand() < self.GIF_prob, time_limit=300)
-
+        print(f"took {time.time() - start_time} to run")
         target_reached, computing_time_list, num_crash, episode_status, succeed_episode, step_count, frames = result
         results['target_reached'] = target_reached
         results['computing time'] = computing_time_list
@@ -574,16 +615,24 @@ class ContinuousTestsRunner:
             return None
         goal_dict = {}
         goalID = 1
-        for line in lines[1:self.num_agents_loaded+1]:
+        line_num = 0
+        while goalID < self.num_agents_loaded+1:
+            line = lines[line_num + 1]
             linear_index = int(line)
             row = linear_index // self.grid_data.shape[1]
             col = linear_index % self.grid_data.shape[1]
+            # check for duplicate goal
+            if self.grid_data[1][row][col] > 0 or self.grid_data[0][row][col] == -1:
+                line_num += 1
+                continue
             self.grid_data[1][row][col] = goalID
             print(f"Goal {goalID} at ({row}, {col}) = {self.grid_data[1][row][col]}")
             goal_dict[goalID] = (row, col)
             goalID += 1
+            line_num += 1
+
         
-        for line in lines[self.num_agents_loaded+1:]:
+        for line in lines[line_num+1:]:
             linear_index = int(line)
             row = linear_index // self.grid_data.shape[1]
             col = linear_index % self.grid_data.shape[1]
@@ -641,7 +690,7 @@ class ContinuousTestsRunner:
             'Error: path should end with /'
         
         for filename in os.listdir(directory_path):
-            if filename.endswith('.json'):
+            if filename.endswith('random_20.json'):     #change this back to '.json' after
                 process_json_file(directory_path + filename)
 
 
@@ -651,7 +700,7 @@ if __name__ == "__main__":
     original_stdout = sys.stdout
     sys.stdout = f
     
-    model_path = './model_Distance_Reward_2/'
+    model_path = './model_3DPathLengthMap_Rotation_Testing2/'
     parser = argparse.ArgumentParser()
     parser.add_argument("--result_path", default="./testing_result/")
     # parser.add_argument("--env_path", default='./saved_environments/')
