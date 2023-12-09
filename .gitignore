@@ -102,3 +102,11 @@ model_3DPathLengthMap_Rotation/checkpoint
 .DS_Store
 __pycache__/Ray_ACNet.cpython-38.pyc
 .DS_Store
+Plots/*.csv
+*.svg
+train_3DPathLengthMap_Rotation_Testing2/base_model_plots/*.svg
+Plots/base_model/*.csv
+Plots/v2_action_space/Plots/*.png
+Plots/v2_action_space/*.csv
+Plots/base_model/Plots/*.png
+MAPF_Benchmarks/random_print.domain/
