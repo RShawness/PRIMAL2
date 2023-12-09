@@ -211,6 +211,15 @@ def manual_generator(state_map, goals_map=None):
         goals_map = np.array(goals_map)
         assert goals_map.shape[0] == state_map.shape[0] and goals_map.shape[1] == state_map.shape[1]
 
+    num_updates = 0
+    agents = {}
+    for i in range(state_map.shape[0]):
+        for j in range(state_map.shape[1]):
+            if goals_map[i, j] > 0:
+                agentID = goals_map[i, j]
+                agents.update({agentID: (i, j)})
+                num_updates += 1
+
     def generator():
         return state_map, goals_map
 
